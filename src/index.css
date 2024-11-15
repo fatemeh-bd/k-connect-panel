@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "IRANSansWeb";
+  src: url("/fonts/IRANSansWeb.woff2");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "IRANSansWeb";
+  src: url("/fonts/IRANSansWeb_Medium.woff2");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "IRANSansWeb";
+  src: url("/fonts/IRANSansWeb_Bold.woff2");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "IRANSansWeb";
+  src: url("/fonts/IRANSansWeb_Black.woff2");
+  font-weight: 700;
+}
+* {
+  font-family: "IRANSansWeb" !important;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  direction: rtl;
+  background-color: #f8f8f8;
+  color: #57534e;
+}
