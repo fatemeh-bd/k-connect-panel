@@ -16,20 +16,20 @@ function App() {
   }, [cookies]);
   return (
     <>
-      {cookies.access_token && (
-        <div className="flex items-start gap-4 w-full">
-          <SideBar />
+      <Routes>
+        {cookies.access_token && (
+          <div className="flex items-start gap-4 w-full">
+            <SideBar />
 
-          <div className="w-[80%] p-4">
-            <TopBar />
-            <div className="py-4">
-              <Routes>
+            <div className="w-[80%] p-4">
+              <TopBar />
+              <div className="py-4">
                 <Route path="/" element={<p>در حال پیاده سازی</p>} />
-              </Routes>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </Routes>
 
       <Routes>
         <Route path="/login" element={<Login />} />
