@@ -11,7 +11,7 @@ function App() {
   const [cookies] = useCookies(["access_token"]);
   useEffect(() => {
     if (!cookies.access_token) {
-      navigate("login");
+      navigate("/login");
     }
   }, [cookies]);
   return (
