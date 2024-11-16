@@ -31,13 +31,13 @@ export const routesList = [
   },
   {
     title: "مدیریت کاربران",
-    path: "/support",
+    path: "/usermanagment",
     icon: UserGroupIcon,
     element: "",
   },
   {
     title: "حساب کاربری",
-    path: "/support",
+    path: "/profile",
     icon: UserIcon,
     element: "",
   },
