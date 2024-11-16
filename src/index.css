@@ -25,7 +25,9 @@
   src: url("/fonts/IRANSansWeb_Black.woff2") format("woff2");
   font-weight: 700;
 }
-
+:root {
+  --primary: #202020;
+}
 * {
   font-family: "IRANSansWeb" !important;
   box-sizing: border-box;
@@ -41,4 +43,20 @@ body {
   direction: rtl;
   background-color: #f8f8f8;
   color: #57534e;
+}
+table {
+  font-size: 14px;
+}
+thead th {
+  font-weight: normal !important;
+  color: #818181 !important;
+}
+th,
+td {
+  text-align: center !important;
+}
+.dt-paging-button.current {
+  background-color: #20202040 !important;
+  color: #fff !important;
+  border-radius: 8px !important;
 }

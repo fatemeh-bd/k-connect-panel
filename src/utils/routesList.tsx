@@ -8,6 +8,7 @@ import {
   UserIcon,
 } from "@heroicons/react/24/outline";
 import Dashboard from "../pages/dashboard/Dashboard";
+import UsersManagment from "../pages/usersManagment/UsersManagment";
 
 export interface RouteItemType {
   title: "داشبورد";
@@ -17,7 +18,13 @@ export interface RouteItemType {
 }
 
 export const routesList = [
-  { id: 1, title: "داشبورد", path: "/", icon: HomeIcon, element: <Dashboard/> },
+  {
+    id: 1,
+    title: "داشبورد",
+    path: "/",
+    icon: HomeIcon,
+    element: <Dashboard />,
+  },
   {
     id: 2,
     title: "پشتیبانی",
@@ -37,7 +44,7 @@ export const routesList = [
     title: "مدیریت کاربران",
     path: "/usermanagment",
     icon: UserGroupIcon,
-    element: "",
+    element: <UsersManagment />,
   },
   {
     id: 5,
