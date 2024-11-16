@@ -11,7 +11,7 @@ export const exampleData = {
     {
       label: "گزارش مالی",
       data: [100, 55],
-      backgroundColor: ["rgba(0, 162, 255, 0.589)", "rgba(0, 255, 166, 0.688)"],
+      backgroundColor: ["#0fbff560", "#28fdd25f"],
       borderColor: ["#55b7fc", "#36eb94"],
       borderWidth: 1,
     },
