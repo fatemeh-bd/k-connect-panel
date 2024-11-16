@@ -5,7 +5,7 @@ import Bell from "../bell/Bell";
 
 const TopBar = () => {
   return (
-    <div className="bg-white flex justify-between gap-4 flex-wrap items-center shadow-sm rounded-xl p-4 w-full">
+    <div className="bg-white flex justify-between gap-4 flex-wrap items-center shadow-sm rounded-xl p-4 w-full sticky top-0">
       <Paragraph>داشبورد</Paragraph>
       <div className="flex items-center gap-4">
         <Bell />

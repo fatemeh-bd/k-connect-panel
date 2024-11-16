@@ -5,6 +5,7 @@ import SignUp from "./pages/auth/SignUp";
 import { useEffect } from "react";
 import { useCookies } from "react-cookie";
 import TopBar from "./components/TopBar/TopBar";
+import { routesList } from "./utils/routesList";
 
 function App() {
   const navigate = useNavigate();
@@ -17,14 +18,20 @@ function App() {
   return (
     <>
       {cookies.access_token && (
-        <div className="flex items-start gap-1 w-full">
+        <div className="flex items-start h-screen overflow-hidden gap-1 w-full">
           <SideBar />
 
-          <div className="w-[80%] p-4">
+          <div className="w-[80%] px-4 mt-4 pb-4 h-screen overflow-auto">
             <TopBar />
             <div className="py-4">
               <Routes>
-                <Route path="/" element={<p>در حال پیاده سازی</p>} />
+                {routesList.map((item) => (
+                  <Route
+                    key={item.id}
+                    path={item.path}
+                    element={item.element}
+                  />
+                ))}
               </Routes>
             </div>
           </div>

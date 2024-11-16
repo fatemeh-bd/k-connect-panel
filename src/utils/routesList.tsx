@@ -1,12 +1,13 @@
 import React from "react";
 import { SvgType } from "./enums";
 import {
-    BanknotesIcon,
+  BanknotesIcon,
   ChatBubbleBottomCenterTextIcon,
   HomeIcon,
   UserGroupIcon,
   UserIcon,
 } from "@heroicons/react/24/outline";
+import Dashboard from "../pages/dashboard/Dashboard";
 
 export interface RouteItemType {
   title: "داشبورد";
@@ -16,26 +17,30 @@ export interface RouteItemType {
 }
 
 export const routesList = [
-  { title: "داشبورد", path: "/", icon: HomeIcon, element: "" },
+  { id: 1, title: "داشبورد", path: "/", icon: HomeIcon, element: <Dashboard/> },
   {
+    id: 2,
     title: "پشتیبانی",
     path: "/support",
     icon: ChatBubbleBottomCenterTextIcon,
     element: "",
   },
   {
+    id: 3,
     title: "مالی",
     path: "/financial",
     icon: BanknotesIcon,
     element: "",
   },
   {
+    id: 4,
     title: "مدیریت کاربران",
     path: "/usermanagment",
     icon: UserGroupIcon,
     element: "",
   },
   {
+    id: 5,
     title: "حساب کاربری",
     path: "/profile",
     icon: UserIcon,
