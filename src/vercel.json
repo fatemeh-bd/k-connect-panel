@@ -1,11 +1,14 @@
 {
-    "github": {
-        "silent": true
-    },
-    "rewrites": [
-        {
-            "source": "(.*)",
-            "destination": "/index.html"
-        }
+    "headers": [
+      {
+        "source": "/fonts/(.*)",
+        "headers": [
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "*"
+          }
+        ]
+      }
     ]
-}
+  }
+  

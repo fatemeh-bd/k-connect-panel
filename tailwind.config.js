@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       colors:{
-        primary:"#666cff"
+        primary:"#202020"
       }
     },
   },
