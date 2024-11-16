@@ -5,16 +5,29 @@ import "datatables.net-dt/js/dataTables.dataTables";
 import "datatables.net-dt/css/dataTables.dataTables.css";
 import Button from "../../components/buttons/Button";
 import ReactDOM from "react-dom";
+
 DataTable.use(DT);
 
+interface ExampleType {
+  userAvatar: string;
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  cityName: string;
+  isActiveLawyer: boolean;
+  isConfirmDocument: boolean;
+  userId: string;
+}
+
 const UsersManagment = () => {
-  const columns = [
+  const columns: any[] = [
     {
       data: "userAvatar",
       title: "پروفایل",
       orderable: false,
       searchable: false,
-      render: (data, type, row) => {
+      // @ts-ignore: Ignore TypeScript error for ReactDOM.render
+      render: (data: any, type: any, row: ExampleType) => {
         return `<img loading="lazy" class="rounded-full size-12 mx-auto" src=${row.userAvatar} width="50" height="50" alt="Profile" />`;
       },
     },
@@ -26,44 +39,40 @@ const UsersManagment = () => {
       data: "isActiveLawyer",
       title: "وضعیت پروفایل",
       orderable: false,
-      render: (data) => {
-        return "خوب"
-         
+      render: () => {
+        return "خوب";
       },
     },
     {
       data: "userId",
       title: "تغییر وضعیت پروفایل",
       orderable: false,
-      render: (data, type, row) => {
+      // @ts-ignore: Ignore TypeScript error for ReactDOM.render
+      render: (data: any, type: any, row: ExampleType) => {
         return `<button type="button" class="btn btn-success me-1" onclick="handleToggleActive('${row.userId}')">تغییر وضعیت</button>`;
       },
     },
     {
       data: "isConfirmDocument",
       title: "وضعیت مدارک",
-      render: (data) => (data ? "تایید شده" : "تایید نشده"),
+      render: (data: ExampleType) => (data ? "تایید شده" : "تایید نشده"),
     },
     {
       data: "userId",
       title: "عملیات",
-      createdCell: (td, cellData, rowData) => {
+      createdCell: (td: HTMLTableCellElement) => {
         const container = document.createElement("div");
         td.appendChild(container);
 
-        ReactDOM.render(
-          <Button>
-            جزئیات
-          </Button>,
-          container
-        );
+        ReactDOM.render(<Button>جزئیات</Button>, container);
       },
     },
   ];
 
-  const exampleData = [
+  const exampleData: ExampleType[] = [
     {
-      userAvatar: "https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg",
+      userAvatar:
+        "https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg",
       firstName: "Fatemeh",
       lastName: "Ghasemi",
       phoneNumber: "09123456789",
@@ -73,7 +82,8 @@ const UsersManagment = () => {
       userId: "1",
     },
     {
-      userAvatar: "https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg",
+      userAvatar:
+        "https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg",
       firstName: "Ali",
       lastName: "Rezaei",
       phoneNumber: "09223334455",
@@ -83,7 +93,8 @@ const UsersManagment = () => {
       userId: "2",
     },
     {
-      userAvatar: "https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg",
+      userAvatar:
+        "https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg",
       firstName: "Sara",
       lastName: "Ahmadi",
       phoneNumber: "09331234567",
@@ -120,7 +131,7 @@ const UsersManagment = () => {
   return (
     <div className={boxStyle}>
       <div className="container">
-        <DataTable {...options} className="display"/>
+        <DataTable options={options} className="display" />
       </div>
     </div>
   );
