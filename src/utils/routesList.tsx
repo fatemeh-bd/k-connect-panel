@@ -25,7 +25,7 @@ export const routesList = [
   },
   {
     title: "مالی",
-    path: "/support",
+    path: "/financial",
     icon: BanknotesIcon,
     element: "",
   },
