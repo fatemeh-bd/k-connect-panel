@@ -9,7 +9,7 @@ const LastNotifications = () => {
       <Paragraph className="mb-4">آخرین اخبار</Paragraph>
       <div className="space-y-2">
         <div
-          className="bg-zinc-100 border-r-4 border-zinc-500 rounded-b text-zinc-900 px-4 py-3 shadow-md flex items-center justify-between"
+          className="bg-zinc-100 border-r-4 border-zinc-500 rounded-b text-zinc-900 px-4 py-3 shadow-md flex items-center justify-between flex-wrap gap-2"
           role="alert"
         >
           <div className="flex gap-3">
@@ -18,14 +18,14 @@ const LastNotifications = () => {
             <p className="font-medium">اضافه شدن سرور های جدید </p>
           </div>
           <Link
-            className="bg-zinc-300 py-1 px-3 rounded-full hover:bg-primary hover:text-white"
+            className="bg-zinc-300 mr-auto py-1 px-3 rounded-full hover:bg-primary hover:text-white"
             to="/"
           >
             مشاهده بیشتر
           </Link>
         </div>
         <div
-          className="bg-zinc-100 border-r-4 border-zinc-500 rounded-b text-zinc-900 px-4 py-3 shadow-md flex items-center justify-between"
+          className="bg-zinc-100 border-r-4 border-zinc-500 rounded-b text-zinc-900 px-4 py-3 shadow-md flex items-center justify-between flex-wrap gap-2"
           role="alert"
         >
           <div className="flex gap-3">
@@ -34,14 +34,14 @@ const LastNotifications = () => {
             <p className="font-medium">اضافه شدن سرور های جدید </p>
           </div>
           <Link
-            className="bg-zinc-300 py-1 px-3 rounded-full hover:bg-primary hover:text-white"
+            className="bg-zinc-300 mr-auto py-1 px-3 rounded-full hover:bg-primary hover:text-white"
             to="/"
           >
             مشاهده بیشتر
           </Link>
         </div>
         <div
-          className="bg-zinc-100 border-r-4 border-zinc-500 rounded-b text-zinc-900 px-4 py-3 shadow-md flex items-center justify-between"
+          className="bg-zinc-100 border-r-4 border-zinc-500 rounded-b text-zinc-900 px-4 py-3 shadow-md flex items-center justify-between flex-wrap gap-2"
           role="alert"
         >
           <div className="flex gap-3">
@@ -50,7 +50,7 @@ const LastNotifications = () => {
             <p className="font-medium">اضافه شدن سرور های جدید </p>
           </div>
           <Link
-            className="bg-zinc-300 py-1 px-3 rounded-full hover:bg-primary hover:text-white"
+            className="bg-zinc-300 mr-auto py-1 px-3 rounded-full hover:bg-primary hover:text-white"
             to="/"
           >
             مشاهده بیشتر

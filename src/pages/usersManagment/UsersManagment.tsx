@@ -1,75 +1,14 @@
+import React, { useState } from "react";
+import DataTable, { TableColumn } from "react-data-table-component";
 import { boxStyle } from "../../utils/enums";
-import DataTable from "datatables.net-react";
-import DT from "datatables.net-dt";
-import "datatables.net-dt/js/dataTables.dataTables";
-import "datatables.net-dt/css/dataTables.dataTables.css";
 import Button from "../../components/buttons/Button";
-import ReactDOM from "react-dom";
-
-DataTable.use(DT);
-
-interface ExampleType {
-  userAvatar: string;
-  firstName: string;
-  lastName: string;
-  phoneNumber: string;
-  cityName: string;
-  isActiveLawyer: boolean;
-  isConfirmDocument: boolean;
-  userId: string;
-}
+import { ChevronUpDownIcon } from "@heroicons/react/24/outline";
+import { UserType } from "./types";
+import Input from "../../components/inputs/Input";
 
 const UsersManagment = () => {
-  const columns: any[] = [
-    {
-      data: "userAvatar",
-      title: "پروفایل",
-      orderable: false,
-      searchable: false,
-      // @ts-ignore: Ignore TypeScript error for ReactDOM.render
-      render: (data: any, type: any, row: ExampleType) => {
-        return `<img loading="lazy" class="rounded-full size-12 mx-auto" src=${row.userAvatar} width="50" height="50" alt="Profile" />`;
-      },
-    },
-    { data: "firstName", title: "نام", orderable: false },
-    { data: "lastName", title: "نام خانوادگی", orderable: true },
-    { data: "phoneNumber", title: "شماره موبایل", orderable: true },
-    { data: "cityName", title: "شهر", orderable: true },
-    {
-      data: "isActiveLawyer",
-      title: "وضعیت پروفایل",
-      orderable: false,
-      render: () => {
-        return "خوب";
-      },
-    },
-    {
-      data: "userId",
-      title: "تغییر وضعیت پروفایل",
-      orderable: false,
-      // @ts-ignore: Ignore TypeScript error for ReactDOM.render
-      render: (data: any, type: any, row: ExampleType) => {
-        return `<button type="button" class="btn btn-success me-1" onclick="handleToggleActive('${row.userId}')">تغییر وضعیت</button>`;
-      },
-    },
-    {
-      data: "isConfirmDocument",
-      title: "وضعیت مدارک",
-      render: (data: ExampleType) => (data ? "تایید شده" : "تایید نشده"),
-    },
-    {
-      data: "userId",
-      title: "عملیات",
-      createdCell: (td: HTMLTableCellElement) => {
-        const container = document.createElement("div");
-        td.appendChild(container);
-
-        ReactDOM.render(<Button>جزئیات</Button>, container);
-      },
-    },
-  ];
-
-  const exampleData: ExampleType[] = [
+  // داده‌های نمونه
+  const exampleData: UserType[] = [
     {
       userAvatar:
         "https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg",
@@ -105,34 +44,125 @@ const UsersManagment = () => {
     },
   ];
 
-  const options = {
-    data: exampleData,
-    columns,
-    lengthMenu: [5, 10, 20],
-    responsive: true,
-    pagingType: "full_numbers",
-    language: {
-      sZeroRecords: "دیتایی برای نمایش وجود ندارد",
-      infoEmpty: "دیتایی برای نمایش وجود ندارد",
-      emptyTable: "دیتایی برای نمایش وجود ندارد",
-      info: "نمایش _START_ از _END_ از _TOTAL_ رکورد",
-      lengthMenu: "نمایش _MENU_ رکورد",
-      paginate: {
-        last: "اخرین",
-        first: "اولین",
-        next: "بعدی",
-        previous: "قبلی",
-      },
-      search: "جستجو :",
-      searchPlaceholder: "جستجو",
-    },
-  };
+  // state برای جستجو
+  const [searchText, setSearchText] = useState("");
 
+  // فیلتر کردن داده‌ها بر اساس جستجو
+  const filteredData = exampleData.filter(
+    (item) =>
+      item.firstName.toLowerCase().includes(searchText.toLowerCase()) ||
+      item.lastName.toLowerCase().includes(searchText.toLowerCase()) ||
+      item.phoneNumber.includes(searchText) ||
+      item.cityName.toLowerCase().includes(searchText)
+  );
+
+  // ستون‌های جدول
+  const columns: TableColumn<UserType>[] = [
+    {
+      name: "پروفایل",
+      cell: (row) => (
+        <img
+          className="rounded-full size-12"
+          src={row.userAvatar}
+          alt="Profile"
+          width="50"
+          height="50"
+        />
+      ),
+      sortable: false,
+    },
+    {
+      name: "نام",
+      selector: (row) => row.firstName,
+      sortable: true,
+    },
+    {
+      name: "نام خانوادگی",
+      selector: (row) => row.lastName,
+      sortable: true,
+    },
+    {
+      name: "شماره موبایل",
+      selector: (row) => row.phoneNumber,
+      sortable: true,
+    },
+    {
+      name: "شهر",
+      selector: (row) => row.cityName,
+      sortable: true,
+    },
+    {
+      name: "وضعیت پروفایل",
+      cell: (row) => (row.isActiveLawyer ? "خوب" : "بد"),
+      sortable: true,
+    },
+    {
+      name: "وضعیت مدارک",
+      cell: (row) => (row.isConfirmDocument ? "تایید شده" : "تایید نشده"),
+      sortable: true,
+    },
+    {
+      name: "عملیات",
+      cell: () => (
+        <div className="flex justify-center items-center">
+          <Button className="min-w-[120px] text-sm cursor-pointer font-medium items-center justify-center rounded-lg bg-primary text-white p-2 hover:opacity-80 whitespace-nowrap">
+            تغییر وضعیت
+          </Button>
+        </div>
+      ),
+      sortable: false,
+    },
+  ];
+  const paginationComponentOptions = {
+    rowsPerPageText: 'تعداد صفحات',
+    rangeSeparatorText: 'تا',
+    selectAllRowsItem: true,
+    selectAllRowsItemText: 'Todos',
+  };
   return (
-    <div className={boxStyle}>
-      <div className="container">
-        <DataTable options={options} className="display" />
-      </div>
+    <div className={`${boxStyle} overflow-auto`}>
+      <DataTable
+        className="customTable"
+        title="مدیریت کاربران"
+        columns={columns}
+        data={filteredData}
+        pagination
+        paginationPerPage={2}
+        paginationRowsPerPageOptions={[2, 10, 20]}
+        paginationServer
+        responsive
+        highlightOnHover
+        paginationComponentOptions={paginationComponentOptions}
+        sortIcon={<ChevronUpDownIcon className="size-4 mx-1" />}
+        noDataComponent="دیتایی برای نمایش وجود ندارد"
+        subHeader
+        customStyles={{
+          headCells: {
+            style: {
+              justifyContent: "center",
+              textAlign: "center",
+            },
+          },
+          cells: {
+            style: {
+              padding: 10,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            },
+          },
+        }}
+        subHeaderComponent={
+          <Input
+            type="text"
+            label="جستجو در جدول"
+            placeholder="جستجو در جدول..."
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+            className="max-w-[300px]"
+          />
+        }
+      />
     </div>
   );
 };

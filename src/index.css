@@ -44,19 +44,15 @@ body {
   background-color: #f8f8f8;
   color: #57534e;
 }
-table {
-  font-size: 14px;
+thead svg {
+  opacity: 0.5 !important;
 }
-thead th {
-  font-weight: normal !important;
-  color: #818181 !important;
+.customTable svg {
+  opacity: 0.3 !important;
 }
-th,
-td {
-  text-align: center !important;
+.rdt_Pagination {
+  direction: ltr;
 }
-.dt-paging-button.current {
-  background-color: #20202040 !important;
-  color: #fff !important;
-  border-radius: 8px !important;
+.rdt_Pagination span {
+  direction: rtl;
 }
