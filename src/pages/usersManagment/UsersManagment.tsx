@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import DataTable, { TableColumn } from "react-data-table-component";
 import { boxStyle } from "../../utils/enums";
 import Button from "../../components/buttons/Button";
