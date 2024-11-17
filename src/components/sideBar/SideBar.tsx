@@ -16,7 +16,7 @@ const SideBar = () => {
 
   return (
     <>
-      <div className="md:hidden p-4 pb-0">
+      <div className="lg:hidden p-4 pb-0">
         <Bars3Icon
           className="size-12 bg-white rounded-full p-2 cursor-pointer"
           onClick={() => setShowMenu(true)}
@@ -26,9 +26,9 @@ const SideBar = () => {
       <div
         className={`${
           showMenu ? "translate-x-0" : "translate-x-full"
-        } md:translate-x-0 transition-transform duration-300 ease-in-out md:w-[20%] w-[300px] fixed md:relative z-50 h-screen overflow-auto shadow-xl p-5 bg-white`}
+        } lg:translate-x-0 transition-transform duration-300 ease-in-out lg:w-[20%] w-[300px] fixed lg:relative z-50 h-screen overflow-auto shadow-xl p-5 bg-white`}
       >
-        <div className="md:hidden flex justify-end mb-4">
+        <div className="lg:hidden flex justify-end mb-4">
           <XMarkIcon
             className="size-8 cursor-pointer"
             onClick={() => setShowMenu(false)}
