@@ -34,10 +34,10 @@ const infoList = [
 ];
 const InfoList = () => {
   return (
-    <div className="grid grid-cols-12 gap-4">
+    <div className="grid grid-cols-12 md:gap-4 gap-2">
       {infoList.map((item) => (
         <div
-          className="lg:col-span-3 sm:col-span-6 col-span-12"
+          className="lg:col-span-3 col-span-6 "
           key={item.title}
         >
           <InfoBox data={item} />

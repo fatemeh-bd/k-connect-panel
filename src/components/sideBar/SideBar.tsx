@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { ColorType } from "../../utils/enums";
 import { routesList } from "../../utils/routesList";
 import Paragraph from "../typography/Paragraph";
@@ -8,19 +8,29 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { useCookies } from "react-cookie";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { MoonIcon } from "@heroicons/react/24/outline";
 
 const SideBar = () => {
   const [, removeCookie] = useCookies(["access_token"]);
   const [showMenu, setShowMenu] = useState<boolean>(false);
-
+  const { pathname } = useLocation();
+  const [pageTitle, setPageTitle] = useState<string>("داشبورد");
+  useEffect(() => {
+    const findCurrentPage = routesList.find((i) => i.path === pathname);
+    if (findCurrentPage) {
+      setPageTitle(findCurrentPage.title);
+    }
+  }, [pathname]);
   return (
     <>
-      <div className="lg:hidden p-4 pb-0">
+      <div className="lg:hidden w-full p-4 pb-0 flex justify-between items-center">
         <Bars3Icon
           className="size-12 bg-white rounded-full p-2 cursor-pointer"
           onClick={() => setShowMenu(true)}
         />
+        <Paragraph>{pageTitle}</Paragraph>
+        <MoonIcon className="size-9 bg-white rounded-full p-2" />
       </div>
 
       <div
@@ -55,7 +65,7 @@ const SideBar = () => {
                     ? "bg-primary text-white px-4 py-3 rounded-lg"
                     : "text-gray-600 hover:bg-gray-100 px-4 py-3 rounded-lg"
                 }
-                onClick={() => setShowMenu(false)} 
+                onClick={() => setShowMenu(false)}
               >
                 {<item.icon className="size-5" />}
                 {item.title}

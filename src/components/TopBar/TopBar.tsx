@@ -16,11 +16,11 @@ const TopBar = () => {
     }
   }, [pathname]);
   return (
-    <div className="bg-white flex md:flex-row flex-col-reverse justify-between gap-4 flex-wrap items-center shadow-sm rounded-xl p-4 w-full sticky top-0">
-      <Paragraph>{pageTitle}</Paragraph>
-      <div className="flex items-center gap-4 flex-wrap">
+    <div className="bg-white flex md:flex-row flex-col-reverse justify-between gap-4 flex-wrap items-center shadow-sm rounded-xl p-4 w-full sticky top-0 z-40">
+      <Paragraph className="md:block hidden">{pageTitle}</Paragraph>
+      <div className="md:w-fit w-full flex items-center md:justify-end justify-between gap-4 flex-wrap">
         <Bell />
-        <MoonIcon className="size-9 bg-stone-100 rounded-full p-2" />
+        <MoonIcon className="md:block hidden size-9 bg-stone-100 rounded-full p-2" />
         <ProfileBox />
       </div>
     </div>
