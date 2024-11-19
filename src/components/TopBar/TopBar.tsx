@@ -17,7 +17,7 @@ const TopBar = () => {
   }, [pathname]);
   return (
     <div className="bg-white flex md:flex-row flex-col-reverse justify-between gap-4 flex-wrap items-center shadow-md  p-4 w-full sticky top-0 z-40">
-      <Paragraph className="md:block hidden">{pageTitle}</Paragraph>
+      <div className="md:block hidden"></div>
       <div className="md:w-fit w-full flex items-center md:justify-end justify-between gap-4 flex-wrap">
         <Bell />
         <MoonIcon className="md:block hidden size-9 bg-stone-100 rounded-full p-2" />

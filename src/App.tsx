@@ -6,7 +6,6 @@ import { useEffect } from "react";
 import { useCookies } from "react-cookie";
 import TopBar from "./components/TopBar/TopBar";
 import { routesList } from "./utils/routesList";
-import Banner from "./components/Banners/Banner";
 
 function App() {
   const navigate = useNavigate();
@@ -28,7 +27,7 @@ function App() {
 
           <div className="md:w-[100%] w-full px-1  pb-4 h-screen overflow-auto">
             <TopBar />
-            <Banner />
+          
             <div className="py-4">
               <Routes>
                 {routesList.map((item) => (

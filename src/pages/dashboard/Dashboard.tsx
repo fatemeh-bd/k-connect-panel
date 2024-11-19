@@ -4,6 +4,7 @@ import { boxStyle } from "../../utils/enums";
 import Paragraph from "../../components/typography/Paragraph";
 import InfoList from "./_components/InfoList";
 import LastNotifications from "./_components/LastNotifications";
+import Banner from "../../components/Banners/Banner";
 
 export const exampleData = {
   labels: ["واریزی", "برداشت"],
@@ -47,6 +48,7 @@ export const exampleData2 = {
 const Dashboard = () => {
   return (
     <div className="space-y-4">
+        <Banner />
       <InfoList />
       <div className="grid grid-cols-12 gap-4">
         <div className="lg:col-span-7 col-span-12">
