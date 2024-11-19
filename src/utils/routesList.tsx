@@ -11,6 +11,7 @@ import {
 import Dashboard from "../pages/dashboard/Dashboard";
 import UsersManagment from "../pages/usersManagment/UsersManagment";
 import UserNotification from "../pages/UserNotifcation/UserNotification";
+import Supports from "../pages/Supports/Support";
 
 export interface RouteItemType {
   title: "داشبورد";
@@ -32,7 +33,7 @@ export const routesList = [
     title: "پشتیبانی",
     path: "/support",
     icon: ChatBubbleBottomCenterTextIcon,
-    element: "",
+    element: <Supports />,
   },
   {
     id: 3,

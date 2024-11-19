@@ -101,7 +101,7 @@ const UsersManagment = () => {
 
   return (
     <div className={`${boxStyle} overflow-auto`}>
-      <Table columns={columns} data={exampleData} />
+      <Table columns={columns} data={exampleData} header={[]} />
     </div>
   );
 };
