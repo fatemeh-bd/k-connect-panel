@@ -10,7 +10,7 @@ const Banner = () => {
   if (!isVisible) return null;
 
   return isVisible == true ? (
-    <div className="relative mb-2 shadow-lg flex-row-reverse rounded-sm isolate flex items-center gap-x-6 overflow-hidden bg-gray-50 dark:bg-[var(--bgColor)] px-6 py-2.5 sm:px-3.5 sm:before:flex-1">
+    <div className="relative mb-2 flex-row-reverse rounded-sm isolate flex items-center gap-x-6 overflow-hidden bg-gray-50  px-6 py-2.5 sm:px-3.5 sm:before:flex-1">
       <div
         aria-hidden="true"
         className="absolute right-[max(-7rem,calc(50%-52rem))] top-1/2 -z-10 -translate-y-1/2 transform-gpu blur-2xl"
@@ -37,7 +37,7 @@ const Banner = () => {
       </div>
 
       <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-        <p className="text-sm/6 text-right text-gray-900 dark:text-white">
+        <p className="text-sm/6 text-right">
           <strong className="font-semibold"> یلدای 1403</strong>
           <svg
             viewBox="0 0 2 2"
@@ -57,7 +57,7 @@ const Banner = () => {
           onClick={handleClose} // اضافه کردن رویداد کلیک
         >
           <span className="sr-only">بستن</span>
-          <XMarkIcon aria-hidden="true" className="h-5 w-5 text-gray-900" />
+          <XMarkIcon aria-hidden="true" className="h-5 w-5 text-boxColor" />
         </button>
       </div>
     </div>

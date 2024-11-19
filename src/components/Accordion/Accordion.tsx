@@ -10,10 +10,10 @@ const Accordion = ({ data }: { data: { title: string; msg: string } }) => {
     };
 
     return (
-        <div className="mx-auto bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
+        <div className="mx-auto bg-white rounded-lg border border-gray-200  overflow-hidden">
             <button
                 onClick={toggleAccordion}
-                className={`flex justify-between items-center w-full px-6 py-4 text-left   hover:bg-gray-100 ${isOpen ? "dark:bg-gray-800 bg-gray-100" : "dark:bg-gray-900 light:bg-gray-50"} dark:hover:bg-gray-800`}
+                className={`flex justify-between items-center w-full px-6 py-4 text-left   hover:bg-gray-200 ${isOpen ? "bg-gray-100" : "bg-gray-50"}`}
             >
                 <Paragraph className="font-medium">{data.title}</Paragraph>
                 <ChevronDownIcon
@@ -26,7 +26,7 @@ const Accordion = ({ data }: { data: { title: string; msg: string } }) => {
                 className={`overflow-hidden transition-[max-height] duration-300 ease-in-out ${isOpen ? "max-h-[400px] " : "max-h-0"
                     }`}
             >
-                <div className="px-6 py-4 text-gray-700 dark:text-gray-300">
+                <div className="px-6 py-4 text-gray-600">
                     {/* If msg contains HTML, use dangerouslySetInnerHTML */}
                     {typeof data.msg === "string" ? (
                         <div dangerouslySetInnerHTML={{ __html: data.msg }} />

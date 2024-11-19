@@ -38,7 +38,7 @@ const SideBar = () => {
       <div
         className={`${
           showMenu ? "translate-x-0" : "translate-x-full"
-        } lg:translate-x-0 transition-transform duration-300 ease-in-out lg:w-[20%] w-[300px] fixed lg:relative z-50 h-screen overflow-auto shadow-xl dark:shadow-black p-5 bg-white dark:bg-gray-900`}
+        } lg:translate-x-0 transition-transform duration-300 ease-in-out lg:w-[20%] w-[300px] fixed lg:relative z-50 h-screen overflow-auto shadow-xl dark:shadow-black p-5 bg-white dark:bg-boxColor`}
       >
         <div className="lg:hidden flex justify-end mb-4">
           <XMarkIcon
@@ -64,7 +64,7 @@ const SideBar = () => {
                 to={item.path}
                 className={({ isActive }) =>
                   isActive
-                    ? "bg-primary dark:bg-gray-300 text-white dark:text-gray-800 px-4 py-3 rounded-lg"
+                    ? "bg-primary text-white px-4 py-3 rounded-lg"
                     : "hover:bg-gray-100 dark:hover:bg-gray-700 px-4 py-3 rounded-lg"
                 }
                 onClick={() => setShowMenu(false)}

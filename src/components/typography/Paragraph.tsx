@@ -14,7 +14,7 @@ const Paragraph = ({ children, type, size, className }: ParagraphType) => {
           : "sm:text-base text-sm"
       } ${
         type === ColorType.PRIMARY
-          ? "text-primary dark:text-gray-300"
+          ? "text-primary"
           : type === ColorType.BLACK
           ? "text-black"
           : type === ColorType.SUCCESS

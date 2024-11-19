@@ -31,7 +31,7 @@ const ThemeToggle = () => {
       </button>
 
       {isDropdownOpen && (
-        <div className="absolute top-full  mt-2 text-sm left-0 z-50 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg rounded-lg w-48">
+        <div className="absolute top-full  mt-2 text-sm left-0 z-50 bg-white dark:bg-gray-800 border bordergray-200  shadow-lg rounded-lg w-48">
           <ul className="flex flex-col">
             <li
               onClick={() => handleThemeChange("light")}
@@ -43,7 +43,7 @@ const ThemeToggle = () => {
             </li>
             <li
               onClick={() => handleThemeChange("dark")}
-              className={`py-2 px-4 flex gap-2 items-center cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 ${theme === "dark" ? " dark:bg-gray-600" : ""
+              className={`py-2 px-4 flex gap-2 items-center cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 ${theme === "dark" ? "bg-gray-200" : ""
                 }`}
             >
               <MoonIcon className="size-5" />

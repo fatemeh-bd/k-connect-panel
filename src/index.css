@@ -126,11 +126,27 @@
 :root {
   --bgColor: #f8f8f8;
   --fontColor: #111111;
+  --primary: #202020;
+  --lightColor: #fff;
+  --boxColor: #ffffff;
+  --gray200: #e5e7eb;
+  --gray50: #f9fafb;
+  --gray100: #f3f4f6;
+  --gray600: #4b5563;
+  --gray300: #d1d5db;
 }
 /* dark mode */
 .dark {
-  --bgColor: #121212;
+  --bgColor: #1a1a1e;
   --fontColor: #c9c9c9;
+  --primary: #e9e9e9;
+  --lightColor: #18181b;
+  --boxColor: #27272a;
+  --gray200: #374151;
+  --gray50: #18181b;
+  --gray100: #1f2937;
+  --gray600: #d1d5db;
+  --gray300: #d1d5db;
 }
 * {
   font-family: "AnjomanVF" !important;
@@ -149,7 +165,7 @@ body {
   color: var(--fontColor);
 }
 input {
-  color: var(--fontColor);
+  color: var(--fontColor) !important;
 }
 thead svg {
   opacity: 0.5 !important;
@@ -168,4 +184,8 @@ thead svg {
 }
 .login h1 {
   color: #111111 !important;
+}
+.login button {
+  background-color: #202020 !important;
+  color: #fff !important;
 }
