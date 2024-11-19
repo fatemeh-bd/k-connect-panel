@@ -35,27 +35,24 @@ const ThemeToggle = () => {
           <ul className="flex flex-col">
             <li
               onClick={() => handleThemeChange("light")}
-              className={`py-2 px-4 flex gap-2 items-center cursor-pointer  hover:bg-zinc-100 dark:hover:bg-zinc-700 ${
-                theme === "light" ? "bg-zinc-200" : ""
-              }`}
+              className={`py-2 px-4 flex gap-2 items-center cursor-pointer  hover:bg-zinc-100 dark:hover:bg-zinc-700 ${theme === "light" ? "bg-zinc-200" : ""
+                }`}
             >
               <SunIcon className="size-5" />
               تم روشن
             </li>
             <li
               onClick={() => handleThemeChange("dark")}
-              className={`py-2 px-4 flex gap-2 items-center cursor-pointer hover:bg-zinc-100 dark:hover:bg-zinc-700 ${
-                theme === "dark" ? " dark:bg-zinc-600" : ""
-              }`}
+              className={`py-2 px-4 flex gap-2 items-center cursor-pointer hover:bg-zinc-100 dark:hover:bg-zinc-700 ${theme === "dark" ? " dark:bg-zinc-600" : ""
+                }`}
             >
               <MoonIcon className="size-5" />
               تم تاریک
             </li>
             <li
               onClick={() => handleThemeChange("system")}
-              className={`py-2 px-4 flex gap-2 items-center cursor-pointer hover:bg-zinc-100 dark:hover:bg-zinc-700 ${
-                theme === "system" ? "bg-zinc-200 dark:bg-zinc-600" : ""
-              }`}
+              className={`py-2 px-4 flex gap-2 items-center cursor-pointer hover:bg-zinc-100 dark:hover:bg-zinc-700 ${theme === "system" ? "bg-zinc-200 dark:bg-zinc-600" : ""
+                }`}
             >
               <ComputerDesktopIcon className="size-5" />
               تم سیستم
