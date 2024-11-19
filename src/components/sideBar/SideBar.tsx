@@ -47,9 +47,9 @@ const SideBar = () => {
 
         <Paragraph
           type={ColorType.PRIMARY}
-          className="font-bold !text-2xl mb-6"
+          className="font-bold !text-2xl mb-6 text-center"
         >
-          K-connect
+          پنل فروشندگان
         </Paragraph>
 
         <ul>

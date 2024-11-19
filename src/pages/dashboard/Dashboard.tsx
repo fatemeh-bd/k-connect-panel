@@ -19,7 +19,7 @@ export const exampleData = {
 };
 
 const labels = [
-  "قروردین",
+  "فروردین",
   "اردیبهشت",
   "خرداد",
   "تیر",
