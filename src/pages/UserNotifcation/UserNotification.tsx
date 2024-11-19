@@ -1,5 +1,4 @@
 import Accordion from "../../components/Accordion/Accordion";
-import Paragraph from "../../components/typography/Paragraph";
 
 const UserNotification = () => {
 

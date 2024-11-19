@@ -6,7 +6,7 @@ const InfoBox = ({
   data: { icon: SvgType; title: string; value: string; color: string };
 }) => {
   return (
-    <div className="max-w-md mx-auto light:bg-white dark:bg-gray-900 rounded-lg shadow-md p-6">
+    <div className="max-w-md mx-auto light:bg-white dark:bg-boxColor rounded-lg shadow-md p-6">
       <Paragraph size={Sizes.xl} className="font-bold text-center">
         {data.title}
       </Paragraph>
