@@ -23,20 +23,20 @@ const ThemeToggle = () => {
       >
         {theme === "dark" ? (
           <SunIcon className="dark:text-yellow-500 size-6" />
+        ) : theme === "system" ? (
+          <ComputerDesktopIcon className="size-6" />
         ) : (
           <MoonIcon className="dark:text-blue-500 size-6" />
         )}
       </button>
 
       {isDropdownOpen && (
-        <div className="absolute top-full  mt-2 text-sm right-0 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 shadow-lg rounded-lg w-48">
+        <div className="absolute top-full  mt-2 text-sm left-0 z-50 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 shadow-lg rounded-lg w-48">
           <ul className="flex flex-col">
             <li
               onClick={() => handleThemeChange("light")}
               className={`py-2 px-4 flex gap-2 items-center cursor-pointer  hover:bg-zinc-100 dark:hover:bg-zinc-700 ${
-                theme === "light"
-                  ? "bg-zinc-200"
-                  : ""
+                theme === "light" ? "bg-zinc-200" : ""
               }`}
             >
               <SunIcon className="size-5" />
