@@ -16,17 +16,23 @@ const Accordion = ({ data }: { data: { title: string; msg: string } }) => {
             >
                 <span className="text-lg font-medium text-gray-800">{data.title}</span>
                 <ChevronDownIcon
-                    className={`h-5 w-5 text-gray-600 transition-transform duration-300 ${
-                        isOpen ? "rotate-180" : ""
-                    }`}
+                    className={`h-5 w-5 text-gray-600 transition-transform duration-300 ${isOpen ? "rotate-180" : ""
+                        }`}
                 />
             </button>
             <div
-                className={`overflow-hidden transition-[max-height] duration-300 ease-in-out ${
-                    isOpen ? "max-h-40" : "max-h-0"
-                }`}
+                id="accordion-content"
+                className={`overflow-hidden transition-[max-height] duration-300 ease-in-out ${isOpen ? "max-h-[400px]" : "max-h-0"
+                    }`}
             >
-                <div className="px-6 py-4 text-gray-700">{data.msg}</div>
+                <div className="px-6 py-4 text-gray-700">
+                    {/* If msg contains HTML, use dangerouslySetInnerHTML */}
+                    {typeof data.msg === "string" ? (
+                        <div dangerouslySetInnerHTML={{ __html: data.msg }} />
+                    ) : (
+                        <div>{data.msg}</div>
+                    )}
+                </div>
             </div>
         </div>
     );
