@@ -19,7 +19,7 @@ const ThemeToggle = () => {
     <div className="relative">
       <button
         onClick={() => setIsDropdownOpen((prev) => !prev)}
-        className="size-9 bg-zinc-100 dark:bg-zinc-800 rounded-full  flex items-center justify-center"
+        className="size-9 bg-gray-100 dark:bg-gray-800 rounded-full  flex items-center justify-center"
       >
         {theme === "dark" ? (
           <SunIcon className="dark:text-yellow-500 size-6" />
@@ -31,11 +31,11 @@ const ThemeToggle = () => {
       </button>
 
       {isDropdownOpen && (
-        <div className="absolute top-full  mt-2 text-sm left-0 z-50 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 shadow-lg rounded-lg w-48">
+        <div className="absolute top-full  mt-2 text-sm left-0 z-50 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-lg rounded-lg w-48">
           <ul className="flex flex-col">
             <li
               onClick={() => handleThemeChange("light")}
-              className={`py-2 px-4 flex gap-2 items-center cursor-pointer  hover:bg-zinc-100 dark:hover:bg-zinc-700 ${theme === "light" ? "bg-zinc-200" : ""
+              className={`py-2 px-4 flex gap-2 items-center cursor-pointer  hover:bg-gray-100 dark:hover:bg-gray-700 ${theme === "light" ? "bg-gray-200" : ""
                 }`}
             >
               <SunIcon className="size-5" />
@@ -43,7 +43,7 @@ const ThemeToggle = () => {
             </li>
             <li
               onClick={() => handleThemeChange("dark")}
-              className={`py-2 px-4 flex gap-2 items-center cursor-pointer hover:bg-zinc-100 dark:hover:bg-zinc-700 ${theme === "dark" ? " dark:bg-zinc-600" : ""
+              className={`py-2 px-4 flex gap-2 items-center cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 ${theme === "dark" ? " dark:bg-gray-600" : ""
                 }`}
             >
               <MoonIcon className="size-5" />
@@ -51,7 +51,7 @@ const ThemeToggle = () => {
             </li>
             <li
               onClick={() => handleThemeChange("system")}
-              className={`py-2 px-4 flex gap-2 items-center cursor-pointer hover:bg-zinc-100 dark:hover:bg-zinc-700 ${theme === "system" ? "bg-zinc-200 dark:bg-zinc-600" : ""
+              className={`py-2 px-4 flex gap-2 items-center cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 ${theme === "system" ? "bg-gray-200 dark:bg-gray-600" : ""
                 }`}
             >
               <ComputerDesktopIcon className="size-5" />

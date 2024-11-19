@@ -15,7 +15,7 @@ const Button: React.FC<ButtonProps> = ({
   } flex text-sm cursor-pointer font-medium items-center justify-center gap-2 rounded-lg  transition-all hover:opacity-80 p-3.5 ${className} ${
     themeType === ColorType.ERROR
       ? "bg-rose-600 text-[#fff]"
-      : "bg-primary dark:bg-zinc-300  dark:text-zinc-800  text-white"
+      : "bg-primary dark:bg-gray-300  dark:text-gray-800  text-white"
   } ${outline ? "!bg-transparent" : ""}`;
 
   return (
