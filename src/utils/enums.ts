@@ -1,7 +1,6 @@
 import React from "react";
 export type SvgType = React.ComponentType<React.SVGProps<SVGSVGElement>>;
-export const boxStyle =
-  "bg-white dark:bg-zinc-900 shadow-sm dark:shadow-black rounded-2xl lg:p-5 p-4";
+export const boxStyle = "bg-white shadow-sm rounded lg:p-5 p-4";
 export enum ColorType {
   PRIMARY = "primary",
   BLACK = "black",
