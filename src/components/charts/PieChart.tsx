@@ -12,7 +12,7 @@ const PieChart = ({
  
 
   return (
-    <div className="w-full h-[350px]">
+    <div className="w-full sm:h-[350px] h-[280px]">
       <Pie
         data={data}
         options={chartOptions}

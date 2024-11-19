@@ -14,14 +14,14 @@ const Paragraph = ({ children, type, size, className }: ParagraphType) => {
           : "sm:text-base text-sm"
       } ${
         type === ColorType.PRIMARY
-          ? "text-primary"
+          ? "text-primary dark:text-zinc-300"
           : type === ColorType.BLACK
           ? "text-black"
           : type === ColorType.SUCCESS
           ? "text-teal-500"
           : type === ColorType.ERROR
           ? "text-rose-500 !text-sm"
-          : "text-stone-600"
+          : ""
       } ${className || ""}`}
     >
       {children}

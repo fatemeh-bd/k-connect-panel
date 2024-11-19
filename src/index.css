@@ -26,7 +26,13 @@
   font-weight: 700;
 }
 :root {
-  --primary: #202020;
+  --bgColor: #f8f8f8;
+  --fontColor: #57534e;
+}
+/* dark mode */
+.dark {
+  --bgColor: #121212;
+  --fontColor: #c9c9c9;
 }
 * {
   font-family: "IRANSansWeb" !important;
@@ -41,9 +47,10 @@ body {
   margin: 0;
   padding: 0;
   direction: rtl;
-  background-color: #f8f8f8;
-  color: #57534e;
+  background-color: var(--bgColor);
+  color: var(--fontColor);
 }
+
 thead svg {
   opacity: 0.5 !important;
 }

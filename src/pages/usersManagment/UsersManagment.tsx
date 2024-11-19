@@ -1,13 +1,10 @@
-import  { useState } from "react";
-import DataTable, { TableColumn } from "react-data-table-component";
+import { TableColumn } from "react-data-table-component";
 import { boxStyle } from "../../utils/enums";
 import Button from "../../components/buttons/Button";
-import { ChevronUpDownIcon } from "@heroicons/react/24/outline";
 import { UserType } from "./types";
-import Input from "../../components/inputs/Input";
+import Table from "../../components/table/Table";
 
 const UsersManagment = () => {
-  // داده‌های نمونه
   const exampleData: UserType[] = [
     {
       userAvatar:
@@ -44,20 +41,7 @@ const UsersManagment = () => {
     },
   ];
 
-  // state برای جستجو
-  const [searchText, setSearchText] = useState("");
-
-  // فیلتر کردن داده‌ها بر اساس جستجو
-  const filteredData = exampleData.filter(
-    (item) =>
-      item.firstName.toLowerCase().includes(searchText.toLowerCase()) ||
-      item.lastName.toLowerCase().includes(searchText.toLowerCase()) ||
-      item.phoneNumber.includes(searchText) ||
-      item.cityName.toLowerCase().includes(searchText)
-  );
-
-  // ستون‌های جدول
-  const columns: TableColumn<UserType>[] = [
+  const columns: TableColumn<{ [key: string]: any }>[] = [
     {
       name: "پروفایل",
       cell: (row) => (
@@ -69,6 +53,7 @@ const UsersManagment = () => {
           height="50"
         />
       ),
+      grow: 0,
       sortable: false,
     },
     {
@@ -105,7 +90,7 @@ const UsersManagment = () => {
       name: "عملیات",
       cell: () => (
         <div className="flex justify-center items-center">
-          <Button className="min-w-[120px] text-sm cursor-pointer font-medium items-center justify-center rounded-lg bg-primary text-white p-2 hover:opacity-80 whitespace-nowrap">
+          <Button className="min-w-[120px] text-sm whitespace-nowrap">
             تغییر وضعیت
           </Button>
         </div>
@@ -113,56 +98,10 @@ const UsersManagment = () => {
       sortable: false,
     },
   ];
-  const paginationComponentOptions = {
-    rowsPerPageText: 'تعداد صفحات',
-    rangeSeparatorText: 'تا',
-    selectAllRowsItem: true,
-    selectAllRowsItemText: 'Todos',
-  };
+
   return (
     <div className={`${boxStyle} overflow-auto`}>
-      <DataTable
-        className="customTable"
-        title="مدیریت کاربران"
-        columns={columns}
-        data={filteredData}
-        pagination
-        paginationPerPage={2}
-        paginationRowsPerPageOptions={[2, 10, 20]}
-        paginationServer
-        responsive
-        highlightOnHover
-        paginationComponentOptions={paginationComponentOptions}
-        sortIcon={<ChevronUpDownIcon className="size-4 mx-1" />}
-        noDataComponent="دیتایی برای نمایش وجود ندارد"
-        subHeader
-        customStyles={{
-          headCells: {
-            style: {
-              justifyContent: "center",
-              textAlign: "center",
-            },
-          },
-          cells: {
-            style: {
-              padding: 10,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            },
-          },
-        }}
-        subHeaderComponent={
-          <Input
-            type="text"
-            label="جستجو در جدول"
-            placeholder="جستجو در جدول..."
-            value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
-            className="max-w-[300px]"
-          />
-        }
-      />
+      <Table columns={columns} data={exampleData} />
     </div>
   );
 };

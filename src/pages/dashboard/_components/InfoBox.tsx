@@ -25,7 +25,7 @@ const InfoBox = ({
         <Paragraph size={Sizes.lg} className="font-medium">
           {data.value}
         </Paragraph>
-        <Paragraph className="text-stone-400 md:text-sm text-xs">
+        <Paragraph className="text-zinc-400 md:text-sm text-xs">
           {data.title}
         </Paragraph>
       </div>
