@@ -29,13 +29,14 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
       root.classList.toggle("dark", theme === "dark");
     }
 
-    if (theme !== "system") {
-      localStorage.setItem("theme", theme);
-    }
+  
+    localStorage.setItem("theme", theme);
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === "dark" ? "light" : "dark"));
+    setTheme((prevTheme) =>
+      prevTheme === "dark" ? "light" : prevTheme === "light" ? "dark" : "system"
+    );
   };
 
   return (
