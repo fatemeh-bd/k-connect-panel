@@ -4,6 +4,7 @@ import {
   UserGroupIcon,
   UsersIcon,
   WalletIcon,
+  
 } from "@heroicons/react/24/outline";
 
 const infoList = [

@@ -17,7 +17,7 @@ const Banner = () => {
         isVisible == true ?
             <div
 
-                className="relative mb-2 flex-row-reverse rounded-sm isolate flex items-center gap-x-6 overflow-hidden bg-gray-50 px-6 py-2.5 sm:px-3.5 sm:before:flex-1"
+                className="relative mb-2 shadow-lg flex-row-reverse rounded-sm isolate flex items-center gap-x-6 overflow-hidden bg-gray-50 px-6 py-2.5 sm:px-3.5 sm:before:flex-1"
             >
 
                 <div

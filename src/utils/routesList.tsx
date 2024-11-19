@@ -6,9 +6,11 @@ import {
   HomeIcon,
   UserGroupIcon,
   UserIcon,
+  BellAlertIcon,
 } from "@heroicons/react/24/outline";
 import Dashboard from "../pages/dashboard/Dashboard";
 import UsersManagment from "../pages/usersManagment/UsersManagment";
+import UserNotification from "../pages/UserNotifcation/UserNotification";
 
 export interface RouteItemType {
   title: "داشبورد";
@@ -52,5 +54,12 @@ export const routesList = [
     path: "/profile",
     icon: UserIcon,
     element: "",
+  },
+  {
+    id: 6,
+    title: "اعلان های من",
+    path: "/MyNotification",
+    icon: BellAlertIcon,
+    element: <UserNotification />,
   },
 ];
