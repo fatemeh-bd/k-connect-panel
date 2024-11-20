@@ -1,9 +1,10 @@
 import { TableColumn } from "react-data-table-component";
 import Table from "../../components/table/Table";
 import Title from "../../components/typography/Title";
-import { boxStyle, TicketStatusMapping } from "../../utils/enums";
+import { boxStyle, ColorType, TicketStatusMapping } from "../../utils/enums";
 import Button from "../../components/buttons/Button";
 import { TicketType } from "./types";
+import { PlusIcon } from "@heroicons/react/24/outline";
 
 const Tickets = () => {
   const exampleData: TicketType[] = [
@@ -76,8 +77,15 @@ const Tickets = () => {
   return (
     <div className="space-y-3">
       <Title>لیست تیک های ارسال شده</Title>
+      <Button
+        Icon={PlusIcon}
+        themeType={ColorType.SUCCESS}
+        className="float-end"
+      >
+        تیکت جدید
+      </Button>
       <div className={boxStyle}>
-        <Table columns={columns} data={mappedData} />
+        <Table columns={columns} data={mappedData} header={[]} />
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import Button from "../../components/buttons/Button";
 import { UserType } from "./types";
 import Table from "../../components/table/Table";
 import { PlusIcon } from "@heroicons/react/24/outline";
+import Title from "../../components/typography/Title";
 
 const UsersManagment = () => {
   const exampleData: UserType[] = [
@@ -102,6 +103,9 @@ const UsersManagment = () => {
 
   return (
     <div className={`${boxStyle} overflow-auto`}>
+      <Title>
+        لیست کاربران
+      </Title>
       <Button
         Icon={PlusIcon}
         themeType={ColorType.SUCCESS}

@@ -4,7 +4,7 @@ import { FC, useState } from "react";
 import { TablePropsType } from "./types";
 import { ChevronUpDownIcon } from "@heroicons/react/24/outline";
 import { useTheme } from "../../context/ThemeContext";
-import Button from "../buttons/Button";
+// import Button from "../buttons/Button";
 
 const Table: FC<TablePropsType> = ({ columns, data }) => {
   const [searchText, setSearchText] = useState("");
@@ -39,15 +39,14 @@ const Table: FC<TablePropsType> = ({ columns, data }) => {
   return (
     <>
       <div className="grid grid-cols-6 gap-4">
-        <Button className="mt-10" full type="button">
+        {/* <Button className="mt-10" full type="button">
           رکورد
-        </Button>
+        </Button> */}
       </div>
       <div>
 
         <DataTable
           className="customTable"
-          // title="مدیریت کاربران"
           columns={columns}
           data={filteredData}
           pagination
@@ -84,7 +83,7 @@ const Table: FC<TablePropsType> = ({ columns, data }) => {
             placeholder="جستجو در جدول..."
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
-            className="max-w-[300px] ml-auto" />} />
+            className="!w-[300px] !my-0" />} />
       </div>
     </>
   );

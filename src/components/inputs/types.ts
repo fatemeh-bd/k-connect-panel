@@ -8,4 +8,5 @@ export type InputPropsType = Omit<
   errorText?: string;
   className?: string;
   icon?: React.ReactNode;
+  
 };

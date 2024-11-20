@@ -174,3 +174,8 @@ thead svg {
   background-color: #202020 !important;
   color: #fff !important;
 }
+
+header {
+  width: auto !important;
+  float: right;
+}
