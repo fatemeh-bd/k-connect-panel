@@ -1,5 +1,5 @@
 import { ButtonHTMLAttributes } from "react";
-import { ColorType } from "../../utils/enums";
+import { ColorType, SvgType } from "../../utils/enums";
 
 export type ButtonProps = Omit<
   ButtonHTMLAttributes<HTMLButtonElement>,
@@ -7,7 +7,8 @@ export type ButtonProps = Omit<
 > & {
   children: React.ReactNode;
   className?: string;
-  themeType?: ColorType.ERROR;
+  themeType?: ColorType.SUCCESS | ColorType.ERROR;
   outline?: boolean;
   full?: boolean;
+  Icon?: SvgType;
 };

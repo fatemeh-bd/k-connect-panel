@@ -28,7 +28,7 @@ const SideBar = () => {
     <>
       <div className="lg:hidden w-full p-4 pb-0 flex justify-between items-center">
         <Bars3Icon
-          className="size-12 bg-white dark:bg-gray-800 rounded-full p-2 cursor-pointer"
+          className="size-12 bg-white rounded-full p-2 cursor-pointer"
           onClick={() => setShowMenu(true)}
         />
         <Paragraph>{pageTitle}</Paragraph>
@@ -38,7 +38,7 @@ const SideBar = () => {
       <div
         className={`${
           showMenu ? "translate-x-0" : "translate-x-full"
-        } lg:translate-x-0 transition-transform duration-300 ease-in-out lg:w-[20%] w-[300px] fixed lg:relative z-50 h-screen overflow-auto shadow-xl dark:shadow-black p-5 bg-white dark:bg-boxColor`}
+        } lg:translate-x-0 transition-transform duration-300 ease-in-out lg:w-[20%] w-[300px] fixed lg:relative z-50 h-screen overflow-auto shadow-xl dark:shadow-black p-5 bg-white`}
       >
         <div className="lg:hidden flex justify-end mb-4">
           <XMarkIcon
@@ -65,7 +65,7 @@ const SideBar = () => {
                 className={({ isActive }) =>
                   isActive
                     ? "bg-primary text-white px-4 py-3 rounded-lg"
-                    : "hover:bg-gray-100 dark:hover:bg-gray-700 px-4 py-3 rounded-lg"
+                    : "hover:bg-secondary-100  px-4 py-3 rounded-lg"
                 }
                 onClick={() => setShowMenu(false)}
               >

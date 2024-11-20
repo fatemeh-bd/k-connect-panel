@@ -1,8 +1,9 @@
 import { TableColumn } from "react-data-table-component";
-import { boxStyle } from "../../utils/enums";
+import { boxStyle, ColorType } from "../../utils/enums";
 import Button from "../../components/buttons/Button";
 import { UserType } from "./types";
 import Table from "../../components/table/Table";
+import { PlusIcon } from "@heroicons/react/24/outline";
 
 const UsersManagment = () => {
   const exampleData: UserType[] = [
@@ -90,7 +91,7 @@ const UsersManagment = () => {
       name: "عملیات",
       cell: () => (
         <div className="flex justify-center items-center">
-          <Button className="min-w-[120px] text-sm whitespace-nowrap">
+          <Button outline className="min-w-[120px] text-sm whitespace-nowrap">
             تغییر وضعیت
           </Button>
         </div>
@@ -101,6 +102,13 @@ const UsersManagment = () => {
 
   return (
     <div className={`${boxStyle} overflow-auto`}>
+      <Button
+        Icon={PlusIcon}
+        themeType={ColorType.SUCCESS}
+        className="float-end"
+      >
+        افزودن کاربر
+      </Button>
       <Table columns={columns} data={exampleData} header={[]} />
     </div>
   );

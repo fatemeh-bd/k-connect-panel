@@ -10,7 +10,9 @@ const Paragraph = ({ children, type, size, className }: ParagraphType) => {
           : size === Sizes.xs
           ? "text-xs"
           : size === Sizes.xl
-          ? "text-xl"
+          ? "xl:text-xl text-lg"
+          : size === Sizes.lg
+          ? "lg:text-lg text-base"
           : "sm:text-base text-sm"
       } ${
         type === ColorType.PRIMARY

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   ComputerDesktopIcon,
   MoonIcon,
@@ -8,18 +8,35 @@ import { useTheme } from "../../context/ThemeContext";
 
 const ThemeToggle = () => {
   const { theme, setTheme } = useTheme();
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [IsOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const handleThemeChange = (selectedTheme: "light" | "dark" | "system") => {
     setTheme(selectedTheme);
-    setIsDropdownOpen(false);
+    setIsOpen(false);
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className="relative">
+    <div className="relative" ref={dropdownRef}>
       <button
-        onClick={() => setIsDropdownOpen((prev) => !prev)}
-        className="size-9 bg-gray-100 dark:bg-gray-800 rounded-full  flex items-center justify-center"
+        onClick={() => setIsOpen((prev) => !prev)}
+        className="size-9 bg-secondary-100 rounded-full text-secondary-600 flex items-center justify-center"
       >
         {theme === "dark" ? (
           <SunIcon className="dark:text-yellow-500 size-6" />
@@ -30,29 +47,34 @@ const ThemeToggle = () => {
         )}
       </button>
 
-      {isDropdownOpen && (
-        <div className="absolute top-full  mt-2 text-sm left-0 z-50 bg-white dark:bg-gray-800 border bordergray-200  shadow-lg rounded-lg w-48">
+      {IsOpen && (
+        <div className="absolute top-full mt-2 text-sm left-0 z-50 bg-white border border-secondary-200 shadow-lg rounded-lg w-48">
           <ul className="flex flex-col">
             <li
               onClick={() => handleThemeChange("light")}
-              className={`py-2 px-4 flex gap-2 items-center cursor-pointer  hover:bg-gray-100 dark:hover:bg-gray-700 ${theme === "light" ? "bg-gray-200" : ""
-                }`}
+              className={`py-2 px-4 flex gap-2 items-center !cursor-pointer hover:bg-secondary-100 ${
+                theme === "light" ? "bg-secondary-200" : ""
+              }`}
             >
               <SunIcon className="size-5" />
               تم روشن
             </li>
             <li
               onClick={() => handleThemeChange("dark")}
-              className={`py-2 px-4 flex gap-2 items-center cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 ${theme === "dark" ? "bg-gray-200" : ""
-                }`}
+              className={`py-2 px-4 flex gap-2 items-center !cursor-pointer hover:bg-secondary-100 ${
+                theme === "dark" ? "bg-secondary-200" : ""
+              }`}
             >
               <MoonIcon className="size-5" />
               تم تاریک
             </li>
             <li
               onClick={() => handleThemeChange("system")}
-              className={`py-2 px-4 flex gap-2 items-center cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 ${theme === "system" ? "bg-gray-200 dark:bg-gray-600" : ""
-                }`}
+              className={`py-2 px-4 flex gap-2 items-center !cursor-pointer hover:bg-secondary-100 ${
+                theme === "system"
+                  ? "bg-secondary-200 dark:bg-secondary-500"
+                  : ""
+              }`}
             >
               <ComputerDesktopIcon className="size-5" />
               تم سیستم

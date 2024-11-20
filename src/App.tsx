@@ -22,10 +22,10 @@ function App() {
         <Route path="/signUp" element={<SignUp />} />
       </Routes>
       {cookies.access_token && (
-        <div className="flex lg:flex-row flex-col items-start h-screen overflow-hidden gap-1 w-full">
+        <div className="flex text-zinc-900 lg:flex-row flex-col items-start h-screen overflow-hidden gap-1 w-full">
           <SideBar />
 
-          <div className="md:w-[100%] w-full px-1  pb-4 h-screen overflow-auto">
+          <div className="lg:w-[80%] w-full px-1  pb-4 h-screen overflow-auto">
             <TopBar />
           
             <div className="py-4">

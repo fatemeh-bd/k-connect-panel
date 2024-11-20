@@ -56,9 +56,9 @@ const SignUp = () => {
                 className="cursor-pointer"
               >
                 {passwordVisible ? (
-                  <EyeSlashIcon className="w-5 h-5 text-gray-500" />
+                  <EyeSlashIcon className="w-5 h-5 text-secondary-500" />
                 ) : (
-                  <EyeIcon className="w-5 h-5 text-gray-500" />
+                  <EyeIcon className="w-5 h-5 text-secondary-500" />
                 )}
               </div>
             }
@@ -76,9 +76,9 @@ const SignUp = () => {
                 className="cursor-pointer"
               >
                 {passwordVisible ? (
-                  <EyeSlashIcon className="w-5 h-5 text-gray-500" />
+                  <EyeSlashIcon className="w-5 h-5 text-secondary-500" />
                 ) : (
-                  <EyeIcon className="w-5 h-5 text-gray-500" />
+                  <EyeIcon className="w-5 h-5 text-secondary-500" />
                 )}
               </div>
             }

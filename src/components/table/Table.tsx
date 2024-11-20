@@ -12,10 +12,10 @@ const Table: FC<TablePropsType> = ({ columns, data }) => {
   const baseTheme = {
     text: {
       primary: "var(--fontColor)",
-      secondary: "#4B5563", // Default secondary color
+      secondary: "#4B5563",
     },
     background: {
-      default: "transparent", // Default transparent background
+      default: "transparent",
     },
   };
   createTheme(theme, baseTheme);
@@ -26,7 +26,16 @@ const Table: FC<TablePropsType> = ({ columns, data }) => {
     selectAllRowsItem: true,
     selectAllRowsItemText: "Todos",
   };
-  const filteredData = data;
+  const keys = columns
+    .filter((column) => column.selector) 
+    .map((column) => column.selector);
+
+  const filteredData = data.filter((item) =>
+    keys.some((selector: any) => {
+      const value = selector(item)?.toString().toLowerCase() || "";
+      return value.includes(searchText.toLowerCase());
+    })
+  );
   return (
     <>
       <div className="grid grid-cols-6 gap-4">
