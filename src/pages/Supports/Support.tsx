@@ -1,12 +1,16 @@
 import { TableColumn } from "react-data-table-component";
-import { boxStyle, ColorType } from "../../utils/enums";
+import { boxStyle} from "../../utils/enums";
 import Button from "../../components/buttons/Button";
 import Table from "../../components/table/Table";
 import { TicketType } from "./Ticket";
 import Title from "../../components/typography/Title";
 import { PlusIcon } from "@heroicons/react/24/outline";
+import { useState } from "react";
+import Modal from "../../components/modal/Modal";
+import AddTicket from "./_components/AddTicket";
 
 const Supports = () => {
+  const [openModal, setOpenModal] = useState<boolean>(false);
   const exampleData: TicketType[] = [
     {
       Id: "3",
@@ -96,12 +100,15 @@ const Supports = () => {
       <Title>لیست تیک های ارسال شده</Title>
       <Button
         Icon={PlusIcon}
-        themeType={ColorType.SUCCESS}
-        className="float-end"
+        className="float-end bg-purple-700 border border-purple-700"
+        onClick={() => setOpenModal(true)}
       >
         تیکت جدید
       </Button>
       <Table columns={columns} data={exampleData} header={[]} />
+      <Modal isOpen={openModal} onClose={() => setOpenModal(false)}>
+        <AddTicket />
+      </Modal>
     </div>
   );
 };

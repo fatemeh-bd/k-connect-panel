@@ -10,3 +10,10 @@ export type InputPropsType = Omit<
   icon?: React.ReactNode;
   
 };
+
+export type TextAreaType = Omit<
+InputHTMLAttributes<HTMLTextAreaElement>,
+"className"
+> &{
+  className?:string
+}

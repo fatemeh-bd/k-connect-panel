@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
 import { InputPropsType } from "./types";
-import { ColorType } from "../../utils/enums";
+import { ColorType, inputClass } from "../../utils/enums";
 import Paragraph from "../typography/Paragraph";
 
 const Input = forwardRef<HTMLInputElement, InputPropsType>(
@@ -17,7 +17,7 @@ const Input = forwardRef<HTMLInputElement, InputPropsType>(
             {...rest}
             ref={ref}
             id="floating_outlined"
-            className={`peer w-full bg-transparent placeholder:text-secondary-500 text-secondary-800 text-sm border border-secondary-200  rounded-md p-3.5 transition duration-300 ease focus:outline-none focus:border-primary shadow-sm focus:shadow ${
+            className={`peer ${inputClass} transition duration-300 ease focus:outline-none focus:border-primary shadow-sm focus:shadow ${
               errorText ? "border-rose-500" : ""
             }`}
           />

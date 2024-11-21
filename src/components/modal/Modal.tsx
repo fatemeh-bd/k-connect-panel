@@ -19,14 +19,14 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
       }`}
     >
       <div
-        className={`absolute inset-0 z-[999] bg-backDrop transition-opacity duration-500 delay-100 ${
+        className={`absolute inset-0 z-[999] bg-[#1818182c] transition-opacity duration-500 delay-100 ${
           isOpen ? "opacity-100" : "opacity-0"
         }`}
         onClick={handleClose}
       ></div>
 
       <div
-        className={`relative bg-background z-[9999] rounded-lg w-11/12 md:max-w-md mx-auto shadow-lg overflow-y-auto
+        className={`relative bg-white z-[9999] rounded-lg w-11/12 md:max-w-md mx-auto shadow-lg overflow-y-auto
         transition-all duration-300 delay-200 ${
           isOpen ? "opacity-100" : "opacity-0"
         }`}

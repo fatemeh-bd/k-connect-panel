@@ -38,7 +38,7 @@ const SideBar = () => {
       <div
         className={`${
           showMenu ? "translate-x-0" : "translate-x-full"
-        } lg:translate-x-0 transition-transform duration-300 ease-in-out lg:w-[20%] w-[300px] fixed lg:relative z-50 h-screen overflow-auto shadow-xl dark:shadow-black p-5 bg-white`}
+        } lg:translate-x-0 transition-transform duration-300 ease-in-out  w-[300px] fixed lg:relative z-50 h-screen overflow-auto shadow-xl dark:shadow-black p-5 bg-white`}
       >
         <div className="lg:hidden flex justify-end mb-4">
           <XMarkIcon
