@@ -179,3 +179,20 @@ header {
   width: auto !important;
   float: right;
 }
+
+::-webkit-scrollbar-track {
+  background: var(--gray50) !important;
+  border-radius: 6px !important;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  background-color: transparent !important;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: var(--gray200);
+}

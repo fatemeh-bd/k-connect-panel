@@ -27,23 +27,30 @@ function App() {
 
           <div className="w-full px-1  pb-4 h-screen overflow-auto">
             <TopBar />
-          
+
             <div className="py-4">
               <Routes>
                 {routesList.map((item) => (
-                  <Route
-                    key={item.id}
-                    path={item.path}
-                    element={item.element}
-                  />
+                  <>
+                    <Route
+                      key={item.id}
+                      path={item.path}
+                      element={item.element}
+                    />
+                    {item.subRoutes?.map((sub) => (
+                      <Route
+                        key={sub.id}
+                        path={sub.path}
+                        element={sub.element}
+                      />
+                    ))}
+                  </>
                 ))}
               </Routes>
             </div>
           </div>
         </div>
       )}
-
-    
     </>
   );
 }

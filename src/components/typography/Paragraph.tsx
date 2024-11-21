@@ -23,6 +23,8 @@ const Paragraph = ({ children, type, size, className }: ParagraphType) => {
           ? "text-teal-500"
           : type === ColorType.ERROR
           ? "text-rose-500 !text-sm"
+          : type === ColorType.SECONDARY
+          ? "text-purple-700"
           : ""
       } ${className || ""}`}
     >

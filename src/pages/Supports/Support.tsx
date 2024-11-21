@@ -1,13 +1,14 @@
-import { TableColumn } from "react-data-table-component";
-import { boxStyle} from "../../utils/enums";
-import Button from "../../components/buttons/Button";
-import Table from "../../components/table/Table";
-import { TicketType } from "./Ticket";
-import Title from "../../components/typography/Title";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
+import { TableColumn } from "react-data-table-component";
+import Button from "../../components/buttons/Button";
 import Modal from "../../components/modal/Modal";
+import Table from "../../components/table/Table";
+import Title from "../../components/typography/Title";
+import { boxStyle, ColorType } from "../../utils/enums";
 import AddTicket from "./_components/AddTicket";
+import { TicketType } from "./types";
+import ButtonLink from "../../components/buttons/ButtonLink";
 
 const Supports = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
@@ -81,14 +82,12 @@ const Supports = () => {
     {
       name: "عملیات",
       cell: () => (
-        <div className="flex justify-center items-center gap-2">
-          <Button outline className="min-w-[120px] text-sm whitespace-nowrap">
-            تغییر وضعیت
-          </Button>
-          <Button className="min-w-[120px] text-sm whitespace-nowrap">
-            تغییر وضعیت
-          </Button>
-        </div>
+        <ButtonLink
+          href={"/support/1"}
+          className="min-w-[120px] text-sm whitespace-nowrap"
+        >
+          مشاهده پیام
+        </ButtonLink>
       ),
       sortable: false,
       grow: 1,
@@ -100,7 +99,8 @@ const Supports = () => {
       <Title>لیست تیک های ارسال شده</Title>
       <Button
         Icon={PlusIcon}
-        className="float-end bg-purple-700 border border-purple-700"
+        themeType={ColorType.SECONDARY}
+        className="float-end"
         onClick={() => setOpenModal(true)}
       >
         تیکت جدید

@@ -7,8 +7,11 @@ export type ButtonProps = Omit<
 > & {
   children: React.ReactNode;
   className?: string;
-  themeType?: ColorType.SUCCESS | ColorType.ERROR;
+  themeType?: ColorType.SUCCESS | ColorType.ERROR | ColorType.SECONDARY;
   outline?: boolean;
   full?: boolean;
   Icon?: SvgType;
 };
+export interface ButtonLinkProps extends ButtonProps {
+  href: string;
+}

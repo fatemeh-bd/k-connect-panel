@@ -1,15 +1,16 @@
 import React from "react";
-import { ButtonProps } from "./types";
+import { ButtonLinkProps } from "./types";
 import { ColorType } from "../../utils/enums";
+import { Link } from "react-router-dom";
 
-const Button: React.FC<ButtonProps> = ({
+const ButtonLink: React.FC<ButtonLinkProps> = ({
   children,
   className,
   themeType,
   outline,
   full,
   Icon,
-  ...props
+  href,
 }) => {
   const buttonClass = `${
     full ? "w-full" : "min-w-[100px]"
@@ -28,11 +29,11 @@ const Button: React.FC<ButtonProps> = ({
   } ${outline ? "!bg-transparent" : ""}`;
 
   return (
-    <button type="button" name="Button" className={buttonClass} {...props}>
+    <Link to={href} className={buttonClass}>
       {Icon && <Icon className="size-5" />}
       {children}
-    </button>
+    </Link>
   );
 };
 
-export default Button;
+export default ButtonLink;

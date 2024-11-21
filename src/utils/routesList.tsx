@@ -12,6 +12,7 @@ import Dashboard from "../pages/dashboard/Dashboard";
 import UsersManagment from "../pages/usersManagment/UsersManagment";
 import UserNotification from "../pages/UserNotifcation/UserNotification";
 import Supports from "../pages/Supports/Support";
+import TicketDetail from "../pages/Supports/TiketDetail";
 
 export interface RouteItemType {
   title: "داشبورد";
@@ -34,6 +35,13 @@ export const routesList = [
     path: "/support",
     icon: ChatBubbleBottomCenterTextIcon,
     element: <Supports />,
+    subRoutes: [
+      {
+        id: 1,
+        path: "/support/1",
+        element: <TicketDetail />,
+      },
+    ],
   },
   {
     id: 3,
