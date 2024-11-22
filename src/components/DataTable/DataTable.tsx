@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import DataTable from 'datatables.net-react';
 import DT from 'datatables.net-dt';
 
@@ -24,7 +24,7 @@ const CustomeDataTable: React.FC<CustomeDataTableProps> = ({
     queryParameters = {},
 }) => {
     const inputRefs = useRef<{ [key: string]: HTMLInputElement | null }>({});
-    const [searchParams, setSearchParams] = useState<QueryParameters>(queryParameters);
+    const [, setSearchParams] = useState<QueryParameters>(queryParameters);
     const tableRef = useRef<any>(null);
     const columns = [
         { data: 'name', name: '', orderable: false, width: '', autoWidth: '', title: 'title', searchable: true, visible: true },

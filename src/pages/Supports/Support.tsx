@@ -4,7 +4,6 @@ import { TableColumn } from "react-data-table-component";
 import Button from "../../components/buttons/Button";
 import Modal from "../../components/modal/Modal";
 import Table from "../../components/table/Table";
-import Title from "../../components/typography/Title";
 import { boxStyle, ColorType } from "../../utils/enums";
 import AddTicket from "./_components/AddTicket";
 import { TicketType } from "./types";

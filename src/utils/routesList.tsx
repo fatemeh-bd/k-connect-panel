@@ -13,6 +13,7 @@ import UsersManagment from "../pages/usersManagment/UsersManagment";
 import UserNotification from "../pages/UserNotifcation/UserNotification";
 import Supports from "../pages/Supports/Support";
 import TicketDetail from "../pages/Supports/TiketDetail";
+import MyProfile from "../pages/profile/MyProfile";
 
 export interface RouteItemType {
   title: "داشبورد";
@@ -62,7 +63,7 @@ export const routesList = [
     title: "حساب کاربری",
     path: "/profile",
     icon: UserIcon,
-    element: "",
+    element: <MyProfile/>,
   },
   {
     id: 6,

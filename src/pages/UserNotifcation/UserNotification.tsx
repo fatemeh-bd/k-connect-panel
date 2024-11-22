@@ -1,6 +1,6 @@
-import DataTable from "datatables.net-dt";
 import Accordion from "../../components/Accordion/Accordion";
-import CustomeDataTable from "../../components/DataTable/DataTable";
+import Paragraph from "../../components/typography/Paragraph";
+import { boxStyle } from "../../utils/enums";
 
 const UserNotification = () => {
 
@@ -40,13 +40,14 @@ const UserNotification = () => {
     ];
 
     return (
-        <CustomeDataTable
-            inputHeaders={[
-                { ParameterName: 'name', Id: 'nameInput' },
-                { ParameterName: 'position', Id: 'positionInput' },
-            ]}
-            queryParameters={{ sort: 'asc', filter: 'active' }}
-        />
+        <div className={boxStyle}>
+            <Paragraph className="mb-4">آخرین اخبار</Paragraph>
+            <div className="space-y-2">
+                {accordionData.map((item, index) => (
+                    <Accordion key={index} data={item} />
+                ))}
+            </div>
+        </div>
     );
 };
 

@@ -4,7 +4,6 @@ import { boxStyle } from "../../utils/enums";
 import Paragraph from "../../components/typography/Paragraph";
 import InfoList from "./_components/InfoList";
 import LastNotifications from "./_components/LastNotifications";
-import Banner from "../../components/Banners/Banner";
 
 export const exampleData = {
   labels: ["واریزی", "برداشت"],
