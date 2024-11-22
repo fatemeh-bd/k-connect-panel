@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}",
-    
+
   ],
   darkMode: "class",
   theme: {
@@ -9,6 +9,7 @@ export default {
       colors: {
         primary: "var(--primary)",
         white: "var(--boxColor)",
+        purple: "var(--purple)",
         secondary: {
           100: "var(--gray50)",
           200: "var(--gray200)",

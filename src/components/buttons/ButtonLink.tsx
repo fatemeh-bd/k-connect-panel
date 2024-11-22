@@ -22,7 +22,7 @@ const ButtonLink: React.FC<ButtonLinkProps> = ({
       : themeType === ColorType.SUCCESS
       ? "bg-teal-500  border-teal-500"
       : themeType === ColorType.SECONDARY
-      ? "bg-purple-700 border-purple-700"
+      ? "bg-purple border-purple"
       : `bg-primary dark:bg-gray-300  dark:text-gray-800 border-primary  text-white ${
           outline ? "!text-secondary-800" : ""
         }`
