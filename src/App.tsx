@@ -25,7 +25,7 @@ function App() {
         <div className="flex lg:flex-row flex-col items-start h-screen overflow-hidden gap-1 w-full">
           <SideBar />
 
-          <div className="w-full px-1  pb-4 h-screen overflow-auto">
+          <div className="w-full px-2  pb-4 h-screen overflow-auto">
             <TopBar />
 
             <div className="py-4">

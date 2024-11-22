@@ -96,7 +96,6 @@ const Supports = () => {
 
   return (
     <div className={`${boxStyle} overflow-auto`}>
-      <Title>لیست تیک های ارسال شده</Title>
       <Button
         Icon={PlusIcon}
         themeType={ColorType.SECONDARY}

@@ -48,7 +48,6 @@ export const exampleData2 = {
 const Dashboard = () => {
   return (
     <div className="space-y-4">
-        <Banner />
       <InfoList />
       <div className="grid grid-cols-12 gap-4">
         <div className="lg:col-span-7 col-span-12">
