@@ -1,11 +1,17 @@
 import Select from "react-select";
+import Paragraph from "../typography/Paragraph";
+import { ColorType } from "../../utils/enums";
 
 const DropDown = ({
   className,
   options,
+  errorText,
+ // onChange
 }: {
   className?: string;
   options: { label: string; value: string }[];
+  errorText?: string;
+ // onChange?: (e: { label: string; value: string }) => void
 }) => {
   const selectStyle = {
     control: (styles: any, { isFocused }: { isFocused: boolean }) => ({
@@ -23,12 +29,12 @@ const DropDown = ({
     }),
     option: (styles: any, { isFocused, isSelected }: { isFocused: boolean; isSelected: boolean }) => ({
       ...styles,
-      color: isSelected?"var(--gray200)":"var(--gray800)",
+      color: isSelected ? "var(--gray200)" : "var(--gray800)",
       backgroundColor: isSelected
         ? "var(--primary)"
         : isFocused
-        ? "rgba(0, 0, 0, 0.1)"
-        : "transparent",
+          ? "rgba(0, 0, 0, 0.1)"
+          : "transparent",
       cursor: "pointer",
       ":active": {
         backgroundColor: "var(--primary)",
@@ -48,7 +54,15 @@ const DropDown = ({
     }),
   };
 
-  return <Select styles={selectStyle} options={options} className={`${className} w-full`} />;
+  return (
+    <div className={`${className} w-full`}>
+      <Select styles={selectStyle} options={options}/>
+      {
+
+        errorText ? <Paragraph type={ColorType.ERROR} className="mt-2 ">{errorText}</Paragraph> : ""
+      }
+    </div>
+  )
 };
 
 export default DropDown;

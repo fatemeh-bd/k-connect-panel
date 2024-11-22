@@ -1,13 +1,15 @@
 import React, { ReactNode } from "react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
+import Title from "../typography/Title";
 
 type ModalProps = {
   isOpen: boolean;
   onClose: () => void;
   children: ReactNode;
+  title?: string
 };
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
+const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, title }) => {
   const handleClose = () => {
     onClose();
   };
@@ -25,17 +27,23 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
 
       <div
         className={`relative bg-white z-[9999] rounded-lg dark:border border-secondary-200 w-11/12 md:max-w-xl mx-auto  overflow-y-auto
-        transition-all duration-300 delay-200 ${
-          isOpen ? "opacity-100" : "opacity-0"
-        }`}
+        transition-all duration-300 delay-200 ${isOpen ? "opacity-100" : "opacity-0"
+          }`}
       >
         <div className="py-4 px-6">
-          <button
-            onClick={handleClose}
-            className="mr-auto ml-0 block cursor-pointer"
-          >
-            <XMarkIcon className="w-6 h-6 text-secondary-600" />
-          </button>
+
+          <div className="flex justify-between items-center mb-3">
+          <Title className="!mb-0">{title}</Title>
+
+            <button
+              onClick={handleClose}
+              className="ml-0 block cursor-pointer"
+            >
+              <XMarkIcon className="w-6 h-6 text-secondary-600" />
+
+            </button>
+          </div>
+          <hr></hr>
           {children}
         </div>
       </div>

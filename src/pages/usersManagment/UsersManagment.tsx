@@ -120,7 +120,8 @@ const UsersManagment = () => {
       </Button>
       <Table columns={columns} data={exampleData} header={[]} />
 
-      <Modal isOpen={openModal} onClose={() => setOpenModal(false)}>
+      <Modal isOpen={openModal} onClose={() => setOpenModal(false)}  title="افزودن کاربر">
+       
         <AddUser />
       </Modal>
     </div>

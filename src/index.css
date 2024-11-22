@@ -27,9 +27,8 @@
 }
 
 @font-face {
-  font-family: AnjomanFaNum;
-  font-style: normal;
-  font-weight: 500;
+  font-family: Anjoman-Medium;
+
   src: url("/fonts/anjoman/woff2/Anjoman-FaNum-Medium.woff2") format("woff2"),
     url("/fonts/anjoman/woff/Anjoman-FaNum-Medium.woff") format("woff");
 }
@@ -131,7 +130,7 @@
   --gray800: #d1d5db;
 }
 * {
-  font-family: "AnjomanVF" !important;
+  font-family: "Anjoman" !important;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
