@@ -5,9 +5,12 @@ import Button from "../../components/buttons/Button";
 import Modal from "../../components/modal/Modal";
 import Table from "../../components/table/Table";
 import { boxStyle } from "../../utils/enums";
-import AddTicket from "./_components/AddTicket";
+import AddTicket, { ApiResponse, Option } from "./_components/AddTicket";
 import { TicketType } from "./types";
 import ButtonLink from "../../components/buttons/ButtonLink";
+import { useQuery } from "react-query";
+import { postMethod } from "../../api/callApi";
+import { SUPPORT_SECTIONS_LIST, TICKET_LIST } from "../../api/endpoints";
 
 const Supports = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
@@ -94,8 +97,20 @@ const Supports = () => {
     },
   ];
 
+  const { data, isLoading } = useQuery(
+    "support-list",
+    () =>
+      postMethod(TICKET_LIST, {}).then((res) => {
+        if (res?.isSuccess) {
+          return res.data;
+        }
+        return [];
+      }),
+    {}
+  );
   return (
     <div className={`${boxStyle} overflow-auto`}>
+   
       <Button
         Icon={PlusIcon}
         className="float-end"

@@ -8,13 +8,15 @@ import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { getMethod, postMethod } from "../../../api/callApi";
 import { CREATE_TICKET, SUPPORT_SECTIONS_LIST } from "../../../api/endpoints";
 import { useForm } from "react-hook-form";
+import { notify } from "../../../utils/notify";
 
-interface ApiResponse<T> {
+export interface ApiResponse<T> {
   isSuccess: boolean;
   data: T;
+  message: string;
 }
 
-interface Option {
+export interface Option {
   value: string;
   text: string;
 }
@@ -55,16 +57,21 @@ const AddTicket = ({
       formData.append("Message", data.message);
       formData.append("Title", data.title);
       const response = await postMethod(CREATE_TICKET, formData);
+
       return response;
     },
     {
       onSuccess: (res) => {
+        console.log(res);
         if (res?.isSuccess) {
           setClose(false);
         } else {
+          res?.message.split("|").map((i) => notify(i, "error"));
         }
       },
-      onError: () => {},
+      onError: (error) => {
+        notify(error?.message, "error");
+      },
     }
   );
 

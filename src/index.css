@@ -120,15 +120,15 @@
 }
 /* dark mode */
 .dark {
-  --bgColor: #09090b;
+  --bgColor: #030712;
   --fontColor: #c9c9c9;
   --primary: #e9e9e9;
-  --boxColor: #18181b;
-  --gray50: #101011;
+  --boxColor: #111827;
+  --gray50: #1f2937;
   --gray200: #374151;
   --gray600: #d1d5db;
-  --gray500: #374151;
-  --gray800: #d1d5db;
+  --gray500: #4b5563;
+  --gray800: #f3f4f6;
 }
 * {
   font-family: "Anjoman" !important;
@@ -149,7 +149,7 @@ a {
 }
 body {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   margin: 0;
   padding: 0;
   direction: rtl;
@@ -189,18 +189,9 @@ header {
 
 ::-webkit-scrollbar-track {
   background: var(--gray50) !important;
-  border-radius: 6px !important;
-}
-
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-  background-color: transparent !important;
-  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-  border-radius: 10px;
   background: var(--gray200);
 }
 
@@ -220,4 +211,8 @@ div .dt-container .dt-input {
   border-radius: 8px;
   box-shadow: 1px 1px 6px 6px var(--gray200);
   padding: 1rem 0;
+}
+
+.toast-right-align {
+  text-align: right;
 }

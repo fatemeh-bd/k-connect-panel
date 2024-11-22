@@ -1,0 +1,16 @@
+.sticky-top-bar {
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Make shadow visible */
+  z-index: 10;
+  transition: transform 1s ease, box-shadow 0.3s ease;
+}
+
+.scrolled {
+  display: none !important;
+  transform: translateY(-8px); /* Stronger animation */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Stronger shadow */
+}
