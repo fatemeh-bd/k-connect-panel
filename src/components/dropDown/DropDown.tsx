@@ -32,7 +32,7 @@ const DropDown = ({
       borderRadius: 7,
       padding: "0.4rem",
       color: "var(--gray800)",
-      fontSize: 12,
+      fontSize: 13,
       boxShadow: isFocused
         ? "0 0 0 0.5px var(--primary)"
         : "var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)",
