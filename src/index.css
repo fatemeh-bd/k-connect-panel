@@ -167,7 +167,8 @@ thead svg {
 .login .input_label {
   background-color: #fff !important;
 }
-.login h1 {
+.login h1,
+.login input {
   color: #111111 !important;
 }
 .login button {

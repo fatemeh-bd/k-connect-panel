@@ -6,7 +6,17 @@ const DropDown = ({
   className?: string;
   options: { label: string; value: string }[];
 }) => {
-  return <Select options={options} className={`${className} w-full`} />;
+
+  const selectStyle = {
+    // control: styles => ({ ...styles, backgroundColor: 'transparent',borderColor:"" }),
+    // option: (styles) => {
+    //   return {
+    //     ...styles,
+    //     color: '#FFF'
+    //   };
+    // },
+  };
+  return <Select styles={selectStyle} options={options} className={`${className} w-full`} />;
 };
 
 export default DropDown;
