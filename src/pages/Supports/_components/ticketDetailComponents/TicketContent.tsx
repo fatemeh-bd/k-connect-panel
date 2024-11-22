@@ -3,7 +3,7 @@ import TicketActions from "./TicketActions";
 
 const TicketContent = () => {
   return (
-    <div className="pt-6 flex flex-col justify-between  h-[79vh]">
+    <div className="pt-6 flex flex-col justify-between chat">
       <div className="h-full overflow-auto px-8">
         <MessageBox />
         <MessageBox />
