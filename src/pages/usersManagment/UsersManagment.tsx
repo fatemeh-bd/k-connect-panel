@@ -5,6 +5,9 @@ import { UserType } from "./types";
 import Table from "../../components/table/Table";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import Title from "../../components/typography/Title";
+import { useState } from "react";
+import AddUser from "./_components/AddUser";
+import Modal from "../../components/modal/Modal";
 
 const UsersManagment = () => {
   const exampleData: UserType[] = [
@@ -42,6 +45,7 @@ const UsersManagment = () => {
       userId: "3",
     },
   ];
+  const [openModal, setOpenModal] = useState<boolean>(false);
 
   const columns: TableColumn<{ [key: string]: any }>[] = [
     {
@@ -110,10 +114,15 @@ const UsersManagment = () => {
         Icon={PlusIcon}
         themeType={ColorType.SUCCESS}
         className="float-end"
+        onClick={() => setOpenModal(true)}
       >
         افزودن کاربر
       </Button>
       <Table columns={columns} data={exampleData} header={[]} />
+
+      <Modal isOpen={openModal} onClose={() => setOpenModal(false)}>
+        <AddUser />
+      </Modal>
     </div>
   );
 };
