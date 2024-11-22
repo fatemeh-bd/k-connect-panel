@@ -22,7 +22,7 @@ function App() {
         <Route path="/signUp" element={<SignUp />} />
       </Routes>
       {cookies.access_token && (
-        <div className="flex lg:flex-row flex-col items-start h-screen overflow-hidden gap-1 w-full">
+        <div className="flex shadow-sm lg:flex-row flex-col items-start h-screen overflow-hidden gap-2 w-full">
           <SideBar />
 
           <div className="w-full px-2  pb-4 h-screen overflow-auto">
