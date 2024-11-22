@@ -1,0 +1,87 @@
+{
+    "draw": 1,
+    "recordsTotal": 100,
+    "recordsFiltered": 100,
+    "data": [
+        {
+            "name": "John Doe",
+            "position": "Developer",
+            "office": "New York",
+            "extn": "5421",
+            "start_date": "2023-01-15",
+            "salary": "$5,000"
+        },
+        {
+            "name": "Jane Smith",
+            "position": "Manager",
+            "office": "London",
+            "extn": "7432",
+            "start_date": "2022-11-10",
+            "salary": "$6,500"
+        },
+        {
+            "name": "Samuel Johnson",
+            "position": "Analyst",
+            "office": "Sydney",
+            "extn": "1342",
+            "start_date": "2021-05-25",
+            "salary": "$4,200"
+        },
+        {
+            "name": "Emily Davis",
+            "position": "Designer",
+            "office": "Tokyo",
+            "extn": "8623",
+            "start_date": "2020-03-18",
+            "salary": "$4,800"
+        },
+        {
+            "name": "Michael Brown",
+            "position": "Architect",
+            "office": "San Francisco",
+            "extn": "3423",
+            "start_date": "2019-07-08",
+            "salary": "$7,200"
+        },
+        {
+            "name": "Emma Wilson",
+            "position": "HR Specialist",
+            "office": "Berlin",
+            "extn": "5642",
+            "start_date": "2023-04-01",
+            "salary": "$4,900"
+        },
+        {
+            "name": "Oliver Martinez",
+            "position": "Team Lead",
+            "office": "Paris",
+            "extn": "4312",
+            "start_date": "2018-09-12",
+            "salary": "$6,800"
+        },
+        {
+            "name": "Sophia Anderson",
+            "position": "Intern",
+            "office": "Dublin",
+            "extn": "1234",
+            "start_date": "2023-06-15",
+            "salary": "$2,000"
+        },
+        {
+            "name": "Liam Garcia",
+            "position": "Consultant",
+            "office": "Madrid",
+            "extn": "6432",
+            "start_date": "2022-02-11",
+            "salary": "$5,600"
+        },
+        {
+            "name": "Ava Rodriguez",
+            "position": "Sales Executive",
+            "office": "Rome",
+            "extn": "8654",
+            "start_date": "2021-12-20",
+            "salary": "$4,300"
+        }
+    ]
+}

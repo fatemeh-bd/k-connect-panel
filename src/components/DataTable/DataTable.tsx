@@ -46,36 +46,36 @@ const CustomeDataTable: React.FC<CustomeDataTableProps> = ({
     };
 
 
-  // DataTable options
-  const tableOptions = {
-    processing: true,
-    serverSide: true,
-    paging: true, // Enables pagination
-    responsive: true,
-    pagingType: 'full_numbers',
-    language: {
-      sProcessing: 'لطفا منتطر بمانید ...',
-      sZeroRecords: 'دیتایی برای نمایش وجود ندارد',
-      infoEmpty: 'دیتایی برای نمایش وجود ندارد',
-      emptyTable: 'دیتایی برای نمایش وجود ندارد',
-      info: 'نمایش _START_ از _END_ از _TOTAL_ رکورد',
-      lengthMenu: 'نمایش _MENU_ رکورد',
-      infoFiltered: ' - فیلتر از بین  _MAX_ رکورد',
-      paginate: {
-        last: 'آخرین',
-        first: 'اولین',
-        next: 'بعدی',
-        previous: 'قبلی',
-      },
-      search: 'جستجو :  ',
-      searchPlaceholder: 'جستجو',
-    },
-    lengthMenu: [10, 20, 50, 100, 150, 200, 300, 500, 700, 1000], // Pagination options
-    pageLength: 10, // Default number of rows per page
-  };
+    // DataTable options
+    const tableOptions = {
+        processing: true,
+        serverSide: true,
+        paging: true, // Enables pagination
+        responsive: true,
+        pagingType: 'full_numbers',
+        language: {
+            sProcessing: 'لطفا منتطر بمانید ...',
+            sZeroRecords: 'دیتایی برای نمایش وجود ندارد',
+            infoEmpty: 'دیتایی برای نمایش وجود ندارد',
+            emptyTable: 'دیتایی برای نمایش وجود ندارد',
+            info: 'نمایش _START_ از _END_ از _TOTAL_ رکورد',
+            lengthMenu: 'نمایش _MENU_ رکورد',
+            infoFiltered: ' - فیلتر از بین  _MAX_ رکورد',
+            paginate: {
+                last: 'آخرین',
+                first: 'اولین',
+                next: 'بعدی',
+                previous: 'قبلی',
+            },
+            search: 'جستجو :  ',
+            searchPlaceholder: 'جستجو',
+        },
+        lengthMenu: [10, 20, 50, 100, 150, 200, 300, 500, 700, 1000], // Pagination options
+        pageLength: 10, // Default number of rows per page
+    };
 
     const ajaxConfig = {
-        url: "https://localhost:7092/v1/Support/GetTickets",
+        url: "/tickets.json",
         type: "POST",
         contentType: "application/json",
         // beforeSend: (xhr: XMLHttpRequest) => {
