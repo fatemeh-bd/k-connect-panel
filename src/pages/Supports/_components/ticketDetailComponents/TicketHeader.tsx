@@ -1,6 +1,6 @@
 import Avatar from "../../../../components/avatar/Avatar";
+import Button from "../../../../components/buttons/Button";
 import Paragraph from "../../../../components/typography/Paragraph";
-import Status from "./Status";
 
 const TicketHeader = () => {
   return (
@@ -11,7 +11,8 @@ const TicketHeader = () => {
           <Paragraph className="font-bold">عنوان:تغییر سرور</Paragraph>
         </div>
       </div>
-      <Status text="آنلاین" />
+
+      <Button>بستن تیکت</Button>
     </div>
   );
 };

@@ -1,3 +1,4 @@
+import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
 import Button from "../../../components/buttons/Button";
 import DropDown from "../../../components/dropDown/DropDown";
 import Input from "../../../components/inputs/Input";
@@ -16,7 +17,12 @@ const AddTicket = () => {
         <DropDown className="col-span-6" options={options} />
         <TextArea placeholder="متن تیکت را وارد کنید" className="col-span-12" />
       </div>
-      <Button className="mr-auto">ارسال تیکت</Button>
+      <Button
+        className="mr-auto [&>svg]:rotate-180 flex-row-reverse"
+        Icon={PaperAirplaneIcon}
+      >
+        ارسال تیکت
+      </Button>
     </form>
   );
 };
