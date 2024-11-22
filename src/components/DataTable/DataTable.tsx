@@ -1,9 +1,12 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import DataTable from "datatables.net-react";
 import DT from "datatables.net-dt";
 import "datatables.net-dt/js/dataTables.dataTables";
 import "datatables.net-dt/css/dataTables.dataTables.css";
 import Input from "../inputs/Input";
+import Button from "../buttons/Button";
+import ReactDOM from "react-dom/client";
+import { ColorType } from "../../utils/enums";
 DataTable.use(DT);
 
 // Define types for props
@@ -25,18 +28,91 @@ const CustomeDataTable: React.FC<CustomeDataTableProps> = ({
   inputHeaders = [],
   queryParameters = {},
 }) => {
-    const inputRefs = useRef<{ [key: string]: HTMLInputElement | null }>({});
-    const [, setSearchParams] = useState<QueryParameters>(queryParameters);
-    const tableRef = useRef<any>(null);
-    const columns = [
-        { data: 'name', name: '', orderable: false, width: '', autoWidth: '', title: 'title', searchable: true, visible: true },
-        { data: 'position', name: 'position', orderable: true, width: '', autoWidth: '', title: 'position', searchable: true, visible: true },
-        { data: 'office', name: 'office', orderable: false, width: '', autoWidth: '', title: 'office', searchable: true, visible: true },
-        { data: 'extn', name: 'extn', orderable: false, width: '', autoWidth: '', title: 'extn', searchable: true, visible: true },
-        { data: 'start_date', name: 'start_date', orderable: false, width: '', autoWidth: '', title: 'start_date', searchable: true, visible: true },
-        { data: 'salary', name: 'salary', orderable: false, width: '', autoWidth: '', title: 'salary', searchable: true, visible: true },
-    ];
-
+  const inputRefs = useRef<{ [key: string]: HTMLInputElement | null }>({});
+  const [, setSearchParams] = useState<QueryParameters>(queryParameters);
+  const tableRef = useRef<any>(null);
+  const rootsMap = useRef<Map<string, ReactDOM.Root>>(new Map()); // برای ذخیره ریشه‌ها
+  const columns = [
+    {
+      data: "name",
+      name: "name",
+      orderable: false,
+      width: "",
+      autoWidth: "",
+      title: "عنوان",
+      searchable: true,
+      visible: true,
+    },
+    {
+      data: "position",
+      name: "position",
+      orderable: true,
+      width: "",
+      autoWidth: "",
+      title: "موقعیت",
+      searchable: true,
+      visible: true,
+    },
+    {
+      data: "office",
+      name: "office",
+      orderable: false,
+      width: "",
+      autoWidth: "",
+      title: "office",
+      searchable: true,
+      visible: true,
+    },
+    {
+      data: "extn",
+      name: "extn",
+      orderable: false,
+      width: "",
+      autoWidth: "",
+      title: "extn",
+      searchable: true,
+      visible: true,
+    },
+    {
+      data: "start_date",
+      name: "start_date",
+      orderable: false,
+      width: "",
+      autoWidth: "",
+      title: "start_date",
+      searchable: true,
+      visible: true,
+    },
+    {
+      data: "salary",
+      name: "salary",
+      orderable: false,
+      width: "",
+      autoWidth: "",
+      title: "salary",
+      searchable: true,
+      visible: true,
+    },
+    {
+      data: "salary", // We will use this for the operations column
+      name: "salary",
+      orderable: false,
+      width: "150px",
+      autoWidth: false,
+      title: "عملیات",
+      searchable: false,
+      visible: true,
+      render: (data: any, type: string, row: any, meta: any) => {
+        // This will render a button in the "عملیات" column
+        const divElementId = `btn-${row.salary}`;
+        return `<div id="${divElementId}"></div>`; // Create a div with an id to render the button inside
+      },
+    },
+  ];
+  const handleAction = (row: any) => {
+    // در اینجا می‌توانید هر عملیاتی که می‌خواهید برای ردیف انجام دهید
+    alert(row);
+  };
   const handleInputChange = (id: string, value: string) => {
     // Update search parameters
     setSearchParams((prev) => ({ ...prev, [id]: value }));
@@ -46,7 +122,29 @@ const CustomeDataTable: React.FC<CustomeDataTableProps> = ({
       api.draw();
     }
   };
+  useEffect(() => {
+    const tableApi = tableRef.current?.dt();
+    if (tableApi) {
+      tableApi.on("draw", () => {
+        // After DataTable is drawn, render the button in the "عملیات" column dynamically
+        document.querySelectorAll("[id^='btn-']").forEach((button) => {
+          const rowId = button.id.replace("btn-", "");
+          const divElement = button as HTMLElement;
 
+          // Ensure we create a root container for React 18
+          const root = ReactDOM.createRoot(divElement);
+
+          // Render the Button component
+          root.render(
+          <div className="flex gap-2">
+              <Button themeType={ColorType.SUCCESS} onClick={() => handleAction(rowId)}>عملیات</Button>
+              <Button themeType={ColorType.ERROR} onClick={() => handleAction(rowId)}>عملیات</Button>
+          </div>
+          );
+        });
+      });
+    }
+  }, []);
   // DataTable options
   const tableOptions = {
     processing: true,
