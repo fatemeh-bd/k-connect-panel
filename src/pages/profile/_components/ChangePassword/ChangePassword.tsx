@@ -26,7 +26,7 @@ const changePassword = () => {
     const togglePasswordVisibility = (type: "currentPassword" | "newPassword" | "repeatPassword") => {
         setPasswordVisible((prevState) => ({
             ...prevState,
-            [type]: !prevState[type], 
+            [type]: !prevState[type],
         }));
     };
 
