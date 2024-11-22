@@ -11,6 +11,7 @@ export type ButtonProps = Omit<
   outline?: boolean;
   full?: boolean;
   Icon?: SvgType;
+  loading?: boolean;
 };
 export interface ButtonLinkProps extends ButtonProps {
   href: string;

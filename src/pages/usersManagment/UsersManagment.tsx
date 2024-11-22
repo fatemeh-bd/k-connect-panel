@@ -1,5 +1,5 @@
 import { TableColumn } from "react-data-table-component";
-import { boxStyle, ColorType } from "../../utils/enums";
+import { boxStyle } from "../../utils/enums";
 import Button from "../../components/buttons/Button";
 import { UserType } from "./types";
 import Table from "../../components/table/Table";
@@ -107,12 +107,9 @@ const UsersManagment = () => {
 
   return (
     <div className={`${boxStyle} overflow-auto`}>
-      <Title>
-        لیست کاربران
-      </Title>
+      <Title>لیست کاربران</Title>
       <Button
         Icon={PlusIcon}
-        themeType={ColorType.SUCCESS}
         className="float-end"
         onClick={() => setOpenModal(true)}
       >
@@ -120,8 +117,12 @@ const UsersManagment = () => {
       </Button>
       <Table columns={columns} data={exampleData} header={[]} />
 
-      <Modal isOpen={openModal} onClose={() => setOpenModal(false)}  title="افزودن کاربر">
-       
+      <Modal
+        isOpen={openModal}
+        onClose={() => setOpenModal(false)}
+        title="افزودن کاربر"
+        className="md:min-w-[450px] min-w-[90%]"
+      >
         <AddUser />
       </Modal>
     </div>

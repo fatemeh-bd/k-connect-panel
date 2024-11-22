@@ -9,26 +9,50 @@ import { ColorType } from "../../utils/enums";
 import { Link, useNavigate } from "react-router-dom";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid"; // Correct import for icons
 import { SignUpFormType } from "./types";
-import { useCookies } from "react-cookie";
+import { useMutation } from "react-query";
+import { postMethod } from "../../api/callApi";
+import { REGISTER } from "../../api/endpoints";
 
 const SignUp = () => {
   const {
     register,
     formState: { errors },
     handleSubmit,
+    watch,
   } = useForm<SignUpFormType>();
-  const [, setCookie] = useCookies(["access_token"]);
   const navigate = useNavigate();
+  const [error, setError] = useState<string>("");
+  const { mutate, isLoading } = useMutation(
+    (data: SignUpFormType) =>
+      postMethod(REGISTER, {
+        email: data.email,
+        password: data.password,
+      }),
+    {
+      onSuccess: (res) => {
+        if (res?.isSuccess) {
+       
+          navigate("/login");
+        } else {
+          setError(res.message);
+        }
+      },
+      onError: () => {},
+    }
+  );
 
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   const togglePasswordVisibility = () => {
     setPasswordVisible((prevState) => !prevState);
   };
-  const signupHandler = () => {
-    setCookie("access_token", "token example");
-    navigate("/");
+
+  const password = watch("password");
+
+  const signupHandler = (data: SignUpFormType) => {
+    mutate(data);
   };
+
   return (
     <LoginLayout>
       <div className="lg:w-[85%] w-full min-w-[300px] mx-auto">
@@ -49,7 +73,7 @@ const SignUp = () => {
           />
 
           <Input
-            type={passwordVisible ? "text" : "password"} // Toggle input type between text and password
+            type={passwordVisible ? "text" : "password"}
             icon={
               <div
                 onClick={togglePasswordVisibility}
@@ -65,11 +89,15 @@ const SignUp = () => {
             label="کلمه عبور"
             {...register("password", {
               required: "کلمه عبور خود را وارد کنید",
+              minLength: {
+                value: 6,
+                message: "کلمه عبور باید حداقل 6 کاراکتر باشد",
+              },
             })}
             errorText={errors.password?.message?.toString()}
           />
           <Input
-            type={passwordVisible ? "text" : "password"} // Toggle input type between text and password
+            type={passwordVisible ? "text" : "password"}
             icon={
               <div
                 onClick={togglePasswordVisibility}
@@ -85,10 +113,14 @@ const SignUp = () => {
             label="تکرار کلمه عبور"
             {...register("repeatPassword", {
               required: "تکرار کلمه عبور خود را وارد کنید",
+              validate: (value) =>
+                value === password || "کلمه عبور و تکرار آن مطابقت ندارند",
             })}
             errorText={errors.repeatPassword?.message?.toString()}
           />
-          <Button className="mt-10" full type="submit">
+          {error && <Paragraph type={ColorType.ERROR}>{error}</Paragraph>}
+
+          <Button className="mt-10" full type="submit" loading={isLoading}>
             ثبت و ورود به پنل
           </Button>
         </form>

@@ -104,8 +104,13 @@ const Supports = () => {
         تیکت جدید
       </Button>
       <Table columns={columns} data={exampleData} header={[]} />
-      <Modal isOpen={openModal} onClose={() => setOpenModal(false)} className="w-11/12 md:max-w-xl">
-        <AddTicket />
+      <Modal
+        isOpen={openModal}
+        onClose={() => setOpenModal(false)}
+        className="w-11/12 md:max-w-xl"
+        title="ایجاد تیکت جدید"
+      >
+        <AddTicket setClose={setOpenModal} />
       </Modal>
     </div>
   );

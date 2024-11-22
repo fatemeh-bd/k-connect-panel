@@ -8,12 +8,12 @@ export type InputPropsType = Omit<
   errorText?: string;
   className?: string;
   icon?: React.ReactNode;
-  
 };
 
 export type TextAreaType = Omit<
-InputHTMLAttributes<HTMLTextAreaElement>,
-"className"
-> &{
-  className?:string
-}
+  InputHTMLAttributes<HTMLTextAreaElement>,
+  "className"
+> & {
+  className?: string;
+  errorText?: string;
+};
