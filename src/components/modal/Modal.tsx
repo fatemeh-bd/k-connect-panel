@@ -7,6 +7,7 @@ type ModalProps = {
   onClose: () => void;
   children: ReactNode;
   className?: string;
+  title?:string
 };
 
 const Modal: React.FC<ModalProps> = ({
@@ -14,6 +15,7 @@ const Modal: React.FC<ModalProps> = ({
   onClose,
   children,
   className,
+  title
 }) => {
   const handleClose = () => {
     onClose();
