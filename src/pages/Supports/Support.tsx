@@ -4,7 +4,7 @@ import { TableColumn } from "react-data-table-component";
 import Button from "../../components/buttons/Button";
 import Modal from "../../components/modal/Modal";
 import Table from "../../components/table/Table";
-import { boxStyle, ColorType } from "../../utils/enums";
+import { boxStyle } from "../../utils/enums";
 import AddTicket from "./_components/AddTicket";
 import { TicketType } from "./types";
 import ButtonLink from "../../components/buttons/ButtonLink";
@@ -82,6 +82,7 @@ const Supports = () => {
       name: "عملیات",
       cell: () => (
         <ButtonLink
+          outline
           href={"/support/1"}
           className="min-w-[120px] text-sm whitespace-nowrap"
         >
@@ -97,7 +98,6 @@ const Supports = () => {
     <div className={`${boxStyle} overflow-auto`}>
       <Button
         Icon={PlusIcon}
-        themeType={ColorType.SECONDARY}
         className="float-end"
         onClick={() => setOpenModal(true)}
       >
