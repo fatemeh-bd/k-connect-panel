@@ -23,7 +23,7 @@ const DropDown = ({
     }),
     option: (styles: any, { isFocused, isSelected }: { isFocused: boolean; isSelected: boolean }) => ({
       ...styles,
-      color: "var(--gray800)",
+      color: isSelected?"var(--gray200)":"var(--gray800)",
       backgroundColor: isSelected
         ? "var(--primary)"
         : isFocused
@@ -31,7 +31,7 @@ const DropDown = ({
         : "transparent",
       cursor: "pointer",
       ":active": {
-        backgroundColor: "var(--primary-light)",
+        backgroundColor: "var(--primary)",
       },
     }),
     placeholder: (styles: any) => ({
