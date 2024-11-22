@@ -1,7 +1,4 @@
 import Accordion from "../../components/Accordion/Accordion";
-import CustomeDataTable from "../../components/DataTable/DataTable";
-import { boxStyle } from "../../utils/enums";
-
 const UserNotification = () => {
   const accordionData = [
     {

@@ -71,6 +71,7 @@ const Supports = () => {
       title: "عملیات",
       searchable: false,
       visible: true,
+      // @ts-ignore
       render: (data: any, type: string, row: any, meta: any) => {
         // This will render a button in the "عملیات" column
         const divElementId = `btn-${row.id}`;

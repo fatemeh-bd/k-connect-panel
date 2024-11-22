@@ -1,6 +1,6 @@
 import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
 import Button from "../../../components/buttons/Button";
-import DropDown from "../../../components/dropDown/DropDown";
+import DropDown, { SelectType } from "../../../components/dropDown/DropDown";
 import Input from "../../../components/inputs/Input";
 import TextArea from "../../../components/inputs/TextArea";
 import { useMutation, useQuery } from "react-query";
@@ -14,11 +14,6 @@ export interface ApiResponse<T> {
   isSuccess: boolean;
   data: T;
   message: string;
-}
-
-export interface Option {
-  value: string;
-  text: string;
 }
 
 interface AddTicketType {
@@ -75,15 +70,17 @@ const AddTicket = ({
     }
   );
 
-  const { data, isLoading } = useQuery(
+  const { data = [], isLoading } = useQuery(
     "support-sections",
     () =>
-      getMethod<ApiResponse<Option[]>>(SUPPORT_SECTIONS_LIST).then((res) => {
-        if (res?.isSuccess) {
-          return res.data;
+      getMethod<ApiResponse<SelectType[]>>(SUPPORT_SECTIONS_LIST).then(
+        (res) => {
+          if (res?.isSuccess) {
+            return res.data;
+          }
+          return [];
         }
-        return [];
-      }),
+      ),
     {
       enabled: isMounted,
     }
@@ -105,6 +102,7 @@ const AddTicket = ({
           errorText={errors.title?.message}
         />
         <DropDown
+          options={data}
           className="md:col-span-6 col-span-12 self-center"
           onSelect={(e) => {
             setValue("section", e.value);

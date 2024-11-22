@@ -37,7 +37,6 @@ const CustomeDataTable: React.FC<CustomeDataTableProps> = ({
   const [cookies] = useCookies(["access_token"]);
   const [, setSearchParams] = useState<QueryParameters>(queryParameters);
   const tableRef = useRef<any>(null);
-  const rootsMap = useRef<Map<string, ReactDOM.Root>>(new Map()); // برای ذخیره ریشه‌ها
 
   const handleAction = (row: any) => {
     // در اینجا می‌توانید هر عملیاتی که می‌خواهید برای ردیف انجام دهید
