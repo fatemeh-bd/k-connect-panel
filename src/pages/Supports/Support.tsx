@@ -3,7 +3,7 @@ import { useState } from "react";
 import Button from "../../components/buttons/Button";
 import Modal from "../../components/modal/Modal";
 import { boxStyle } from "../../utils/enums";
-import AddTicket, { ApiResponse, Option } from "./_components/AddTicket";
+import AddTicket from "./_components/AddTicket";
 import CustomeDataTable from "../../components/DataTable/DataTable";
 import { BASE_URL } from "../../api/callApi";
 import { TICKET_LIST } from "../../api/endpoints";

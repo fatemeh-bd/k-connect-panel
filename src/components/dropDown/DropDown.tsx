@@ -10,6 +10,8 @@ const DropDown = ({
   options,
   errorText,
   onSelect,
+  loading,
+  disabled,
   placeholder = "انتخاب کنید",
   noOptionsMessage = "آیتمی یافت نشد",
 }: {
@@ -17,8 +19,10 @@ const DropDown = ({
   options: SelectType[];
   errorText?: string;
   placeholder?: string;
+  loading?: boolean;
   noOptionsMessage?: string;
   onSelect: (e: SelectType) => void;
+  disabled?:boolean
 }) => {
   const selectStyle = {
     control: (styles: any, { isFocused }: { isFocused: boolean }) => ({
@@ -68,7 +72,8 @@ const DropDown = ({
     <div className={`${className} w-full`}>
       <Select
         styles={selectStyle}
-        placeholder={placeholder}
+        isDisabled={disabled}
+        placeholder={loading ? "در حال بارگذاری..." : placeholder}
         options={options}
         onChange={(newValue: SingleValue<SelectType>) => {
           if (newValue) {
