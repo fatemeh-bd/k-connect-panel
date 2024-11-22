@@ -24,9 +24,10 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
       ></div>
 
       <div
-        className={`relative bg-white z-[9999] rounded-lg dark:border border-secondary-200 w-11/12 md:max-w-md mx-auto  overflow-y-auto
-        transition-all duration-300 delay-200 ${isOpen ? "opacity-100" : "opacity-0"
-          }`}
+        className={`relative bg-white z-[9999] rounded-lg dark:border border-secondary-200 w-11/12 md:max-w-xl mx-auto  overflow-y-auto
+        transition-all duration-300 delay-200 ${
+          isOpen ? "opacity-100" : "opacity-0"
+        }`}
       >
         <div className="py-4 px-6">
           <button
