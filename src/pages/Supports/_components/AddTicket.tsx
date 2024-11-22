@@ -80,12 +80,7 @@ const AddTicket = ({
     () =>
       getMethod<ApiResponse<Option[]>>(SUPPORT_SECTIONS_LIST).then((res) => {
         if (res?.isSuccess) {
-          return res.data.map(
-            ({ text, value }: { text: string; value: string }) => ({
-              label: text,
-              value: value,
-            })
-          );
+          return res.data;
         }
         return [];
       }),
@@ -111,7 +106,6 @@ const AddTicket = ({
         />
         <DropDown
           className="md:col-span-6 col-span-12 self-center"
-          options={isLoading ? [] : data || []}
           onSelect={(e) => {
             setValue("section", e.value);
             trigger("section");

@@ -1,116 +1,85 @@
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
-import { TableColumn } from "react-data-table-component";
 import Button from "../../components/buttons/Button";
 import Modal from "../../components/modal/Modal";
-import Table from "../../components/table/Table";
 import { boxStyle } from "../../utils/enums";
 import AddTicket, { ApiResponse, Option } from "./_components/AddTicket";
-import { TicketType } from "./types";
-import ButtonLink from "../../components/buttons/ButtonLink";
-import { useQuery } from "react-query";
-import { postMethod } from "../../api/callApi";
-import { SUPPORT_SECTIONS_LIST, TICKET_LIST } from "../../api/endpoints";
+import CustomeDataTable from "../../components/DataTable/DataTable";
+import { BASE_URL } from "../../api/callApi";
+import { TICKET_LIST } from "../../api/endpoints";
 
 const Supports = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
-  const exampleData: TicketType[] = [
+  const columns = [
     {
-      Id: "3",
-      IsSeen: false,
-      Message: "سلام سرور جدید میخواستم",
-      Title: "خرید سرور جدید",
-      Status: "خوانده نشده",
-      CreateDate: "3 دقیقه پیش",
-      ModifyDate: "1 ثاینه پیش",
+      data: "id",
+      name: "id",
+      orderable: false,
+      width: "",
+      autoWidth: "",
+      title: "عنوان",
+      searchable: false,
+      visible: false,
     },
     {
-      Id: "4",
-      IsSeen: false,
-      Message: "سلام سرور جدید میخواستم",
-      Title: "خرید سرور جدید",
-      Status: "خوانده نشده",
-      CreateDate: "3 دقیقه پیش",
-      ModifyDate: "1 ثاینه پیش",
+      data: "title",
+      name: "title",
+      orderable: true,
+      width: "",
+      autoWidth: "",
+      title: "عنوان",
+      searchable: true,
+      visible: true,
     },
     {
-      Id: "6",
-      IsSeen: false,
-      Message: "سلام سرور جدید میخواستم",
-      Title: "خرید سرور جدید",
-      Status: "خوانده نشده",
-      CreateDate: "3 دقیقه پیش",
-      ModifyDate: "1 ثاینه پیش",
+      data: "ticketStatus",
+      name: "ticketStatus",
+      orderable: true,
+      width: "",
+      autoWidth: "",
+      title: "وضعیت",
+      searchable: true,
+      visible: true,
+    },
+    {
+      data: "sectionName",
+      name: "sectionName",
+      orderable: true,
+      width: "",
+      autoWidth: "",
+      title: "دپارتمان",
+      searchable: true,
+      visible: true,
+    },
+    {
+      data: "createdAt",
+      name: "createdAt",
+      orderable: false,
+      width: "",
+      autoWidth: "",
+      title: "تاریخ ایجاد",
+      searchable: true,
+      visible: true,
+    },
+
+    {
+      data: "id", // We will use this for the operations column
+      name: "id",
+      orderable: false,
+      width: "150px",
+      autoWidth: false,
+      title: "عملیات",
+      searchable: false,
+      visible: true,
+      render: (data: any, type: string, row: any, meta: any) => {
+        // This will render a button in the "عملیات" column
+        const divElementId = `btn-${row.id}`;
+        return `<div id="${divElementId}"></div>`; // Create a div with an id to render the button inside
+      },
     },
   ];
-
-  const columns: TableColumn<{ [key: string]: any }>[] = [
-    {
-      name: "شناسه تیکت",
-      selector: (row) => row.Id,
-      sortable: true,
-      grow: 0,
-    },
-    {
-      name: "عنوان",
-      selector: (row) => row.Title,
-      sortable: true,
-      grow: 0.5,
-    },
-    {
-      name: "پیام",
-      selector: (row) => row.Message,
-      sortable: true,
-      grow: 0.5,
-    },
-    {
-      name: "وضعیت",
-      selector: (row) => row.Status,
-      sortable: true,
-      grow: 0.5,
-    },
-    {
-      name: "تاریخ بروز رسانی",
-      selector: (row) => row.ModifyDate,
-      sortable: true,
-      grow: 0.5,
-    },
-    {
-      name: "تاریخ ایجاد",
-      selector: (row) => row.CreateDate,
-      sortable: true,
-      grow: 0.5,
-    },
-    {
-      name: "عملیات",
-      cell: () => (
-        <ButtonLink
-          outline
-          href={"/support/1"}
-          className="min-w-[120px] text-sm whitespace-nowrap"
-        >
-          مشاهده پیام
-        </ButtonLink>
-      ),
-      sortable: false,
-      grow: 1,
-    },
-  ];
-
-  const { data, isLoading } = useQuery(
-    "support-list",
-    () =>
-      postMethod(TICKET_LIST, {}).then((res) => {
-        if (res?.isSuccess) {
-          return res.data;
-        }
-        return [];
-      }),
-    {}
-  );
   return (
     <div className={`${boxStyle} overflow-auto`}>
-   
       <Button
         Icon={PlusIcon}
         className="float-end"
@@ -118,7 +87,14 @@ const Supports = () => {
       >
         تیکت جدید
       </Button>
-      <Table columns={columns} data={exampleData} header={[]} />
+      <div className={boxStyle}>
+        <CustomeDataTable
+          columns={columns}
+          urlRequest={`${BASE_URL + TICKET_LIST}`}
+          inputHeaders={[]}
+          queryParameters={{ sort: "asc", filter: "active" }}
+        />
+      </div>
       <Modal
         isOpen={openModal}
         onClose={() => setOpenModal(false)}

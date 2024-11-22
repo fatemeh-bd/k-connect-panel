@@ -7,6 +7,7 @@ import Input from "../inputs/Input";
 import Button from "../buttons/Button";
 import ReactDOM from "react-dom/client";
 import { ColorType } from "../../utils/enums";
+import { useCookies } from "react-cookie";
 DataTable.use(DT);
 
 // Define types for props
@@ -22,93 +23,22 @@ interface QueryParameters {
 interface CustomeDataTableProps {
   inputHeaders?: InputHeader[];
   queryParameters?: QueryParameters;
+  urlRequest: string;
+  columns:any
 }
 
 const CustomeDataTable: React.FC<CustomeDataTableProps> = ({
   inputHeaders = [],
   queryParameters = {},
+  urlRequest,
+  columns=[]
 }) => {
   const inputRefs = useRef<{ [key: string]: HTMLInputElement | null }>({});
+  const [cookies] = useCookies(["access_token"]);
   const [, setSearchParams] = useState<QueryParameters>(queryParameters);
   const tableRef = useRef<any>(null);
   const rootsMap = useRef<Map<string, ReactDOM.Root>>(new Map()); // برای ذخیره ریشه‌ها
-  const columns = [
-    {
-      data: "name",
-      name: "name",
-      orderable: false,
-      width: "",
-      autoWidth: "",
-      title: "عنوان",
-      searchable: true,
-      visible: true,
-    },
-    {
-      data: "position",
-      name: "position",
-      orderable: true,
-      width: "",
-      autoWidth: "",
-      title: "موقعیت",
-      searchable: true,
-      visible: true,
-    },
-    {
-      data: "office",
-      name: "office",
-      orderable: false,
-      width: "",
-      autoWidth: "",
-      title: "office",
-      searchable: true,
-      visible: true,
-    },
-    {
-      data: "extn",
-      name: "extn",
-      orderable: false,
-      width: "",
-      autoWidth: "",
-      title: "extn",
-      searchable: true,
-      visible: true,
-    },
-    {
-      data: "start_date",
-      name: "start_date",
-      orderable: false,
-      width: "",
-      autoWidth: "",
-      title: "start_date",
-      searchable: true,
-      visible: true,
-    },
-    {
-      data: "salary",
-      name: "salary",
-      orderable: false,
-      width: "",
-      autoWidth: "",
-      title: "salary",
-      searchable: true,
-      visible: true,
-    },
-    {
-      data: "salary", // We will use this for the operations column
-      name: "salary",
-      orderable: false,
-      width: "150px",
-      autoWidth: false,
-      title: "عملیات",
-      searchable: false,
-      visible: true,
-      render: (data: any, type: string, row: any, meta: any) => {
-        // This will render a button in the "عملیات" column
-        const divElementId = `btn-${row.salary}`;
-        return `<div id="${divElementId}"></div>`; // Create a div with an id to render the button inside
-      },
-    },
-  ];
+
   const handleAction = (row: any) => {
     // در اینجا می‌توانید هر عملیاتی که می‌خواهید برای ردیف انجام دهید
     alert(row);
@@ -136,10 +66,20 @@ const CustomeDataTable: React.FC<CustomeDataTableProps> = ({
 
           // Render the Button component
           root.render(
-          <div className="flex gap-2">
-              <Button themeType={ColorType.SUCCESS} onClick={() => handleAction(rowId)}>عملیات</Button>
-              <Button themeType={ColorType.ERROR} onClick={() => handleAction(rowId)}>عملیات</Button>
-          </div>
+            <div className="flex gap-2">
+              <Button
+                themeType={ColorType.SUCCESS}
+                onClick={() => handleAction(rowId)}
+              >
+                عملیات
+              </Button>
+              <Button
+                themeType={ColorType.ERROR}
+                onClick={() => handleAction(rowId)}
+              >
+                عملیات
+              </Button>
+            </div>
           );
         });
       });
@@ -174,13 +114,13 @@ const CustomeDataTable: React.FC<CustomeDataTableProps> = ({
   };
 
   const ajaxConfig = {
-    url: "/tickets.json",
+    url: `${urlRequest}`,
     type: "POST",
     contentType: "application/json",
-    // beforeSend: (xhr: XMLHttpRequest) => {
-    //     // Add JWT token to the Authorization header
-    //     xhr.setRequestHeader("Authorization", `Bearer hwt`);
-    // },
+    beforeSend: (xhr: XMLHttpRequest) => {
+      // Add JWT token to the Authorization header
+      xhr.setRequestHeader("Authorization", `Bearer ${cookies.access_token}}`);
+    },
     data: (params: Record<string, any>) => {
       // Collect dynamic query parameters based on input field values
       const updatedParams = inputHeaders.reduce((acc, header) => {

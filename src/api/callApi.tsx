@@ -2,7 +2,7 @@ import axios, { AxiosInstance } from "axios";
 import { getCookie } from "../utils/getCookie";
 import { delete_cookie } from "../utils/removeCookie";
 
-export const BASE_URL = "http://api.artdev.ir";
+export const BASE_URL = "https://localhost:7092";
 
 const getAccessToken = (): string => {
   const token = getCookie("access_token");
@@ -48,14 +48,18 @@ const createAxiosInstance = (
   return instance;
 };
 
-// متد POST
 export const postMethod = async (
   endpoint: string,
-  body: object,
+  body: FormData | object,
   newHeader?: object,
   controller?: AbortController
 ) => {
-  const axiosInstance = createAxiosInstance(controller, newHeader);
+  const isFormData = body instanceof FormData;
+  const axiosInstance = createAxiosInstance(controller, {
+    ...newHeader,
+    ...(isFormData ? { "Content-Type": "multipart/form-data" } : {}),
+  });
+
   try {
     const response = await axiosInstance.post(endpoint, body);
     return response.data;
