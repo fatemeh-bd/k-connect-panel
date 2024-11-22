@@ -3,6 +3,7 @@ import Tabs from "../../components/tabs/Tabs";
 import { TabType } from "../../components/tabs/TabsTypes";
 import UserProfile from "./_components/UserProfile/UserProfile";
 import EditProfile from "./_components/EditProfile/EditProfile";
+import ChangePassword from "./_components/ChangePassword/ChangePassword";
 
 const MyProfile = () => {
 
@@ -15,7 +16,7 @@ const MyProfile = () => {
     const content = [
         <UserProfile />,
         <EditProfile />,
-        <p>Profile Detial</p>,
+        <ChangePassword />,
 
     ]
     return (
