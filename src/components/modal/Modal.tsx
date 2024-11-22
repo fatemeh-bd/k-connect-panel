@@ -6,10 +6,15 @@ type ModalProps = {
   isOpen: boolean;
   onClose: () => void;
   children: ReactNode;
-  title?: string
+  className?: string;
 };
 
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, title }) => {
+const Modal: React.FC<ModalProps> = ({
+  isOpen,
+  onClose,
+  children,
+  className,
+}) => {
   const handleClose = () => {
     onClose();
   };
@@ -26,9 +31,10 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, title }) => {
       ></div>
 
       <div
-        className={`relative bg-white z-[9999] rounded-lg dark:border border-secondary-200 w-11/12 md:max-w-xl mx-auto  overflow-y-auto
-        transition-all duration-300 delay-200 ${isOpen ? "opacity-100" : "opacity-0"
-          }`}
+        className={`relative bg-white z-[9999] rounded-lg dark:border border-secondary-200  mx-auto  overflow-y-auto
+        transition-all duration-300 delay-200 ${
+          isOpen ? "opacity-100" : "opacity-0"
+        } ${className || ""}`}
       >
         <div className="py-4 px-6">
 
