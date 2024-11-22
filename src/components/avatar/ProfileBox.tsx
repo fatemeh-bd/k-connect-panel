@@ -1,7 +1,7 @@
 import Avatar from "./Avatar";
 import Paragraph from "../typography/Paragraph";
 import { ColorType, Sizes } from "../../utils/enums";
-import { useQueries, useQuery } from "react-query";
+import { useQueries } from "react-query";
 import { postMethod } from "../../api/callApi";
 import { GET_BALANCE, GET_PROFILE } from "../../api/endpoints";
 import { notify } from "../../utils/notify";
