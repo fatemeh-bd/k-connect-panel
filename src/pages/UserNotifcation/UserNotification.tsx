@@ -1,4 +1,6 @@
+import DataTable from "datatables.net-dt";
 import Accordion from "../../components/Accordion/Accordion";
+import CustomeDataTable from "../../components/DataTable/DataTable";
 
 const UserNotification = () => {
 
@@ -38,15 +40,13 @@ const UserNotification = () => {
     ];
 
     return (
-        <div>
-            <h2 className="mb-4"> اعلانی های دریافتی</h2>
-            <div className="space-y-2">
-                {accordionData.map((item, index) => (
-                    <Accordion key={index} data={item} />
-                ))}
-                
-            </div>
-        </div>
+        <CustomeDataTable
+            inputHeaders={[
+                { ParameterName: 'name', Id: 'nameInput' },
+                { ParameterName: 'position', Id: 'positionInput' },
+            ]}
+            queryParameters={{ sort: 'asc', filter: 'active' }}
+        />
     );
 };
 
