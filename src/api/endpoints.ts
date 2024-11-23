@@ -10,6 +10,8 @@ export const SUPPORT_SECTIONS_LIST = "/v1/Support/TicketSections";
 export const CREATE_TICKET = "/v1/Support/CreateTicket";
 export const TICKET_LIST = "/v1/Support/GetTickets";
 export const TICKET_DETAILS = "/v1/Support/GetTicketMessages";
+export const SEND_MESSAGE = "/v1/Support/SendTicket";
+export const CLOSE_TICKET = "/v1/Support/CloseTicket";
 // server plan
 export const GET_SERVER_PLANS = "/v1/ServerPlan/GetServerPlanSelectList";
 // server location

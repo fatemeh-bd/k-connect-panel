@@ -1,4 +1,4 @@
-import { useParams, useSearchParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { boxStyle } from "../../utils/enums";
 import TicketContent from "./_components/ticketDetailComponents/TicketContent";
 import TicketHeader from "./_components/ticketDetailComponents/TicketHeader";
@@ -7,9 +7,10 @@ import { postMethod } from "../../api/callApi";
 import { useQuery } from "react-query";
 import { TICKET_DETAILS } from "../../api/endpoints";
 import CustomSkeleton from "../../components/skeleton/skeleton";
+import TicketActions from "./_components/ticketDetailComponents/TicketActions";
 
 const TicketDetail = () => {
-  const { id } = useParams(); // مقدار id از URL
+  const { id } = useParams();
   console.log(
     "%csrcpagesSupportsTiketDetail.tsx:12 object",
     "color: #007acc;",
@@ -25,17 +26,30 @@ const TicketDetail = () => {
     }
   };
 
-  const { data = {}, isLoading } = useQuery(`ticket-${id}`, async () => {
-    return await fetchData();
-  });
+  const {
+    data = {},
+    isLoading,
+    isFetching,
+    refetch,
+  } = useQuery(
+    `ticket-${id}`,
+    async () => {
+      return await fetchData();
+    },
+    {
+      refetchOnWindowFocus: false,
+      refetchInterval: false,
+    }
+  );
 
   return !isLoading ? (
     <div className={`${boxStyle} !p-0`}>
-      <TicketHeader
-        title={data.ticketTitle}
-        ticketSectionName={data.ticketSectionName}
-      />
-      <TicketContent messages={data.messages} />
+      <TicketHeader data={data} refetch={refetch} />
+      <div className="pt-6 flex flex-col justify-between chat">
+        <TicketContent messages={data.messages} loading={isFetching} />
+
+        <TicketActions refetch={refetch} />
+      </div>
     </div>
   ) : (
     <div>

@@ -4,7 +4,13 @@ import DropDown, { SelectType } from "../../../components/dropDown/DropDown";
 import Input from "../../../components/inputs/Input";
 import TextArea from "../../../components/inputs/TextArea";
 import { useMutation, useQuery } from "react-query";
-import { useState, useEffect, Dispatch, SetStateAction } from "react";
+import {
+  useState,
+  useEffect,
+  Dispatch,
+  SetStateAction,
+  forwardRef,
+} from "react";
 import { getMethod, postMethod } from "../../../api/callApi";
 import { CREATE_TICKET, SUPPORT_SECTIONS_LIST } from "../../../api/endpoints";
 import { useForm } from "react-hook-form";
@@ -22,11 +28,10 @@ interface AddTicketType {
   message: string;
 }
 
-const AddTicket = ({
-  setClose,
-}: {
-  setClose: Dispatch<SetStateAction<boolean>>;
-}) => {
+const AddTicket = forwardRef<
+  HTMLFormElement,
+  { setClose: Dispatch<SetStateAction<boolean>>; onAddTicket: () => void }
+>(({ setClose, onAddTicket }, ref) => {
   const [isMounted, setIsMounted] = useState(false);
   const {
     register,
@@ -60,6 +65,7 @@ const AddTicket = ({
         console.log(res);
         if (res?.isSuccess) {
           setClose(false);
+          onAddTicket();
         } else {
           res?.message.split("|").map((i) => notify(i, "error"));
         }
@@ -91,7 +97,11 @@ const AddTicket = ({
   };
 
   return (
-    <form className="space-y-3" onSubmit={handleSubmit(createTicketHandler)}>
+    <form
+      ref={ref}
+      className="space-y-3"
+      onSubmit={handleSubmit(createTicketHandler)}
+    >
       <div className="grid grid-cols-12 items-start gap-x-4">
         <Input
           label="عنوان تیکت"
@@ -140,6 +150,6 @@ const AddTicket = ({
       </Button>
     </form>
   );
-};
+});
 
 export default AddTicket;

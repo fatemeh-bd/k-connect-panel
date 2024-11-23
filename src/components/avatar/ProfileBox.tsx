@@ -16,6 +16,7 @@ const fetchBalance = async () => {
     return [];
   }
 };
+
 const fetchProfile = async () => {
   const response = await postMethod(GET_PROFILE, {});
   if (response?.isSuccess) {
@@ -25,15 +26,20 @@ const fetchProfile = async () => {
     return [];
   }
 };
+
 const ProfileBox = () => {
   const results = useQueries([
     {
       queryKey: "profile",
       queryFn: fetchProfile,
+      refetchOnWindowFocus: false,
+      refetchInterval: false,
     },
     {
       queryKey: "balance",
       queryFn: fetchBalance,
+      refetchOnWindowFocus: false,
+      refetchInterval: false,
     },
   ]);
 
@@ -44,14 +50,14 @@ const ProfileBox = () => {
     <div className="flex  items-center justify-start gap-2">
       <div className="">
         <Paragraph size={Sizes.sm} className="font-medium">
-          {profile && profile.sellerInfo.userName}
+          {profile?.sellerInfo && profile.sellerInfo?.userName}
         </Paragraph>
-        <Paragraph>
+        <div>
           <Paragraph size={Sizes.xs} type={ColorType.PRIMARY}>
-          موجودی شما :
+            موجودی شما :
             {balance && <span>{numberWithCommas(balance)} تومان</span>}
           </Paragraph>
-        </Paragraph>
+        </div>
       </div>
       <Avatar />
     </div>

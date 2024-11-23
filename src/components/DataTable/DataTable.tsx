@@ -1,4 +1,4 @@
-import React, { useRef} from "react";
+import React, { useRef } from "react";
 import DataTable from "datatables.net-react";
 import DT from "datatables.net-dt";
 import "datatables.net-dt/js/dataTables.dataTables";
@@ -25,7 +25,7 @@ interface CustomeDataTableProps {
 
 const CustomeDataTable: React.FC<CustomeDataTableProps> = ({
   inputHeaders = [],
-  queryParameters = {},
+  // queryParameters = {},
   urlRequest,
   columns = [],
 }) => {
@@ -89,13 +89,7 @@ const CustomeDataTable: React.FC<CustomeDataTableProps> = ({
   };
 
   return (
-    <div className="container">
-    <DataTable
-        ajax={ajaxConfig}
-        className="display"
-        options={tableOptions}
-      ></DataTable>
-    </div>
+    <DataTable ajax={ajaxConfig} className="display" options={tableOptions} />
   );
 };
 

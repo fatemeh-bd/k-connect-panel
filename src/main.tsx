@@ -8,12 +8,17 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const queryClient = new QueryClient();
-
-createRoot(document.getElementById("root")!).render(
+const container = document.getElementById("root")!;
+createRoot(container).render(
   <StrictMode>
     <ThemeProvider>
       <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
+        <BrowserRouter
+          future={{
+            v7_relativeSplatPath: true,
+            v7_startTransition: true,
+          }}
+        >
           <App />
         </BrowserRouter>
       </QueryClientProvider>

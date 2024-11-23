@@ -7,14 +7,20 @@ import AddTicket from "./_components/AddTicket";
 import CustomeDataTable from "../../components/DataTable/DataTable";
 import { BASE_URL } from "../../api/callApi";
 import { TICKET_LIST } from "../../api/endpoints";
-import ReactDOM from "react-dom";
 import Paragraph from "../../components/typography/Paragraph";
 import { useNavigate } from "react-router-dom";
+import { createRoot } from "react-dom/client";
 
 const Supports = () => {
   const navigate = useNavigate();
 
   const [openModal, setOpenModal] = useState<boolean>(false);
+  const [refreshKey, setRefreshKey] = useState<number>(0); // Add refresh key
+
+  const handleRefresh = () => {
+    setRefreshKey((prev) => prev + 1); // Increment refresh key to trigger re-fetch
+  };
+
   const columns = [
     {
       data: "title",
@@ -44,10 +50,8 @@ const Supports = () => {
         td.innerHTML = "";
         td.appendChild(container);
 
-        ReactDOM.render(
-          <Paragraph type={ColorType.ERROR}>تست</Paragraph>,
-          container
-        );
+        const root = createRoot(container);
+        root.render(<Paragraph type={ColorType.ERROR}>تست</Paragraph>);
       },
     },
     {
@@ -83,16 +87,17 @@ const Supports = () => {
       searchable: false,
       visible: true,
       // @ts-ignore
+
       createdCell: (td: HTMLTableCellElement, cellData: any, rowData: any) => {
         const container = document.createElement("div");
         td.innerHTML = "";
         td.appendChild(container);
 
-        ReactDOM.render(
+        const root = createRoot(container);
+        root.render(
           <Button onClick={() => navigate(`/support/${cellData}`)}>
             جزئیات
-          </Button>,
-          container
+          </Button>
         );
       },
     },
@@ -101,24 +106,23 @@ const Supports = () => {
     <div className={`${boxStyle} overflow-auto`}>
       <Button
         Icon={PlusIcon}
-        className="float-end"
+        className="float-end mb-4"
         onClick={() => setOpenModal(true)}
       >
         تیکت جدید
       </Button>
-      <div className={boxStyle}>
         <CustomeDataTable
           urlRequest={`${BASE_URL + TICKET_LIST}`}
           columns={columns}
+          key={refreshKey}
         />
-      </div>
       <Modal
         isOpen={openModal}
         onClose={() => setOpenModal(false)}
         className="w-11/12 md:max-w-xl"
         title="ایجاد تیکت جدید"
       >
-        <AddTicket setClose={setOpenModal} />
+        <AddTicket setClose={setOpenModal} onAddTicket={handleRefresh}  />
       </Modal>
     </div>
   );

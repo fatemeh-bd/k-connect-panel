@@ -1,5 +1,6 @@
+import { useEffect, useRef } from "react";
 import MessageBox from "./MessageBox";
-import TicketActions from "./TicketActions";
+import CustomSkeleton from "../../../../components/skeleton/skeleton";
 
 interface TicketMessagesProps {
   message: string;
@@ -9,31 +10,43 @@ interface TicketMessagesProps {
 
 interface TicketHeaderProps {
   messages: TicketMessagesProps[];
+  loading: boolean;
 }
 
-const TicketContent: React.FC<TicketHeaderProps> = ({ messages }) => {
+const TicketContent: React.FC<TicketHeaderProps> = ({ messages, loading }) => {
+  const messageEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (messageEndRef.current) {
+      messageEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages,loading]);
+
   return (
-    <div className="pt-6 flex flex-col justify-between chat">
-      {/* Messages */}
-      <div className="h-full overflow-auto px-8">
-        {messages ? (
-          messages.map((message, index) => (
+    <div className="h-full overflow-auto px-8">
+      {messages && messages.length > 0 ? (
+        [...messages]
+          .reverse()
+          .map((message, index) => (
             <MessageBox
               key={index}
-              type={message.operationSend == 0 ? "operator" : "client"}
+              type={message.operationSend === 1 ? "operator" : "client"}
               messageText={message.message || "پیام خالی"}
               time={message.timeAgo}
             />
           ))
-        ) : (
-          <p className="text-gray-500 text-center py-4">
-            پیامی برای نمایش وجود ندارد.
-          </p>
-        )}
-      </div>
-
-      {/* Ticket Actions */}
-      <TicketActions />
+      ) : (
+        <p className="text-gray-500 text-center py-4">
+          پیامی برای نمایش وجود ندارد.
+        </p>
+      )}
+      {loading && (
+        <div className="flex gap-2 mb-4">
+          <CustomSkeleton height="!size-[40px] rounded-full" />
+          <CustomSkeleton height="h-[60px]" />
+        </div>
+      )}
+      <div ref={messageEndRef}></div>
     </div>
   );
 };
