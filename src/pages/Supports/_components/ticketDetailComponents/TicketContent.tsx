@@ -23,7 +23,7 @@ const TicketContent: React.FC<TicketHeaderProps> = ({ messages, loading }) => {
   }, [messages,loading]);
 
   return (
-    <div className="h-full overflow-auto px-8">
+    <div className="h-full overflow-auto px-8 pb-20">
       {messages && messages.length > 0 ? (
         [...messages]
           .reverse()

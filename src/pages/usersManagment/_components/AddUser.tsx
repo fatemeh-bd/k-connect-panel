@@ -66,23 +66,23 @@ const AddUser = () => {
     },
   });
 
-//   const { mutate: mutateSubmit, isLoading: submitLoader } = useMutation(
-//     submitUser,
-//     {
-//       onSuccess: (response) => {
-//         if (response?.isSuccess) {
-//           return response.data;
-//         } else {
-//           notify(response.message, "success");
-//         }
-//       },
-//       onError: (error: any) => {
-//         notify(error?.message, "error");
-//       },
-//     }
-//   );
+  //   const { mutate: mutateSubmit, isLoading: submitLoader } = useMutation(
+  //     submitUser,
+  //     {
+  //       onSuccess: (response) => {
+  //         if (response?.isSuccess) {
+  //           return response.data;
+  //         } else {
+  //           notify(response.message, "success");
+  //         }
+  //       },
+  //       onError: (error: any) => {
+  //         notify(error?.message, "error");
+  //       },
+  //     }
+  //   );
   useEffect(() => {
-    mutate(watch("serverLocationId"));
+    if (watch("serverLocationId")) mutate(watch("serverLocationId"));
   }, [watch("serverLocationId")]);
   return (
     <form className="space-y-3" onSubmit={handleSubmit(submitFrom)}>

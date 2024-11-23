@@ -45,12 +45,11 @@ const TicketDetail = () => {
   return !isLoading ? (
     <div className={`${boxStyle} !p-0`}>
       <TicketHeader data={data} refetch={refetch} />
-      <div className="pt-6 flex flex-col justify-between chat">
+      <div className="py-6 flex flex-col justify-between chat">
         <TicketContent messages={data.messages} loading={isFetching} />
-{
-  data.state !== 3 && data.state < 3 && data.state > 0 &&
-        <TicketActions refetch={refetch} />
-}
+        {data.state !== 3 && data.state < 3 && data.state > 0 && (
+          <TicketActions refetch={refetch} />
+        )}
       </div>
     </div>
   ) : (
