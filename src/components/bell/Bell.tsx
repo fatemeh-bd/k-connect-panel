@@ -38,7 +38,7 @@ const Bell = () => {
         </span>
       </div>
       {isOpen && (
-        <div ref={notifs} className="absolute top-full mt-2 text-sm left-0 z-50 bg-white border border-secondary-200 shadow-lg rounded-lg lg:w-96 w-fit">
+        <div ref={notifs} className="absolute top-full mt-2 text-sm  left-0 lg:right-auto right-0 z-50 bg-white border border-secondary-200 shadow-lg rounded-lg lg:w-96 w-80">
           <div className="bg-primary text-center text-white p-4 rounded-t-lg">
             <div className="flex text-secondary-200 gap-2 items-center justify-center">
             <BellIcon className="size-7" />
