@@ -41,14 +41,14 @@ const ProfileBox = () => {
   const { data: balance } = results[1];
 
   return (
-    <div className="flex items-center justify-center gap-2">
-      <div className="text-left">
+    <div className="flex  items-center justify-start gap-2">
+      <div className="">
         <Paragraph size={Sizes.sm} className="font-medium">
-          {profile && profile.userName}
+          {profile && profile.sellerInfo.userName}
         </Paragraph>
         <Paragraph>
           <Paragraph size={Sizes.xs} type={ColorType.PRIMARY}>
-            موجودی شما:
+          موجودی شما :
             {balance && <span>{numberWithCommas(balance)} تومان</span>}
           </Paragraph>
         </Paragraph>

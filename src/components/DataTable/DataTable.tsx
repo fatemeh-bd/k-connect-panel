@@ -24,14 +24,14 @@ interface CustomeDataTableProps {
   inputHeaders?: InputHeader[];
   queryParameters?: QueryParameters;
   urlRequest: string;
-  columns:any
+  columns: any;
 }
 
 const CustomeDataTable: React.FC<CustomeDataTableProps> = ({
   inputHeaders = [],
   queryParameters = {},
   urlRequest,
-  columns=[]
+  columns = [],
 }) => {
   const inputRefs = useRef<{ [key: string]: HTMLInputElement | null }>({});
   const [cookies] = useCookies(["access_token"]);
@@ -111,14 +111,14 @@ const CustomeDataTable: React.FC<CustomeDataTableProps> = ({
     lengthMenu: [10, 20, 50, 100, 150, 200, 300, 500, 700, 1000], // Pagination options
     pageLength: 10, // Default number of rows per page
   };
-
   const ajaxConfig = {
     url: `${urlRequest}`,
     type: "POST",
     contentType: "application/json",
     beforeSend: (xhr: XMLHttpRequest) => {
       // Add JWT token to the Authorization header
-      xhr.setRequestHeader("Authorization", `Bearer ${cookies.access_token}}`);
+      xhr.setRequestHeader("Authorization", `Bearer ${cookies.access_token}`);
+      xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
     },
     data: (params: Record<string, any>) => {
       // Collect dynamic query parameters based on input field values
