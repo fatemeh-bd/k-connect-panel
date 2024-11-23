@@ -47,8 +47,10 @@ const TicketDetail = () => {
       <TicketHeader data={data} refetch={refetch} />
       <div className="pt-6 flex flex-col justify-between chat">
         <TicketContent messages={data.messages} loading={isFetching} />
-
+{
+  data.state !== 3 && data.state < 3 && data.state > 0 &&
         <TicketActions refetch={refetch} />
+}
       </div>
     </div>
   ) : (

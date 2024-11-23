@@ -18,11 +18,15 @@ export enum Sizes {
 }
 export enum TicketStatusEnums {
   OPEN = "باز",
-  CLOSE = "بسته شده",
+  CLOSE = "بسته",
+  ANSWERED = "پاسخ داده شده",
+  UNREAD = "خوانده نشده",
 }
 export const TicketStatusMapping: {
-  [key: number]: { text: string; color: string };
+  [key: number]: { text: string; color: ColorType };
 } = {
   1: { text: TicketStatusEnums.OPEN, color: ColorType.SUCCESS },
-  2: { text: TicketStatusEnums.CLOSE, color: ColorType.ERROR },
+  2: { text: TicketStatusEnums.CLOSE, color: ColorType.PRIMARY },
+  3: { text: TicketStatusEnums.ANSWERED, color: ColorType.SECONDARY },
+  4: { text: TicketStatusEnums.UNREAD, color: ColorType.ERROR },
 };

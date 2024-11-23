@@ -2,7 +2,7 @@ import { PlusIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import Button from "../../components/buttons/Button";
 import Modal from "../../components/modal/Modal";
-import { boxStyle, ColorType } from "../../utils/enums";
+import { boxStyle, ColorType, TicketStatusMapping } from "../../utils/enums";
 import AddTicket from "./_components/AddTicket";
 import CustomeDataTable from "../../components/DataTable/DataTable";
 import { BASE_URL } from "../../api/callApi";
@@ -45,14 +45,28 @@ const Supports = () => {
       title: "وضعیت",
       searchable: true,
       visible: true,
-      createdCell: (td: HTMLTableCellElement) => {
+      // @ts-ignore
+
+      createdCell: (td: HTMLTableCellElement, cellData: any, rowData: any) => {
         const container = document.createElement("div");
         td.innerHTML = "";
         td.appendChild(container);
-
+      
         const root = createRoot(container);
-        root.render(<Paragraph type={ColorType.ERROR}>تست</Paragraph>);
+        const TicketStatusMappingArray = Object.values(TicketStatusMapping);
+
+        const status = TicketStatusMappingArray.find(i=>i.text===cellData);
+        console.log(status)
+        root.render(
+          <Paragraph
+            type={status?.color ?? ColorType.BLACK} 
+            className="!font-normal"
+          >
+            {status?.text || cellData} 
+          </Paragraph>
+        );
       },
+      
     },
     {
       data: "sectionName",
@@ -111,18 +125,18 @@ const Supports = () => {
       >
         تیکت جدید
       </Button>
-        <CustomeDataTable
-          urlRequest={`${BASE_URL + TICKET_LIST}`}
-          columns={columns}
-          key={refreshKey}
-        />
+      <CustomeDataTable
+        urlRequest={`${BASE_URL + TICKET_LIST}`}
+        columns={columns}
+        key={refreshKey}
+      />
       <Modal
         isOpen={openModal}
         onClose={() => setOpenModal(false)}
         className="w-11/12 md:max-w-xl"
         title="ایجاد تیکت جدید"
       >
-        <AddTicket setClose={setOpenModal} onAddTicket={handleRefresh}  />
+        <AddTicket setClose={setOpenModal} onAddTicket={handleRefresh} />
       </Modal>
     </div>
   );
