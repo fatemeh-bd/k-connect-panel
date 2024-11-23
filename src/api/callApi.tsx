@@ -2,7 +2,7 @@ import axios, { AxiosInstance } from "axios";
 import { getCookie } from "../utils/getCookie";
 import { delete_cookie } from "../utils/removeCookie";
 
-export const BASE_URL = "https://localhost:7092";
+export const BASE_URL = "http://api.artdev.ir";
 
 const getAccessToken = (): string => {
   const token = getCookie("access_token");
