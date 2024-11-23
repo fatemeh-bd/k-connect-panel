@@ -39,7 +39,7 @@ export const routesList = [
     subRoutes: [
       {
         id: 1,
-        path: "/support/1",
+        path: "/support/:id",
         element: <TicketDetail />,
       },
     ],
@@ -63,7 +63,7 @@ export const routesList = [
     title: "حساب کاربری",
     path: "/profile",
     icon: UserIcon,
-    element: <MyProfile/>,
+    element: <MyProfile />,
   },
   {
     id: 6,

@@ -2,25 +2,20 @@ import { PlusIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import Button from "../../components/buttons/Button";
 import Modal from "../../components/modal/Modal";
-import { boxStyle } from "../../utils/enums";
+import { boxStyle, ColorType } from "../../utils/enums";
 import AddTicket from "./_components/AddTicket";
 import CustomeDataTable from "../../components/DataTable/DataTable";
 import { BASE_URL } from "../../api/callApi";
 import { TICKET_LIST } from "../../api/endpoints";
+import ReactDOM from "react-dom";
+import Paragraph from "../../components/typography/Paragraph";
+import { useNavigate } from "react-router-dom";
 
 const Supports = () => {
+  const navigate = useNavigate();
+
   const [openModal, setOpenModal] = useState<boolean>(false);
   const columns = [
-    {
-      data: "id",
-      name: "id",
-      orderable: false,
-      width: "",
-      autoWidth: "",
-      title: "عنوان",
-      searchable: false,
-      visible: false,
-    },
     {
       data: "title",
       name: "title",
@@ -30,6 +25,10 @@ const Supports = () => {
       title: "عنوان",
       searchable: true,
       visible: true,
+      // @ts-ignore: Ignore TypeScript error for ReactDOM.render
+      render: (data: any, type: any, row: ExampleType) => {
+        return `<bold>${row.title}</bold>`;
+      },
     },
     {
       data: "ticketStatus",
@@ -40,10 +39,21 @@ const Supports = () => {
       title: "وضعیت",
       searchable: true,
       visible: true,
+      createdCell: (td: HTMLTableCellElement) => {
+        const container = document.createElement("div");
+        td.innerHTML = "";
+        td.appendChild(container);
+
+        ReactDOM.render(
+          <Paragraph type={ColorType.ERROR}>تست</Paragraph>,
+          container
+        );
+      },
     },
     {
       data: "sectionName",
       name: "sectionName",
+
       orderable: true,
       width: "",
       autoWidth: "",
@@ -60,6 +70,7 @@ const Supports = () => {
       title: "تاریخ ایجاد",
       searchable: true,
       visible: true,
+      // renderModel:
     },
 
     {
@@ -72,10 +83,17 @@ const Supports = () => {
       searchable: false,
       visible: true,
       // @ts-ignore
-      render: (data: any, type: string, row: any, meta: any) => {
-        // This will render a button in the "عملیات" column
-        const divElementId = `btn-${row.id}`;
-        return `<div id="${divElementId}"></div>`; // Create a div with an id to render the button inside
+      createdCell: (td: HTMLTableCellElement, cellData: any, rowData: any) => {
+        const container = document.createElement("div");
+        td.innerHTML = "";
+        td.appendChild(container);
+
+        ReactDOM.render(
+          <Button onClick={() => navigate(`/support/${cellData}`)}>
+            جزئیات
+          </Button>,
+          container
+        );
       },
     },
   ];
@@ -90,10 +108,8 @@ const Supports = () => {
       </Button>
       <div className={boxStyle}>
         <CustomeDataTable
-          columns={columns}
           urlRequest={`${BASE_URL + TICKET_LIST}`}
-          inputHeaders={[]}
-          queryParameters={{ sort: "asc", filter: "active" }}
+          columns={columns}
         />
       </div>
       <Modal

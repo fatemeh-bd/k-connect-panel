@@ -1,7 +1,15 @@
 import Avatar from "../../../../components/avatar/Avatar";
 import Paragraph from "../../../../components/typography/Paragraph";
 
-const MessageBox = ({ type }: { type?: "client" | "operator" }) => {
+const MessageBox = ({
+  type,
+  messageText,
+  time
+}: {
+  type?: "client" | "operator";
+  messageText: string;
+  time:string
+}) => {
   return (
     <div
       className={`${
@@ -15,10 +23,10 @@ const MessageBox = ({ type }: { type?: "client" | "operator" }) => {
             type == "client" ? "bg-primary" : "bg-purple-600"
           }`}
         >
-          مجییییییییییید کجایییییییی؟
+          {messageText}
         </Paragraph>
         <span className="block w-fit mr-auto text-sm text-secondary-500 mt-1">
-          12:30
+         {time}
         </span>
       </div>
     </div>

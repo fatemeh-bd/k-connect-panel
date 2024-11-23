@@ -2,13 +2,14 @@
 export const GET_BALANCE = "/v1/Account/GetBalance";
 export const LOGIN = "/v1/Account/Login";
 export const REGISTER = "/v1/Account/Register";
-export const GET_PROFILE="/v1/Account/GetProfile"
-export const EDIT_PROFILE="/v1/Account/EditProfile"
-export const CHANGE_PASSOWRD="/v1/Account/ChangePassword"
+export const GET_PROFILE = "/v1/Account/GetProfile";
+export const EDIT_PROFILE = "/v1/Account/EditProfile";
+export const CHANGE_PASSOWRD = "/v1/Account/ChangePassword";
 // support
 export const SUPPORT_SECTIONS_LIST = "/v1/Support/TicketSections";
 export const CREATE_TICKET = "/v1/Support/CreateTicket";
 export const TICKET_LIST = "/v1/Support/GetTickets";
+export const TICKET_DETAILS = "/v1/Support/GetTicketMessages";
 // server plan
 export const GET_SERVER_PLANS = "/v1/ServerPlan/GetServerPlanSelectList";
 // server location

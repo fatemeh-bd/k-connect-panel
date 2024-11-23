@@ -1,12 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef} from "react";
 import DataTable from "datatables.net-react";
 import DT from "datatables.net-dt";
 import "datatables.net-dt/js/dataTables.dataTables";
 import "datatables.net-dt/css/dataTables.dataTables.css";
-import Input from "../inputs/Input";
-import Button from "../buttons/Button";
-import ReactDOM from "react-dom/client";
-import { ColorType } from "../../utils/enums";
 import { useCookies } from "react-cookie";
 DataTable.use(DT);
 
@@ -35,59 +31,12 @@ const CustomeDataTable: React.FC<CustomeDataTableProps> = ({
 }) => {
   const inputRefs = useRef<{ [key: string]: HTMLInputElement | null }>({});
   const [cookies] = useCookies(["access_token"]);
-  const [, setSearchParams] = useState<QueryParameters>(queryParameters);
-  const tableRef = useRef<any>(null);
 
-  const handleAction = (row: any) => {
-    // در اینجا می‌توانید هر عملیاتی که می‌خواهید برای ردیف انجام دهید
-    alert(row);
-  };
-  const handleInputChange = (id: string, value: string) => {
-    // Update search parameters
-    setSearchParams((prev) => ({ ...prev, [id]: value }));
-    let api = tableRef.current!.dt();
-    // Trigger table redraw or reload
-    if (tableRef.current) {
-      api.draw();
-    }
-  };
-  useEffect(() => {
-    const tableApi = tableRef.current?.dt();
-    if (tableApi) {
-      tableApi.on("draw", () => {
-        // After DataTable is drawn, render the button in the "عملیات" column dynamically
-        document.querySelectorAll("[id^='btn-']").forEach((button) => {
-          const rowId = button.id.replace("btn-", "");
-          const divElement = button as HTMLElement;
-
-          // Ensure we create a root container for React 18
-          const root = ReactDOM.createRoot(divElement);
-
-          // Render the Button component
-          root.render(
-            <div className="flex gap-2">
-              <Button
-                themeType={ColorType.SUCCESS}
-                onClick={() => handleAction(rowId)}
-              >
-                عملیات
-              </Button>
-              <Button
-                themeType={ColorType.ERROR}
-                onClick={() => handleAction(rowId)}
-              >
-                عملیات
-              </Button>
-            </div>
-          );
-        });
-      });
-    }
-  }, []);
   // DataTable options
   const tableOptions = {
     processing: true,
     serverSide: true,
+    columns,
     paging: true, // Enables pagination
     responsive: true,
     pagingType: "full_numbers",
@@ -140,28 +89,9 @@ const CustomeDataTable: React.FC<CustomeDataTableProps> = ({
   };
 
   return (
-    <div>
-      <style></style>
-      <div className="grid grid-cols-12 gap-2">
-        {/* Input fields for dynamic parameters */}
-        {inputHeaders.map((header) => (
-          <div key={header.Id} className="col-span-4">
-            {/* <label htmlFor={header.Id}>{header.ParameterName}</label> */}
-            <Input
-              label={header.ParameterName}
-              id={header.Id}
-              placeholder={header.ParameterName}
-              ref={(el) => (inputRefs.current[header.Id] = el)} // Proper ref assignment
-              onChange={(e) => handleInputChange(header.Id, e.target.value)} // Correct event handling
-            />
-          </div>
-        ))}
-      </div>
-
-      <DataTable
-        ref={tableRef} // Access to DataTable instance
+    <div className="container">
+    <DataTable
         ajax={ajaxConfig}
-        columns={columns}
         className="display"
         options={tableOptions}
       ></DataTable>

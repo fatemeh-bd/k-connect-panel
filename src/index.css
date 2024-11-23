@@ -216,3 +216,7 @@ div .dt-container .dt-input {
 .toast-right-align {
   text-align: right;
 }
+td,
+th {
+  text-align: center !important;
+}
