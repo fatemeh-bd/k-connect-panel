@@ -14,7 +14,7 @@ const MessageBox = ({
     <div
       className={`${
         type === "client" ? "ml-auto" : "mr-auto flex-row-reverse"
-      } lg:max-w-[50%] max-w-[80%] w-fit flex gap-4 items-start my-2`}
+      } lg:max-w-[50%] max-w-[80%] w-fit flex gap-4 items-start my-4`}
     >
       <Avatar className="border border-primary" />
       <div>
@@ -25,7 +25,7 @@ const MessageBox = ({
         >
           {messageText}
         </Paragraph>
-        <span className="block w-fit mr-auto text-sm text-secondary-500 mt-1">
+        <span className="block w-fit ml-auto text-xs text-secondary-500 mt-1">
          {time}
         </span>
       </div>

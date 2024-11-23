@@ -40,10 +40,14 @@ const AddUser = () => {
     {
       queryKey: "plans",
       queryFn: fetchPlans,
+      refetchOnWindowFocus: false,
+      refetchInterval: false,
     },
     {
       queryKey: "serverLocation",
       queryFn: fetchServerLocations,
+      refetchOnWindowFocus: false,
+      refetchInterval: false,
     },
   ]);
 
