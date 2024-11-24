@@ -20,3 +20,6 @@ export const GET_SERVER_PLANS = "/v1/ServerPlan/GetServerPlanSelectList";
 export const GET_SERVER_LOCATIONS =
   "/v1/ServerLocation/ServerLocationSelectList";
 export const GET_SERVER_LIST = "/v1/Server/GetServerSelectList";
+
+// Client
+export const CLIENT_EXIST_USERNAME = "/v1/Client/CheckUserNameExists";
