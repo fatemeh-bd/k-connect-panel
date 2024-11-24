@@ -3,6 +3,8 @@ export const GET_BALANCE = "/v1/Account/GetBalance";
 export const LOGIN = "/v1/Account/Login";
 export const REGISTER = "/v1/Account/Register";
 export const GET_PROFILE = "/v1/Account/GetProfile";
+export const GET_NOTIF = "/v1/Account/GetUserNotifications";
+export const READ_NOTIF = "/v1/Account/ReadNotify";
 export const EDIT_PROFILE = "/v1/Account/EditProfile";
 export const CHANGE_PASSOWRD = "/v1/Account/ChangePassword";
 // support
