@@ -27,9 +27,13 @@ const Bell = () => {
     }
   };
 
-  const { data = {}, isLoading } = useQuery("َAccountNotif", async () => {
-    return await fetchNotif();
-  });
+  const { data = {}, isLoading } = useQuery(
+    "َAccountNotif",
+    async () => {
+      return await fetchNotif();
+    },
+    { refetchOnWindowFocus: false, refetchInterval: false }
+  );
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -69,7 +73,7 @@ const Bell = () => {
 
           <ul className="max-h-[300px] overflow-auto">
             {data
-              .filter((num) => num.readOut === false)
+              .filter((num: any) => num.readOut === false)
               .map((notification: any) => (
                 <Link to="/MyNotification">
                   <li

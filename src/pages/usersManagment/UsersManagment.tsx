@@ -128,7 +128,7 @@ const UsersManagment = () => {
       data: "id", // We will use this for the operations column
       name: "id",
       orderable: false,
-      width: "500px",
+      width: "470px",
       autoWidth: false,
       title: "عملیات",
       searchable: false,
@@ -142,7 +142,7 @@ const UsersManagment = () => {
 
         const root = createRoot(container);
         root.render(
-          <div className="flex gap-1  ">
+          <div className="flex gap-1 justify-center [&>button]:whitespace-nowrap ">
             <Button
               Icon={QrCodeIcon}
               onClick={() => {
@@ -194,7 +194,7 @@ const UsersManagment = () => {
     },
   ];
   return (
-    <div className={`${boxStyle} overflow-auto`}>
+    <div className={`${boxStyle} overflow-auto userTable` }>
       <Button
         Icon={PlusIcon}
         className=" mb-3"

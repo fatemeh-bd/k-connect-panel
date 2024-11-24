@@ -91,10 +91,9 @@ const changePassword = () => {
             className="self-center"
           />
         </div>
-        <div className="w-full flex justify-start items-start gap-4">
-          <div className="flex w-full max-w-[300px] gap-4 items-center">
+        <div className="w-full grid grid-cols-12 items-start gap-4">
             <Input
-              className="self-center"
+              className="self-center md:col-span-4 col-span-12"
               type={passwordVisible.newPassword ? "text" : "password"}
               icon={
                 <div
@@ -114,10 +113,9 @@ const changePassword = () => {
               })}
               errorText={errors.newPassword?.message}
             />
-          </div>
-          <div className="flex w-full max-w-[300px] gap-4 items-center">
             <Input
               defaultValue={""}
+              className="md:col-span-4 col-span-12"
               type={passwordVisible.repeatPassword ? "text" : "password"}
               icon={
                 <div
@@ -140,10 +138,9 @@ const changePassword = () => {
               })}
               errorText={errors.confirmPassowrd?.message}
             />
-          </div>
           <Button
             loading={submitLoading ? true : false}
-            className="max-h-[50px] min-w-[108px] h-fit mt-4"
+            className="sm:col-span-4 col-span-12 mt-4 w-fit px-8"
             type={"submit"}
           >
             تغییر کلمه عبور

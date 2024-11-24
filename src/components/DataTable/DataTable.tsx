@@ -51,14 +51,14 @@ const CustomeDataTable: React.FC<CustomeDataTableProps> = ({
       paginate: {
         last: "آخرین",
         first: "اولین",
-        next: "بعدی",
-        previous: "قبلی",
+        next: "❯",
+        previous: "❮",
       },
       search: "جستجو :  ",
       searchPlaceholder: "جستجو",
     },
     lengthMenu: [10, 20, 50, 100, 150, 200, 300, 500, 700, 1000], // Pagination options
-    pageLength: 10, // Default number of rows per page
+    pageLength: 10, 
   };
   const ajaxConfig = {
     url: `${urlRequest}`,

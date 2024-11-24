@@ -207,11 +207,11 @@ div .dt-container .dt-input {
   padding: 0.4rem !important;
   margin: 0 0.5rem;
 }
-#DataTables_Table_0_processing {
+.dt-processing {
   background-color: var(--gray50) !important;
   border-radius: 8px;
   box-shadow: 1px 1px 6px 6px var(--gray200);
-  padding: 1rem 0;
+  padding: 1rem 0 !important;
 }
 
 .toast-right-align {
@@ -220,4 +220,15 @@ div .dt-container .dt-input {
 td,
 th {
   text-align: center !important;
+}
+
+.userTable th {
+  font-size: 13px !important;
+}
+.userTable td {
+  font-size: 14px !important;
+}
+.dt-paging-button {
+  border-radius: 6px !important;
+  padding: 0.3em 0.82em !important;
 }

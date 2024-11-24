@@ -18,7 +18,7 @@ const MyProfile = () => {
   const content = [<UserProfile />, <EditProfile />, <ChangePassword />];
   return (
     <div>
-      <Tabs tabs={tabs} componets={content}></Tabs>
+      <Tabs tabs={tabs} components={content}></Tabs>
     </div>
   );
 };

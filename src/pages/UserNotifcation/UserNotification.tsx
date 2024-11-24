@@ -26,6 +26,9 @@ const UserNotification = () => {
 
   const { data = {}, isLoading } = useQuery("َAccountNotif", async () => {
     return await fetchNotif();
+  },{
+    refetchOnWindowFocus:false,
+    refetchInterval:false,
   });
 
   return (
@@ -37,7 +40,7 @@ const UserNotification = () => {
             <MyNotification
               key={index}
               data={item}
-              onClick={readNotif(item.id)}
+              onClick={()=>readNotif(item.id)}
             />
           ))}
         </div>

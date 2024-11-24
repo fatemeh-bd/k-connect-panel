@@ -8,6 +8,6 @@ export interface TabType {
 }
 export interface TabsProps {
   tabs: TabType[];
-  componets: ReactNode[];
+  components: ReactNode[];
 }
 

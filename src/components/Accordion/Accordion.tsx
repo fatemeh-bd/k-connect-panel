@@ -1,16 +1,16 @@
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import Paragraph from "../typography/Paragraph";
-
+export interface LastNewsType {
+  title: string;
+  description: string;
+  newsId: number;
+}
 const Accordion = ({
   data,
   onClick,
 }: {
-  data: {
-    title: string;
-    detailes: string;
-    readOut: boolean;
-  };
+  data: LastNewsType;
   onClick?: () => void;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -44,11 +44,7 @@ const Accordion = ({
         }`}
       >
         <div className="px-6 py-4 text-secondary-500">
-          {typeof data.detailes === "string" ? (
-            <div dangerouslySetInnerHTML={{ __html: data.detailes }} />
-          ) : (
-            <div>{data.detailes}</div>
-          )}
+          <div>{data.description}</div>
         </div>
       </div>
     </div>

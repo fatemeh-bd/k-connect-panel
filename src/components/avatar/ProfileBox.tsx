@@ -6,6 +6,7 @@ import { postMethod } from "../../api/callApi";
 import { GET_BALANCE, GET_PROFILE } from "../../api/endpoints";
 import { notify } from "../../utils/notify";
 import { numberWithCommas } from "../../utils/helper";
+import { ProfileInfoType, useProfile } from "../../store/profileSlice";
 
 const fetchBalance = async () => {
   const response = await postMethod(GET_BALANCE, {});
@@ -17,9 +18,12 @@ const fetchBalance = async () => {
   }
 };
 
-const fetchProfile = async () => {
+const fetchProfile = async (
+  setProfileInfo: (profile: ProfileInfoType) => void
+) => {
   const response = await postMethod(GET_PROFILE, {});
   if (response?.isSuccess) {
+    setProfileInfo(response.data);
     return response.data;
   } else {
     notify(response.message, "error");
@@ -28,10 +32,12 @@ const fetchProfile = async () => {
 };
 
 const ProfileBox = () => {
+  const { info, setProfileInfo } = useProfile();
+
   const results = useQueries([
     {
       queryKey: "profile",
-      queryFn: fetchProfile,
+      queryFn: () => fetchProfile(setProfileInfo),
       refetchOnWindowFocus: false,
       refetchInterval: false,
     },
@@ -43,14 +49,13 @@ const ProfileBox = () => {
     },
   ]);
 
-  const { data: profile } = results[0];
   const { data: balance } = results[1];
 
   return (
-    <div className="flex  items-center justify-start gap-2">
+    <div className="flex items-center justify-start gap-2">
       <div className="">
         <Paragraph size={Sizes.sm} className="font-medium">
-          {profile?.sellerInfo && profile.sellerInfo?.userName}
+          {info?.sellerInfo?.userName}
         </Paragraph>
         <div>
           <Paragraph size={Sizes.xs} type={ColorType.PRIMARY}>

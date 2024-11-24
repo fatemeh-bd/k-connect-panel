@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import { TabsProps } from "./TabsTypes";
 
-const Tabs: FC<TabsProps> = ({ tabs, componets }) => {
+const Tabs: FC<TabsProps> = ({ tabs, components }) => {
   const [selectedTab, setSelectedTab] = useState(1);
 
   return (
@@ -24,7 +24,7 @@ const Tabs: FC<TabsProps> = ({ tabs, componets }) => {
           ))}
         </ul>
       </div>
-      {componets[selectedTab - 1]}
+      {components[selectedTab - 1]}
     </div>
   );
 };

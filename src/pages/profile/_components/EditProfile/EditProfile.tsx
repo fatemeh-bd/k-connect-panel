@@ -4,10 +4,9 @@ import Input from "../../../../components/inputs/Input";
 import { boxStyle } from "../../../../utils/enums";
 import { postMethod } from "../../../../api/callApi";
 import { notify } from "../../../../utils/notify";
-import { useQuery } from "react-query";
-import { EDIT_PROFILE, GET_PROFILE } from "../../../../api/endpoints";
-import CustomSkeleton from "../../../../components/skeleton/skeleton";
+import { EDIT_PROFILE } from "../../../../api/endpoints";
 import { useState } from "react";
+import { useProfile } from "../../../../store/profileSlice";
 type Inputs = {
   firstName: string;
   lastName: string;
@@ -15,21 +14,9 @@ type Inputs = {
   email: string;
 };
 const editProfile = () => {
-  const fetchProfile = async () => {
-    const response = await postMethod(GET_PROFILE, {});
-    if (response?.isSuccess) {
-      return response.data;
-    } else {
-      notify(response.message, "error");
-      return {};
-    }
-  };
-
   const [submitLoading, setSubmitLoading] = useState<Boolean>(false);
 
-  const { data = {}, isLoading } = useQuery("َAccountProfile", async () => {
-    return await fetchProfile();
-  });
+  const { info } = useProfile();
 
   const {
     register,
@@ -54,37 +41,14 @@ const editProfile = () => {
       setSubmitLoading(false);
     }
   };
-  if (isLoading) {
-    return (
-      <div>
-        <div className={`${boxStyle} grid grid-cols-12 gap-6 p-6`}>
-          <div className="md:col-span-12 col-span-12 flex  gap-2">
-            <CustomSkeleton width="w-full" height="h-10" />
-          </div>
-        </div>
 
-        <div className={`${boxStyle} grid grid-cols-12 gap-6 p-6`}>
-          {[...Array(3)].map((_, index) => (
-            <div key={index} className="md:col-span-4 col-span-12 flex  gap-2">
-              <CustomSkeleton width="w-full" height="h-10" />
-            </div>
-          ))}
-        </div>
-        <div className={`${boxStyle} grid grid-cols-12 gap-6 p-6`}>
-          <div className="md:col-span-4 col-span-12 flex  gap-2">
-            <CustomSkeleton width="w-40" height="h-10" />
-          </div>
-        </div>
-      </div>
-    );
-  }
   return (
     <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
       <div className={`${boxStyle}  grid grid-cols-12 gap-2`}>
         <div className="md:col-span-4 col-span-12  flex gap-4 md:mb-0 mb-3 items-center">
           <Input
             label="نام "
-            defaultValue={data.firstName}
+            defaultValue={info.firstName}
             {...register("firstName", {
               required: "نام را وارد کنید",
             })}
@@ -93,16 +57,16 @@ const editProfile = () => {
         <div className="md:col-span-4 col-span-12  flex gap-4 md:mb-0 mb-3 items-center">
           <Input
             label="نام خانوادگی"
-            defaultValue={data.lastName}
+            defaultValue={info.lastName}
             {...register("lastName", { required: "نام خانوادگی را وارد کنید" })}
             errorText={errors.lastName?.message}
           />
         </div>
         <div className="md:col-span-4 col-span-12  flex gap-4 md:mb-0 mb-3 items-center">
           <Input
-            disabled={data.phoneNumber ? false : true}
+            disabled={info.phoneNumber ? false : true}
             label="شماره موبایل"
-            defaultValue={data.phoneNumber}
+            defaultValue={info.phoneNumber}
             type="number"
             {...register("phoneNumber", {
               required: "شماره موبایل را وارد کنید",
@@ -124,7 +88,7 @@ const editProfile = () => {
         </div>
 
         <div className="md:col-span-4 col-span-12  flex gap-4 md:mb-0 mb-3 items-center">
-          <Input label="ایمیل" readOnly value={data.sellerInfo.email} />
+          <Input label="ایمیل" readOnly value={info.sellerInfo.email} />
         </div>
         <Button
           loading={submitLoading ? true : false}

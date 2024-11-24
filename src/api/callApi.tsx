@@ -2,8 +2,8 @@ import axios, { AxiosInstance } from "axios";
 import { getCookie } from "../utils/getCookie";
 import { delete_cookie } from "../utils/removeCookie";
 
-// export const BASE_URL = "https://api.artdev.ir";
-export const BASE_URL = "https://localhost:7092";
+export const BASE_URL = "https://api.artdev.ir";
+// export const BASE_URL = "https://localhost:7092";
 
 const getAccessToken = (): string => {
   const token = getCookie("access_token");
@@ -70,10 +70,10 @@ export const postMethod = async (
 };
 
 // متد GET
-export const getMethod = async <T,>(
+export const getMethod = async (
   endpoint: string,
   controller?: AbortController
-): Promise<T | undefined> => {
+) => {
   const axiosInstance = createAxiosInstance(controller);
   try {
     const response = await axiosInstance.get(endpoint);
