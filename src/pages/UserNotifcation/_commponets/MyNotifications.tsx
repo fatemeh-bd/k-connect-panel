@@ -1,8 +1,8 @@
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
-import Paragraph from "../typography/Paragraph";
+import Paragraph from "../../../components/typography/Paragraph";
 
-const Accordion = ({
+const MyNotification = ({
   data,
   onClick,
 }: {
@@ -55,4 +55,4 @@ const Accordion = ({
   );
 };
 
-export default Accordion;
+export default MyNotification;

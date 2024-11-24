@@ -14,7 +14,7 @@ const MessageBox = ({
     <div
       className={`${
         type === "client" ? "ml-auto" : "mr-auto flex-row-reverse"
-      } lg:max-w-[50%] max-w-[80%] w-fit flex gap-4 items-start my-2`}
+      } lg:max-w-[50%] max-w-[80%] w-fit flex gap-4 items-start my-4`}
     >
       <Avatar className="border border-primary" />
       <div>

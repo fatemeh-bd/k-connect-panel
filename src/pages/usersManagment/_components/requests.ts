@@ -1,5 +1,6 @@
 import { postMethod } from "../../../api/callApi";
 import {
+  CLIENT_EXIST_USERNAME,
   GET_SERVER_LIST,
   GET_SERVER_LOCATIONS,
   GET_SERVER_PLANS,
@@ -25,7 +26,18 @@ export const fetchServerLocations = async () => {
     return [];
   }
 };
-
+export const fetchUserNameExist = async (userName: string) => {
+  const res = await postMethod(
+    CLIENT_EXIST_USERNAME + `?userName=${userName}`,
+    {}
+  );
+  if (res?.isSuccess) {
+    return res.data;
+  } else {
+    notify(res.message, "error");
+    return [];
+  }
+};
 export const fetchServerList = async (id: string) => {
   const res = await postMethod(GET_SERVER_LIST, {
     serverLocationId: id,
@@ -39,12 +51,11 @@ export const fetchServerList = async (id: string) => {
 };
 
 export const submitUser = async () => {
-    const res = await postMethod("",{});
-    if (res?.isSuccess) {
-      return res.data;
-    } else {
-      notify(res.message, "error");
-      return [];
-    }
-  };
-  
+  const res = await postMethod("", {});
+  if (res?.isSuccess) {
+    return res.data;
+  } else {
+    notify(res.message, "error");
+    return [];
+  }
+};

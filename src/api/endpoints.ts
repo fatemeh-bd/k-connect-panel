@@ -3,6 +3,8 @@ export const GET_BALANCE = "/v1/Account/GetBalance";
 export const LOGIN = "/v1/Account/Login";
 export const REGISTER = "/v1/Account/Register";
 export const GET_PROFILE = "/v1/Account/GetProfile";
+export const GET_NOTIF = "/v1/Account/GetUserNotifications";
+export const READ_NOTIF = "/v1/Account/ReadNotify";
 export const EDIT_PROFILE = "/v1/Account/EditProfile";
 export const CHANGE_PASSOWRD = "/v1/Account/ChangePassword";
 // support
@@ -18,3 +20,6 @@ export const GET_SERVER_PLANS = "/v1/ServerPlan/GetServerPlanSelectList";
 export const GET_SERVER_LOCATIONS =
   "/v1/ServerLocation/ServerLocationSelectList";
 export const GET_SERVER_LIST = "/v1/Server/GetServerSelectList";
+
+// Client
+export const CLIENT_EXIST_USERNAME = "/v1/Client/CheckUserNameExists";

@@ -5,9 +5,14 @@ import Input from "../../../components/inputs/Input";
 import Paragraph from "../../../components/typography/Paragraph";
 import { Sizes } from "../../../utils/enums";
 import { useForm } from "react-hook-form";
-import { ChangeEvent, useEffect } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useMutation, useQueries } from "react-query";
-import { fetchPlans, fetchServerList, fetchServerLocations } from "./requests";
+import {
+  fetchPlans,
+  fetchServerList,
+  fetchServerLocations,
+  fetchUserNameExist,
+} from "./requests";
 import { notify } from "../../../utils/notify";
 import { numberWithCommas } from "../../../utils/helper";
 
@@ -20,9 +25,12 @@ type Inputs = {
   serverId: number | string;
 };
 const AddUser = () => {
-  const checkUserNameExist = (e: string) => {
-    //cal Api
-    alert(e);
+  const [userNameExist, setUserNameExist] = useState<boolean>(false);
+  const [planPrice, setPlanPrice] = useState<Number>(0);
+  const checkUserNameExist = async (e: string) => {
+    var data = await fetchUserNameExist(e);
+    if (data === true) setUserNameExist(true);
+    else setUserNameExist(false);
   };
   const {
     register,
@@ -40,10 +48,14 @@ const AddUser = () => {
     {
       queryKey: "plans",
       queryFn: fetchPlans,
+      refetchOnWindowFocus: false,
+      refetchInterval: false,
     },
     {
       queryKey: "serverLocation",
       queryFn: fetchServerLocations,
+      refetchOnWindowFocus: false,
+      refetchInterval: false,
     },
   ]);
 
@@ -144,7 +156,11 @@ const AddUser = () => {
           قیمت : {numberWithCommas(4090000)} تومان
         </Paragraph>
       )}
-      <Button className="w-full" type={"submit"}>
+      <Button
+        disabled={userNameExist ? false : true}
+        className="w-full"
+        type={"submit"}
+      >
         ثبت کاربر
       </Button>
     </form>

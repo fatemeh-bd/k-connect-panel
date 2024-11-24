@@ -1,4 +1,4 @@
-import { PlusIcon } from "@heroicons/react/24/outline";
+import { InformationCircleIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import Button from "../../components/buttons/Button";
 import Modal from "../../components/modal/Modal";
@@ -110,7 +110,10 @@ const Supports = () => {
 
         const root = createRoot(container);
         root.render(
-          <Button onClick={() => navigate(`/support/${cellData}`)}>
+          <Button
+            Icon={InformationCircleIcon}
+            onClick={() => navigate(`/support/${cellData}`)}
+          >
             جزئیات
           </Button>
         );
