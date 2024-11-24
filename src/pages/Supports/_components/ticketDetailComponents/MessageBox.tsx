@@ -4,11 +4,11 @@ import Paragraph from "../../../../components/typography/Paragraph";
 const MessageBox = ({
   type,
   messageText,
-  time
+  time,
 }: {
   type?: "client" | "operator";
   messageText: string;
-  time:string
+  time: string;
 }) => {
   return (
     <div
@@ -25,8 +25,8 @@ const MessageBox = ({
         >
           {messageText}
         </Paragraph>
-        <span className="block w-fit mr-auto text-sm text-secondary-500 mt-1">
-         {time}
+        <span className="block w-fit  text-sm text-secondary-500 mt-1">
+          {time}
         </span>
       </div>
     </div>

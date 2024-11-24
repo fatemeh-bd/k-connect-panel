@@ -51,22 +51,23 @@ const Supports = () => {
         const container = document.createElement("div");
         td.innerHTML = "";
         td.appendChild(container);
-      
+
         const root = createRoot(container);
         const TicketStatusMappingArray = Object.values(TicketStatusMapping);
 
-        const status = TicketStatusMappingArray.find(i=>i.text===cellData);
-        console.log(status)
+        const status = TicketStatusMappingArray.find(
+          (i) => i.text === cellData
+        );
+        console.log(status);
         root.render(
           <Paragraph
-            type={status?.color ?? ColorType.BLACK} 
+            type={status?.color ?? ColorType.BLACK}
             className="!font-normal"
           >
-            {status?.text || cellData} 
+            {status?.text || cellData}
           </Paragraph>
         );
       },
-      
     },
     {
       data: "sectionName",

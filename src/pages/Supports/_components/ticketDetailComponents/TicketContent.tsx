@@ -20,7 +20,7 @@ const TicketContent: React.FC<TicketHeaderProps> = ({ messages, loading }) => {
     if (messageEndRef.current) {
       messageEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
-  }, [messages,loading]);
+  }, [messages, loading]);
 
   return (
     <div className="h-full overflow-auto px-8 pb-20">

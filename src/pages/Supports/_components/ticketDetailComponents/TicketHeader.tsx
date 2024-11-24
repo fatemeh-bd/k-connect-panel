@@ -4,7 +4,7 @@ import { CLOSE_TICKET } from "../../../../api/endpoints";
 import Avatar from "../../../../components/avatar/Avatar";
 import Button from "../../../../components/buttons/Button";
 import Paragraph from "../../../../components/typography/Paragraph";
-import { ColorType } from "../../../../utils/enums";
+import { ColorType, TicketStatusMapping } from "../../../../utils/enums";
 import { useMutation } from "react-query";
 import { notify } from "../../../../utils/notify";
 
@@ -19,6 +19,7 @@ interface TicketHeaderProps {
 
 const TicketHeader: React.FC<TicketHeaderProps> = ({ data, refetch }) => {
   const { id } = useParams();
+  const TicketStatusMappingArray = Object.values(TicketStatusMapping);
   const { mutate, isLoading } = useMutation(async () => {
     await postMethod(CLOSE_TICKET + "?ticketId=" + id, {}).then((res) => {
       if (res?.isSuccess) {
@@ -42,11 +43,14 @@ const TicketHeader: React.FC<TicketHeaderProps> = ({ data, refetch }) => {
             {data.ticketTitle}
           </Paragraph>
           <Paragraph className="font-bold" type={ColorType.SUCCESS}>
-            وضعیت:
+            دپارتمان:
             {data.ticketSectionName}
           </Paragraph>
         </div>
       </div>
+      <Paragraph className="font-bold" type={ColorType.PRIMARY}>
+        وضعیت :{TicketStatusMappingArray[data.state].text}
+      </Paragraph>
       {data.state !== 3 && data.state < 3 && data.state > 0 && (
         <Button loading={isLoading} onClick={closeTicketHandler}>
           بستن تیکت
