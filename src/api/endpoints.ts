@@ -23,3 +23,5 @@ export const GET_SERVER_LIST = "/v1/Server/GetServerSelectList";
 
 // Client
 export const CLIENT_EXIST_USERNAME = "/v1/Client/CheckUserNameExists";
+export const CREATE_CLIENT = "/v1/Client/Create";
+export const CLIENT_LIST = "/v1/Client/MyCustomers";

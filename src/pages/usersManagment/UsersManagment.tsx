@@ -1,125 +1,247 @@
-import { TableColumn } from "react-data-table-component";
-import { boxStyle } from "../../utils/enums";
+import { boxStyle, ColorType } from "../../utils/enums";
 import Button from "../../components/buttons/Button";
-import { UserType } from "./types";
-import Table from "../../components/table/Table";
-import { PlusIcon } from "@heroicons/react/24/outline";
-import Title from "../../components/typography/Title";
+import {
+  PlusCircleIcon,
+  PlusIcon,
+  TrashIcon,
+} from "@heroicons/react/24/outline";
 import { useState } from "react";
 import AddUser from "./_components/AddUser";
 import Modal from "../../components/modal/Modal";
+import CustomeDataTable from "../../components/DataTable/DataTable";
+import { BASE_URL } from "../../api/callApi";
+import { CLIENT_LIST } from "../../api/endpoints";
+import { createRoot } from "react-dom/client";
+import { useNavigate } from "react-router-dom";
+import Paragraph from "../../components/typography/Paragraph";
+import { QrCodeIcon } from "@heroicons/react/20/solid";
+import QRCodeGenerator from "../../components/QR/QRCodeGenerator";
 
 const UsersManagment = () => {
-  const exampleData: UserType[] = [
+  const [addUserOpenModal, setAddUserModal] = useState<boolean>(false);
+  const [connectionModal, setConnectionModal] = useState<boolean>(false);
+  const [connectionSubModal, setConnectionSubModal] = useState<boolean>(false);
+  const [increaseVolumeModal, setIncreaseVolumeModal] =
+    useState<boolean>(false);
+  const [removeClientModal, setRemoveClientModal] = useState<boolean>(false);
+
+  const [getConnection, setConnection] = useState<string[]>(["sdsd", "sdsd"]);
+  const [getSubConnection, setSubConnection] = useState<string>("");
+  const [refreshKey, setRefreshKey] = useState<number>(0); // Add refresh key
+
+  const navigate = useNavigate();
+  const columns = [
     {
-      userAvatar:
-        "https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg",
-      firstName: "Fatemeh",
-      lastName: "Ghasemi",
-      phoneNumber: "09123456789",
-      cityName: "تهران",
-      isActiveLawyer: true,
-      isConfirmDocument: true,
-      userId: "1",
+      data: "userName",
+      name: "userName",
+      orderable: true,
+      width: "",
+      autoWidth: "",
+      title: "نام کاربری",
+      searchable: true,
+      visible: true,
+      // @ts-ignore: Ignore TypeScript error for ReactDOM.render
+      render: (data: any, type: any, row: ExampleType) => {
+        return `<bold>${row.userName}</bold>`;
+      },
     },
     {
-      userAvatar:
-        "https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg",
-      firstName: "Ali",
-      lastName: "Rezaei",
-      phoneNumber: "09223334455",
-      cityName: "مشهد",
-      isActiveLawyer: false,
-      isConfirmDocument: false,
-      userId: "2",
+      data: "phoneNumber",
+      name: "phoneNumber",
+      orderable: true,
+      width: "",
+      autoWidth: "",
+      title: "شماره موبایل",
+      searchable: true,
+      visible: true,
+      // @ts-ignore
+
+      createdCell: (td: HTMLTableCellElement, cellData: any, rowData: any) => {
+        const container = document.createElement("div");
+        td.innerHTML = "";
+        td.appendChild(container);
+        const root = createRoot(container);
+        root.render(
+          <Paragraph
+            type={cellData?.color ?? ColorType.BLACK}
+            className="!font-normal"
+          >
+            {cellData}
+          </Paragraph>
+        );
+      },
     },
     {
-      userAvatar:
-        "https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg",
-      firstName: "Sara",
-      lastName: "Ahmadi",
-      phoneNumber: "09331234567",
-      cityName: "شیراز",
-      isActiveLawyer: true,
-      isConfirmDocument: true,
-      userId: "3",
+      data: "planName",
+      name: "planName",
+      orderable: true,
+      width: "",
+      autoWidth: "",
+      title: "پلن انتخابی",
+      searchable: true,
+      visible: true,
+      // @ts-ignore: Ignore TypeScript error for ReactDOM.render
+      render: (data: any, type: any, row: ExampleType) => {
+        return `<bold>${row.planName}</bold>`;
+      },
+    },
+    {
+      data: "useage",
+      name: "useage",
+      orderable: true,
+      width: "",
+      autoWidth: "",
+      title: "حجم",
+      searchable: true,
+      visible: true,
+      // @ts-ignore
+
+      createdCell: (td: HTMLTableCellElement, cellData: any, rowData: any) => {
+        const container = document.createElement("div");
+        td.innerHTML = "";
+        td.appendChild(container);
+
+        const root = createRoot(container);
+
+        console.log(status);
+        root.render(
+          <Paragraph
+            type={cellData?.color ?? ColorType.BLACK}
+            className="!font-normal"
+          >
+            {cellData}
+          </Paragraph>
+        );
+      },
+    },
+    {
+      data: "createAt",
+      name: "createAt",
+      orderable: true,
+      width: "",
+      autoWidth: "",
+      title: "تاریخ ایجاد",
+      searchable: true,
+      visible: true,
+    },
+    {
+      data: "id", // We will use this for the operations column
+      name: "id",
+      orderable: false,
+      width: "500px",
+      autoWidth: false,
+      title: "عملیات",
+      searchable: false,
+      visible: true,
+      // @ts-ignore
+
+      createdCell: (td: HTMLTableCellElement, cellData: any, rowData: any) => {
+        const container = document.createElement("div");
+        td.innerHTML = "";
+        td.appendChild(container);
+
+        const root = createRoot(container);
+        root.render(
+          <div className="flex gap-1  ">
+            <Button
+              Icon={QrCodeIcon}
+              onClick={() => {
+                setConnectionModal(true);
+                console.log(
+                  "%csrcpagesrsManagmentUsersManagment.tsx:150 rowData.connections",
+                  "color: #007acc;",
+                  rowData.connections
+                );
+                setConnection(
+                  rowData.connections.map(
+                    (connection: string) => connection.link
+                  )
+                );
+              }}
+            >
+              کد اتصال
+            </Button>
+            <Button
+              Icon={QrCodeIcon}
+              onClick={() => {
+                setConnectionSubModal(true);
+                console.log(
+                  "%csrcpagessersManagmentUsersManagment.tsx:159 setSubConnection",
+                  "color: #007acc;",
+                  cellData
+                );
+                setSubConnection(rowData.subLink);
+              }}
+            >
+              سابسکریپشن
+            </Button>
+            <Button
+              Icon={PlusCircleIcon}
+              onClick={() => setIncreaseVolumeModal(true)}
+            >
+              حجم
+            </Button>
+            <Button
+              themeType={ColorType.ERROR}
+              Icon={TrashIcon}
+              onClick={() => setRemoveClientModal(true)}
+            >
+              حذف
+            </Button>
+          </div>
+        );
+      },
     },
   ];
-  const [openModal, setOpenModal] = useState<boolean>(false);
-
-  const columns: TableColumn<{ [key: string]: any }>[] = [
-    {
-      name: "پروفایل",
-      cell: (row) => (
-        <img
-          className="rounded-full size-12"
-          src={row.userAvatar}
-          alt="Profile"
-          width="50"
-          height="50"
-        />
-      ),
-      grow: 0,
-      sortable: false,
-    },
-    {
-      name: "نام",
-      selector: (row) => row.firstName,
-      sortable: true,
-    },
-    {
-      name: "نام خانوادگی",
-      selector: (row) => row.lastName,
-      sortable: true,
-    },
-    {
-      name: "شماره موبایل",
-      selector: (row) => row.phoneNumber,
-      sortable: true,
-    },
-    {
-      name: "شهر",
-      selector: (row) => row.cityName,
-      sortable: true,
-    },
-    {
-      name: "وضعیت پروفایل",
-      cell: (row) => (row.isActiveLawyer ? "خوب" : "بد"),
-      sortable: true,
-    },
-    {
-      name: "وضعیت مدارک",
-      cell: (row) => (row.isConfirmDocument ? "تایید شده" : "تایید نشده"),
-      sortable: true,
-    },
-    {
-      name: "عملیات",
-      cell: () => (
-        <div className="flex justify-center items-center">
-          <Button outline className="min-w-[120px] text-sm whitespace-nowrap">
-            تغییر وضعیت
-          </Button>
-        </div>
-      ),
-      sortable: false,
-    },
-  ];
-
   return (
     <div className={`${boxStyle} overflow-auto`}>
-      <Title>لیست کاربران</Title>
       <Button
         Icon={PlusIcon}
-        className="float-end"
-        onClick={() => setOpenModal(true)}
+        className=" mb-3"
+        onClick={() => setAddUserModal(true)}
       >
         افزودن کاربر
       </Button>
-      <Table columns={columns} data={exampleData} header={[]} />
-
+      <CustomeDataTable
+        urlRequest={`${BASE_URL + CLIENT_LIST}`}
+        columns={columns}
+        key={refreshKey}
+      />
       <Modal
-        isOpen={openModal}
-        onClose={() => setOpenModal(false)}
+        isOpen={connectionModal}
+        onClose={() => setConnectionModal(false)}
+        title="کد اتصال"
+        className="md:min-w-[450px] min-w-[90%] overflow-scroll"
+      >
+        <QRCodeGenerator texts={getConnection}></QRCodeGenerator>
+      </Modal>
+      <Modal
+        isOpen={connectionSubModal}
+        onClose={() => setConnectionSubModal(false)}
+        title="سابسکریپشن"
+        className="md:min-w-[450px] min-w-[90%]"
+      >
+        <QRCodeGenerator texts={[getSubConnection]}></QRCodeGenerator>
+      </Modal>
+      <Modal
+        isOpen={increaseVolumeModal}
+        onClose={() => setIncreaseVolumeModal(false)}
+        title="حجم"
+        className="md:min-w-[450px] min-w-[90%]"
+      >
+        <Paragraph>حجم</Paragraph>
+      </Modal>
+      <Modal
+        isOpen={removeClientModal}
+        onClose={() => setRemoveClientModal(false)}
+        title="حذف"
+        className="md:min-w-[450px] min-w-[90%]"
+      >
+        <Paragraph>حذف</Paragraph>
+      </Modal>
+      <Modal
+        isOpen={addUserOpenModal}
+        onClose={() => setAddUserModal(false)}
         title="افزودن کاربر"
         className="md:min-w-[450px] min-w-[90%]"
       >

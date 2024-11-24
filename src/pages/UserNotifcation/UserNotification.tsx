@@ -1,13 +1,12 @@
 import { useQuery } from "react-query";
 import { getMethod, postMethod } from "../../api/callApi";
-import Accordion from "../../components/Accordion/Accordion";
 import { notify } from "../../utils/notify";
 import { GET_NOTIF, READ_NOTIF } from "../../api/endpoints";
 import CustomSkeleton from "../../components/skeleton/skeleton";
 import MyNotification from "./_commponets/MyNotifications";
 const UserNotification = () => {
   const fetchNotif = async () => {
-    const response = await getMethod(GET_NOTIF);
+    const response: any = await getMethod(GET_NOTIF);
     if (response?.isSuccess) {
       return response.data;
     } else {
@@ -25,7 +24,6 @@ const UserNotification = () => {
     }
   };
 
- 
   const { data = {}, isLoading } = useQuery("َAccountNotif", async () => {
     return await fetchNotif();
   });
@@ -35,9 +33,9 @@ const UserNotification = () => {
       <h2 className="mb-4"> اعلانی های دریافتی</h2>
       {!isLoading ? (
         <div className="space-y-2">
-          {data.map((item, index) => (
+          {data.map((item: any, index: any) => (
             <MyNotification
-              key={index} 
+              key={index}
               data={item}
               onClick={readNotif(item.id)}
             />

@@ -1,9 +1,11 @@
+"use client";
+
 import { CurrencyDollarIcon } from "@heroicons/react/20/solid";
 import Button from "../../../components/buttons/Button";
 import DropDown from "../../../components/dropDown/DropDown";
 import Input from "../../../components/inputs/Input";
 import Paragraph from "../../../components/typography/Paragraph";
-import { Sizes } from "../../../utils/enums";
+import { ColorType, Sizes } from "../../../utils/enums";
 import { useForm } from "react-hook-form";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useMutation, useQueries } from "react-query";
@@ -15,23 +17,28 @@ import {
 } from "./requests";
 import { notify } from "../../../utils/notify";
 import { numberWithCommas } from "../../../utils/helper";
+import { useSubmitClient } from "../Hooks/useSubmitClient";
 
 type Inputs = {
   userName: string;
   password: string;
   phoneNumber: string;
-  serverPlanId: number | string;
+  planId: number | string;
   serverLocationId: string;
   serverId: number | string;
 };
+
 const AddUser = () => {
   const [userNameExist, setUserNameExist] = useState<boolean>(false);
-  const [planPrice, setPlanPrice] = useState<Number>(0);
+  const [planPrice, setPlanPrice] = useState<number>(0);
+
   const checkUserNameExist = async (e: string) => {
-    var data = await fetchUserNameExist(e);
-    if (data === true) setUserNameExist(true);
-    else setUserNameExist(false);
+    if (e.length > 0) {
+      var data = await fetchUserNameExist(e);
+      setUserNameExist(data === true);
+    }
   };
+
   const {
     register,
     watch,
@@ -40,8 +47,18 @@ const AddUser = () => {
     handleSubmit,
     trigger,
   } = useForm<Inputs>();
-  const submitFrom = () => {
-    // mutateSubmit(data);
+
+  const { mutate: submitClient, isLoading: submitClientLoading } =
+    useSubmitClient();
+
+  const submitFrom = async (input: Inputs) => {
+    const response = await submitClient(input);
+
+    console.log(
+      "%csrcpagessersManagment_componentsAddUser.tsx:57 response",
+      "color: #007acc;",
+      response
+    );
   };
 
   const results = useQueries([
@@ -61,6 +78,7 @@ const AddUser = () => {
 
   const { data: plans, isLoading: plansLoading } = results[0];
   const { data: serverLocation, isLoading: serverLocationLoading } = results[1];
+
   const {
     mutate,
     isLoading: serverLoading,
@@ -78,24 +96,22 @@ const AddUser = () => {
     },
   });
 
-  //   const { mutate: mutateSubmit, isLoading: submitLoader } = useMutation(
-  //     submitUser,
-  //     {
-  //       onSuccess: (response) => {
-  //         if (response?.isSuccess) {
-  //           return response.data;
-  //         } else {
-  //           notify(response.message, "success");
-  //         }
-  //       },
-  //       onError: (error: any) => {
-  //         notify(error?.message, "error");
-  //       },
-  //     }
-  //   );
   useEffect(() => {
     if (watch("serverLocationId")) mutate(watch("serverLocationId"));
-  }, [watch("serverLocationId")]);
+  }, [watch("serverLocationId"), mutate]);
+
+  useEffect(() => {
+    const selectedPlanId = watch("planId");
+    if (selectedPlanId && plans) {
+      const selectedPlan = plans.find(
+        (plan: any) => plan.value === selectedPlanId
+      );
+      if (selectedPlan) {
+        setPlanPrice(selectedPlan.price);
+      }
+    }
+  }, [watch("planId"), plans]);
+
   return (
     <form className="space-y-3" onSubmit={handleSubmit(submitFrom)}>
       <div className="grid grid-cols-12 items-start gap-x-4">
@@ -108,18 +124,22 @@ const AddUser = () => {
           errorText={errors.userName?.message}
           className="md:col-span-6 col-span-12"
         />
-        <Input label="شماره موبایل " className="md:col-span-6 col-span-12" />
+        <Input
+          label="شماره موبایل "
+          {...register("phoneNumber")}
+          className="md:col-span-6 col-span-12"
+        />
         <DropDown
           className="col-span-12 mb-3"
           options={plans}
           onSelect={(e) => {
-            setValue("serverPlanId", e.value);
-            trigger("serverPlanId");
+            setValue("planId", e.value);
+            trigger("planId");
           }}
           loading={plansLoading}
           placeholder="انتخاب پلن"
-          {...register("serverPlanId", { required: " پلن  را  انتخاب کنید" })}
-          errorText={errors.serverPlanId?.message}
+          {...register("planId", { required: " پلن  را  انتخاب کنید" })}
+          errorText={errors.planId?.message}
         />
         <DropDown
           className="col-span-12 mb-3"
@@ -140,7 +160,7 @@ const AddUser = () => {
           options={serverList}
           loading={serverLoading}
           placeholder=" انتخاب سرور"
-          disabled={watch("serverLocationId") ? false : true}
+          disabled={!watch("serverLocationId")}
           {...register("serverId", { required: "سرور  را انتخاب کنید" })}
           onSelect={(e) => {
             setValue("serverId", e.value);
@@ -150,20 +170,24 @@ const AddUser = () => {
         />
       </div>
 
-      {watch("serverPlanId") && (
+      {watch("planId") && (
         <Paragraph size={Sizes.xl} className="flex items-center gap-2">
           <CurrencyDollarIcon className="size-6 text-purple-900" />
-          قیمت : {numberWithCommas(4090000)} تومان
+          قیمت : {numberWithCommas(planPrice)} تومان
         </Paragraph>
       )}
-      <Button
-        disabled={userNameExist ? false : true}
-        className="w-full"
-        type={"submit"}
-      >
-        ثبت کاربر
-      </Button>
+
+      {userNameExist ? (
+        <Paragraph type={ColorType.ERROR}>
+          نام کاربری از قبل وجود دارد
+        </Paragraph>
+      ) : (
+        <Button loading={submitClientLoading} className="w-full" type="submit">
+          ثبت کاربر
+        </Button>
+      )}
     </form>
   );
 };
+
 export default AddUser;
