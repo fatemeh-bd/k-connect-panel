@@ -2,7 +2,7 @@ import axios, { AxiosInstance } from "axios";
 import { getCookie } from "../utils/getCookie";
 import { delete_cookie } from "../utils/removeCookie";
 
-export const BASE_URL = "https://api.artdev.ir";
+export const BASE_URL = "https://api.nexovpn.net";
 // export const BASE_URL = "https://localhost:7092";
 
 const getAccessToken = (): string => {
@@ -82,7 +82,19 @@ export const getMethod = async (
     handleError(error);
   }
 };
-
+export const getMethodGeneric = async <T,>(
+  endpoint: string,
+  controller?: AbortController
+): Promise<T | undefined> => {
+  const axiosInstance = createAxiosInstance(controller);
+  try {
+    const response = await axiosInstance.get<T>(endpoint);
+    return response.data;
+  } catch (error) {
+    handleError(error);
+    return undefined; // در صورت خطا، خروجی به صورت `undefined`
+  }
+};
 // تابع مشترک برای مدیریت خطاها
 const handleError = (error: any) => {
   if (axios.isAxiosError(error)) {

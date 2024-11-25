@@ -12,7 +12,6 @@ import CustomeDataTable from "../../components/DataTable/DataTable";
 import { BASE_URL } from "../../api/callApi";
 import { CLIENT_LIST } from "../../api/endpoints";
 import { createRoot } from "react-dom/client";
-import { useNavigate } from "react-router-dom";
 import Paragraph from "../../components/typography/Paragraph";
 import { QrCodeIcon } from "@heroicons/react/20/solid";
 import QRCodeGenerator from "../../components/QR/QRCodeGenerator";
@@ -27,9 +26,7 @@ const UsersManagment = () => {
 
   const [getConnection, setConnection] = useState<string[]>(["sdsd", "sdsd"]);
   const [getSubConnection, setSubConnection] = useState<string>("");
-  const [refreshKey, setRefreshKey] = useState<number>(0); // Add refresh key
 
-  const navigate = useNavigate();
   const columns = [
     {
       data: "userName",
@@ -194,7 +191,7 @@ const UsersManagment = () => {
     },
   ];
   return (
-    <div className={`${boxStyle} overflow-auto userTable` }>
+    <div className={`${boxStyle} overflow-auto userTable`}>
       <Button
         Icon={PlusIcon}
         className=" mb-3"
@@ -205,7 +202,6 @@ const UsersManagment = () => {
       <CustomeDataTable
         urlRequest={`${BASE_URL + CLIENT_LIST}`}
         columns={columns}
-        key={refreshKey}
       />
       <Modal
         isOpen={connectionModal}

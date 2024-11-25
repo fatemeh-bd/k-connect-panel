@@ -22,7 +22,7 @@ const DropDown = ({
   loading?: boolean;
   noOptionsMessage?: string;
   onSelect: (e: SelectType) => void;
-  disabled?:boolean
+  disabled?: boolean;
 }) => {
   const selectStyle = {
     control: (styles: any, { isFocused }: { isFocused: boolean }) => ({

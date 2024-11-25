@@ -11,7 +11,7 @@ import {
   SetStateAction,
   forwardRef,
 } from "react";
-import { getMethod, postMethod } from "../../../api/callApi";
+import { getMethodGeneric, postMethod } from "../../../api/callApi";
 import { CREATE_TICKET, SUPPORT_SECTIONS_LIST } from "../../../api/endpoints";
 import { useForm } from "react-hook-form";
 import { notify } from "../../../utils/notify";
@@ -79,7 +79,7 @@ const AddTicket = forwardRef<
   const { data = [], isLoading } = useQuery(
     "support-sections",
     () =>
-      getMethod<ApiResponse<SelectType[]>>(SUPPORT_SECTIONS_LIST).then(
+      getMethodGeneric<ApiResponse<SelectType[]>>(SUPPORT_SECTIONS_LIST).then(
         (res) => {
           if (res?.isSuccess) {
             return res.data;
