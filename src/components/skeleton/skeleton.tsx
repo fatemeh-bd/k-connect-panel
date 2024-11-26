@@ -14,7 +14,7 @@ const CustomSkeleton: React.FC<CustomSkeletonProps> = ({
   height = "h-4",
 }) => {
   const baseClasses =
-    "animate-pulse bg-gradient-to-r from-gray-200 to-gray-300";
+    "animate-pulse  bg-gradient-to-r from-gray-200 to-gray-300";
   const shapeClasses = {
     circle: "rounded-full",
     square: "rounded-md",
