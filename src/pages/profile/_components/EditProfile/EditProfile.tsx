@@ -44,7 +44,7 @@ const editProfile = () => {
 
   return (
     <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
-      <div className={`${boxStyle}  grid grid-cols-12 gap-2`}>
+      <div className={`${boxStyle}  grid grid-cols-12 gap-2 items-start`}>
         <div className="md:col-span-4 col-span-12  flex gap-4 md:mb-0 mb-3 items-center">
           <Input
             label="نام "
@@ -64,7 +64,7 @@ const editProfile = () => {
         </div>
         <div className="md:col-span-4 col-span-12  flex gap-4 md:mb-0 mb-3 items-center">
           <Input
-            disabled={info.phoneNumber ? false : true}
+            disabled={info.phoneNumber ? true : false}
             label="شماره موبایل"
             defaultValue={info.phoneNumber}
             type="number"
