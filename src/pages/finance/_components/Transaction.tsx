@@ -1,4 +1,3 @@
-import { useParams } from "react-router-dom";
 import QRCodeGenerator from "../../../components/QR/QRCodeGenerator";
 import Input from "../../../components/inputs/Input";
 
@@ -6,7 +5,7 @@ const transaction = () => {
   const network = "TRC20";
   const amount = 70.8;
   const walletAddress = "TVCdMivTMf6yMfTHHUAAoqtGyReVPj*BsNL";
-  const { id } = useParams();
+  // const { id } = useParams();
 
   return (
     <div className="flex flex-col items-center justify-center ">
@@ -15,8 +14,6 @@ const transaction = () => {
           <h1 className="text-xl font-bold text-blue-600 mb-4">NEXO VPN</h1>
           <p className="light:text-gray-700 mb-2">
             شما در حال پرداخت با تتر {network} شبکه ترون هستید
-
-            {id}
           </p>
           <p className="light:text-gray-700 mb-4">
             لطفاً مقدار مشخص شده را به آدرس زیر واریز نمایید.
