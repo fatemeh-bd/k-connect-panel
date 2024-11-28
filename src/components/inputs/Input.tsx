@@ -16,7 +16,6 @@ const Input = forwardRef<HTMLInputElement, InputPropsType>(
           <input
             {...rest}
             ref={ref}
-            id="floating_outlined"
             className={`peer ${inputClass} transition duration-300 ease focus:outline-none focus:border-primary shadow-sm focus:shadow ${
               errorText ? "!border-rose-500" : ""
             }`}
