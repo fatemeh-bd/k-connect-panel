@@ -14,6 +14,7 @@ import UserNotification from "../pages/UserNotifcation/UserNotification";
 import Supports from "../pages/Supports/Support";
 import TicketDetail from "../pages/Supports/TiketDetail";
 import MyProfile from "../pages/profile/MyProfile";
+import Financial from "../pages/finance/Finance";
 
 export interface RouteItemType {
   title: "داشبورد";
@@ -49,7 +50,7 @@ export const routesList = [
     title: "مالی",
     path: "/financial",
     icon: BanknotesIcon,
-    element: "",
+    element: <Financial />,
   },
   {
     id: 4,
