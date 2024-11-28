@@ -4,133 +4,156 @@ import Button from "../../components/buttons/Button";
 import { numberWithCommas } from "../../utils/helper";
 import { createRoot } from "react-dom/client";
 import { InformationCircleIcon } from "@heroicons/react/16/solid";
-import Paragraph from "../../components/typography/Paragraph";
 import CustomeDataTable from "../../components/DataTable/DataTable";
 import { BASE_URL } from "../../api/callApi";
 import { TICKET_LIST } from "../../api/endpoints";
-import { ColorType, TicketStatusMapping } from "../../utils/enums";
+import DropDown from "../../components/dropDown/DropDown";
+import { useNavigate } from "react-router-dom";
 
-// Simulated crypto data
-const cryptoData = [
-  {
-    name: "بیت کوین",
-    symbol: "BTC",
-    price: "41,235.67",
-    change: "+2.5%",
-    irPrice: 500000,
-  },
-  {
-    name: "اتریوم",
-    symbol: "ETH",
-    price: "2,234.12",
-    change: "-1.2%",
-    irPrice: 500000,
-  },
-  { name: "تتر", symbol: "USDT", price: "1.00", change: "0%", irPrice: 500000 },
-  {
-    name: "بایننس کوین",
-    symbol: "BNB",
-    price: "312.45",
-    change: "+0.8%",
-    irPrice: 500000,
-  },
-];
-const columns = [
-  {
-    data: "title",
-    name: "title",
-    orderable: true,
-    width: "",
-    autoWidth: "",
-    title: "عنوان",
-    searchable: true,
-    visible: true,
-  },
-  {
-    data: "ticketStatus",
-    name: "ticketStatus",
-    orderable: true,
-    width: "",
-    autoWidth: "",
-    title: "وضعیت",
-    searchable: true,
-    visible: true,
-    // @ts-ignore
-    createdCell: (td: HTMLTableCellElement, cellData: any, rowData: any) => {
-      const container = document.createElement("div");
-      td.innerHTML = "";
-      td.appendChild(container);
-
-      const root = createRoot(container);
-      const TicketStatusMappingArray = Object.values(TicketStatusMapping);
-
-      const status = TicketStatusMappingArray.find((i) => i.text === cellData);
-      console.log(status);
-      root.render(
-        <Paragraph
-          type={status?.color ?? ColorType.BLACK}
-          className="!font-normal"
-        >
-          {status?.text || cellData}
-        </Paragraph>
-      );
-    },
-  },
-  {
-    data: "sectionName",
-    name: "sectionName",
-
-    orderable: true,
-    width: "",
-    autoWidth: "",
-    title: "دپارتمان",
-    searchable: true,
-    visible: true,
-  },
-  {
-    data: "createdAt",
-    name: "createdAt",
-    orderable: false,
-    width: "",
-    autoWidth: "",
-    title: "تاریخ ایجاد",
-    searchable: true,
-    visible: true,
-    // renderModel:
-  },
-
-  {
-    data: "id", // We will use this for the operations column
-    name: "id",
-    orderable: false,
-    width: "150px",
-    autoWidth: false,
-    title: "عملیات",
-    searchable: false,
-    visible: true,
-    // @ts-ignore
-    createdCell: (td: HTMLTableCellElement, cellData: any, rowData: any) => {
-      const container = document.createElement("div");
-      td.innerHTML = "";
-      td.appendChild(container);
-
-      const root = createRoot(container);
-      root.render(
-        <Button
-          Icon={InformationCircleIcon}
-        >
-          جزئیات
-        </Button>
-      );
-    },
-  },
-];
 export default function Financial() {
+  const navigate = useNavigate();
+  // Simulated crypto data
+  const cryptoData = [
+    {
+      name: "بیت کوین",
+      symbol: "BTC",
+      price: "41,235.67",
+      change: "+2.5%",
+      irPrice: 500000,
+    },
+    {
+      name: "اتریوم",
+      symbol: "ETH",
+      price: "2,234.12",
+      change: "-1.2%",
+      irPrice: 500000,
+    },
+    {
+      name: "تتر",
+      symbol: "USDT",
+      price: "1.00",
+      change: "0%",
+      irPrice: 500000,
+    },
+    {
+      name: "بایننس کوین",
+      symbol: "BNB",
+      price: "312.45",
+      change: "+0.8%",
+      irPrice: 500000,
+    },
+  ];
+  const columns = [
+    {
+      data: "title",
+      name: "title",
+      orderable: true,
+      width: "",
+      autoWidth: "",
+      title: "شناسه رهگیری",
+      searchable: true,
+      visible: true,
+    },
+    {
+      data: "ticketStatus",
+      name: "ticketStatus",
+      orderable: true,
+      width: "",
+      autoWidth: "",
+      title: "عنوان",
+      searchable: true,
+      visible: true,
+    },
+    {
+      data: "sectionName",
+      name: "sectionName",
+
+      orderable: true,
+      width: "",
+      autoWidth: "",
+      title: "مبلغ درخواستی",
+      searchable: true,
+      visible: true,
+    },
+    {
+      data: "createdAt",
+      name: "createdAt",
+      orderable: false,
+      width: "",
+      autoWidth: "",
+      title: "مبلغ واریزی",
+      searchable: true,
+      visible: true,
+      // renderModel:
+    },
+    {
+      data: "createdAt",
+      name: "createdAt",
+      orderable: false,
+      width: "",
+      autoWidth: "",
+      title: "ارز انتخابی",
+      searchable: true,
+      visible: true,
+      // renderModel:
+    },
+    {
+      data: "createdAt",
+      name: "createdAt",
+      orderable: false,
+      width: "",
+      autoWidth: "",
+      title: "تاریخ ایجاد",
+      searchable: true,
+      visible: true,
+      // renderModel:
+    },
+    {
+      data: "createdAt",
+      name: "createdAt",
+      orderable: false,
+      width: "",
+      autoWidth: "",
+      title: "وضعیت",
+      searchable: true,
+      visible: true,
+      // renderModel:
+    },
+    {
+      data: "id", // We will use this for the operations column
+      name: "id",
+      orderable: false,
+      width: "300px",
+      autoWidth: false,
+      title: "عملیات",
+      searchable: false,
+      visible: true,
+      // @ts-ignore
+      createdCell: (td: HTMLTableCellElement, cellData: any, rowData: any) => {
+        const container = document.createElement("div");
+        td.innerHTML = "";
+        td.appendChild(container);
+
+        const root = createRoot(container);
+        root.render(
+          <div className="flex gap-2">
+            <Button
+              Icon={InformationCircleIcon}
+              onClick={() => navigate(`/financial/${cellData}`)}
+            >
+              پرداخت
+            </Button>
+            <Button Icon={InformationCircleIcon}>باطل کن</Button>
+          </div>
+        );
+      },
+    },
+  ];
   const [amount, setAmount] = useState("");
   const [refreshKey, setRefreshKey] = useState<number>(0); // Add refresh key
-
+setRefreshKey(1);
   return (
-    <div className="p-6 space-y-6 light:bg-gray-100 min-h-screen">
+    <div className="space-y-2 light:bg-gray-100 min-h-screen">
       {/* Crypto Prices Section */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {cryptoData.map((crypto) => (
@@ -157,21 +180,9 @@ export default function Financial() {
               </div>
               <div className="text-right">
                 <p className="font-semibold">${crypto.price}</p>
+
                 <p
-                  className={
-                    crypto.change.startsWith("+")
-                      ? "text-green-500"
-                      : "text-red-500"
-                  }
-                >
-                  {crypto.change}
-                </p>
-                <p
-                  className={
-                    crypto.change.startsWith("+")
-                      ? "text-green-500"
-                      : "text-red-500"
-                  }
+                  className="text-green-500"
                 >
                   {numberWithCommas(crypto.irPrice)} تومان
                 </p>
@@ -183,25 +194,30 @@ export default function Financial() {
 
       {/* Invoice Creation Section */}
       <div className="bg-white rounded-lg  p-6">
-        <h2 className="text-xl font-semibold mb-4">ایجاد فاکتور جدید</h2>
-        <div className="flex w-[500px] items-center gap-4">
+        <h2 className=" font-semibold mb-4">ایجاد فاکتور جدید</h2>
+        <div className="grid grid-cols-1 md:grid-cols-6 items-center  gap-2 ">
           <Input
             label="مبلغ"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
           ></Input>
+          <DropDown
+            className="w-[300px] "
+            onSelect={(e) => alert(e.value)}
+            options={[]}
+          ></DropDown>
 
-          <Button type="button">تایید فاکتور</Button>
+          <Button type="button">ایجاد فاکتور</Button>
         </div>
       </div>
 
       {/* Financial Reports Table */}
       <div className="bg-white rounded-lg  p-6">
-      <CustomeDataTable
-        urlRequest={`${BASE_URL + TICKET_LIST}`}
-        columns={columns}
-        key={refreshKey}
-      />
+        <CustomeDataTable
+          urlRequest={`${BASE_URL + TICKET_LIST}`}
+          columns={columns}
+          key={refreshKey}
+        />
       </div>
     </div>
   );

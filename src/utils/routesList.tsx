@@ -15,6 +15,7 @@ import Supports from "../pages/Supports/Support";
 import TicketDetail from "../pages/Supports/TiketDetail";
 import MyProfile from "../pages/profile/MyProfile";
 import Financial from "../pages/finance/Finance";
+import Transaction from "../pages/finance/_components/Transaction";
 
 export interface RouteItemType {
   title: "داشبورد";
@@ -51,6 +52,13 @@ export const routesList = [
     path: "/financial",
     icon: BanknotesIcon,
     element: <Financial />,
+    subRoutes: [
+      {
+        id: 1,
+        path: "/financial/:id",
+        element: <Transaction />,
+      },
+    ],
   },
   {
     id: 4,

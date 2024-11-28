@@ -1,4 +1,3 @@
-import { useParams } from "react-router-dom";
 import { boxStyle } from "../../utils/enums";
 import TicketContent from "./_components/ticketDetailComponents/TicketContent";
 import TicketHeader from "./_components/ticketDetailComponents/TicketHeader";
@@ -8,6 +7,7 @@ import { useQuery } from "react-query";
 import { TICKET_DETAILS } from "../../api/endpoints";
 import CustomSkeleton from "../../components/skeleton/skeleton";
 import TicketActions from "./_components/ticketDetailComponents/TicketActions";
+import { useParams } from "react-router-dom";
 
 const TicketDetail = () => {
   const { id } = useParams();

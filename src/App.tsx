@@ -6,6 +6,8 @@ import { useEffect } from "react";
 import { useCookies } from "react-cookie";
 import TopBar from "./components/TopBar/TopBar";
 import { routesList } from "./utils/routesList";
+import Paragraph from "./components/typography/Paragraph";
+import { Sizes } from "./utils/enums";
 
 function App() {
   const navigate = useNavigate();
@@ -14,7 +16,7 @@ function App() {
     if (!cookies.access_token) {
       navigate("/login");
     }
-  }, [cookies]);
+  }, [cookies, navigate]);
   return (
     <>
       <Routes>
@@ -46,6 +48,14 @@ function App() {
                     ))}
                   </>
                 ))}
+                <Route
+                  path="*"
+                  element={
+                    <Paragraph size={Sizes.lg} className="text-center mt-4">
+                      صفحه مورد نظر یافت نشد
+                    </Paragraph>
+                  }
+                />
               </Routes>
             </div>
           </div>
