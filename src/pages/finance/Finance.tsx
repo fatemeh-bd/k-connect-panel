@@ -150,8 +150,6 @@ export default function Financial() {
     },
   ];
   const [amount, setAmount] = useState("");
-  const [refreshKey, setRefreshKey] = useState<number>(0); // Add refresh key
-setRefreshKey(1);
   return (
     <div className="space-y-2 light:bg-gray-100 min-h-screen">
       {/* Crypto Prices Section */}
@@ -181,9 +179,7 @@ setRefreshKey(1);
               <div className="text-right">
                 <p className="font-semibold">${crypto.price}</p>
 
-                <p
-                  className="text-green-500"
-                >
+                <p className="text-green-500">
                   {numberWithCommas(crypto.irPrice)} تومان
                 </p>
               </div>
@@ -216,7 +212,6 @@ setRefreshKey(1);
         <CustomeDataTable
           urlRequest={`${BASE_URL + TICKET_LIST}`}
           columns={columns}
-          key={refreshKey}
         />
       </div>
     </div>
