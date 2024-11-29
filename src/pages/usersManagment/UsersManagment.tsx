@@ -265,7 +265,7 @@ const UsersManagment = () => {
         isOpen={addUserOpenModal}
         onClose={() => setAddUserModal(false)}
         title="افزودن کاربر"
-        className="md:min-w-[450px] min-w-[90%]"
+        className="md:min-w-[450px] min-w-[90%] h-[3]"
       >
         <AddUser onAddClient={handleRefresh} setClose={setAddUserModal} />
       </Modal>
