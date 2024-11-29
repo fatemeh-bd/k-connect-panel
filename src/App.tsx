@@ -2,7 +2,7 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import SideBar from "./components/sideBar/SideBar";
 import Login from "./pages/auth/Login";
 import SignUp from "./pages/auth/SignUp";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useCookies } from "react-cookie";
 import TopBar from "./components/TopBar/TopBar";
 import { routesList } from "./utils/routesList";
@@ -33,12 +33,8 @@ function App() {
             <div className="py-4">
               <Routes>
                 {routesList.map((item) => (
-                  <>
-                    <Route
-                      key={item.id}
-                      path={item.path}
-                      element={item.element}
-                    />
+                  <React.Fragment key={item.id}>
+                    <Route path={item.path} element={item.element} />
                     {item.subRoutes?.map((sub) => (
                       <Route
                         key={sub.id}
@@ -46,7 +42,7 @@ function App() {
                         element={sub.element}
                       />
                     ))}
-                  </>
+                  </React.Fragment>
                 ))}
                 <Route
                   path="*"

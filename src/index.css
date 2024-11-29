@@ -184,7 +184,8 @@ thead svg {
   background-color: #fff !important;
 }
 .login h1,
-.login input {
+.login input,
+.login p {
   color: #111111 !important;
 }
 .login button {

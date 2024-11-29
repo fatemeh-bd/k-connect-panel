@@ -66,6 +66,10 @@ const DropDown = ({
       ...styles,
       color: "var(--gray400)",
     }),
+    menu: (styles: any) => ({
+      ...styles,
+      backgroundColor: "var(--gray50)",
+    }),
   };
 
   return (
