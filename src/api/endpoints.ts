@@ -26,5 +26,13 @@ export const CLIENT_EXIST_USERNAME = "/v1/Client/CheckUserNameExists";
 export const CREATE_CLIENT = "/v1/Client/Create";
 export const CLIENT_LIST = "/v1/Client/MyCustomers";
 export const GET_NEWS = "/v1/Server/GetNews";
+export const INCREASE_VOLUME = "/v1/Client/IncreaseVolume";
+export const REMOVE_CLIENT = "/v1/Client/RemoveClient";
 
-export const DASHBOARD = "/v1/Zone/GetDashboardZone";
+export const DASHBOARD = "/v1/Client/IncreaseVolume";
+
+
+//Crypto
+
+export const CryptoTransaction = "/v1/Finance/GetCryptoTransaction";
+export const WalletTransaction = "/v1/Finance/GetWalletTransaction";

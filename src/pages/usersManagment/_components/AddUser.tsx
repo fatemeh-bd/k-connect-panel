@@ -7,7 +7,13 @@ import Input from "../../../components/inputs/Input";
 import Paragraph from "../../../components/typography/Paragraph";
 import { ColorType, Sizes } from "../../../utils/enums";
 import { useForm } from "react-hook-form";
-import { ChangeEvent, useEffect, useState } from "react";
+import {
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import { useMutation, useQueries } from "react-query";
 import {
   fetchPlans,
@@ -18,7 +24,13 @@ import {
 import { notify } from "../../../utils/notify";
 import { numberWithCommas } from "../../../utils/helper";
 import { useSubmitClient } from "../Hooks/useSubmitClient";
-
+import { postMethod } from "../../../api/callApi";
+import { CREATE_CLIENT } from "../../../api/endpoints";
+import { ApiResponse } from "../../Supports/_components/AddTicket";
+interface AddUserProps {
+  setClose: Dispatch<SetStateAction<boolean>>;
+  onAddClient: () => void;
+}
 type Inputs = {
   userName: string;
   password: string;
@@ -28,12 +40,13 @@ type Inputs = {
   serverId: number | string;
 };
 
-const AddUser = () => {
+const AddUser = ({ setClose, onAddClient }: AddUserProps) => {
   const [userNameExist, setUserNameExist] = useState<boolean>(false);
   const [planPrice, setPlanPrice] = useState<number>(0);
 
   const checkUserNameExist = async (e: string) => {
     if (e.length > 0) {
+      // eslint-disable-next-line no-var
       var data = await fetchUserNameExist(e);
       setUserNameExist(data === true);
     }
@@ -48,17 +61,39 @@ const AddUser = () => {
     trigger,
   } = useForm<Inputs>();
 
-  const { mutate: submitClient, isLoading: submitClientLoading } =
-    useSubmitClient();
-
+  const { mutate: createUser, isLoading: addLoading } = useMutation<
+    ApiResponse<any>,
+    Error,
+    Inputs
+  >(
+    async function (input: Inputs) {
+      const res = await postMethod(CREATE_CLIENT, input);
+      console.log(res);
+      if (res?.isSuccess) {
+        setClose(false);
+        onAddClient();
+        return res;
+      } else {
+        res?.message.split("|").map((i) => notify(i, "error"));
+        return res;
+      }
+    },
+    {
+      onSuccess: (data) => {
+        console.log(
+          "%csrcagesManagmentcomponentsddUser.tsx:81 data",
+          "color: #007acc;",
+          data
+        );
+        notify(data.message, "success");
+      },
+      onError: (error) => {
+        notify(error?.message, "error");
+      },
+    }
+  );
   const submitFrom = async (input: Inputs) => {
-    const response = await submitClient(input);
-
-    console.log(
-      "%csrcpagessersManagment_componentsAddUser.tsx:57 response",
-      "color: #007acc;",
-      response
-    );
+    await createUser(input);
   };
 
   const results = useQueries([
@@ -182,10 +217,17 @@ const AddUser = () => {
           نام کاربری از قبل وجود دارد
         </Paragraph>
       ) : (
-        <Button loading={submitClientLoading} className="w-full" type="submit">
-          ثبت کاربر
-        </Button>
+        ""
       )}
+
+      <Button
+        loading={addLoading}
+        disabled={userNameExist}
+        className="w-full"
+        type="submit"
+      >
+        ثبت کاربر
+      </Button>
     </form>
   );
 };

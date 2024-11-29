@@ -6,7 +6,7 @@ import { createRoot } from "react-dom/client";
 import { InformationCircleIcon } from "@heroicons/react/16/solid";
 import CustomeDataTable from "../../components/DataTable/DataTable";
 import { BASE_URL } from "../../api/callApi";
-import { TICKET_LIST } from "../../api/endpoints";
+import { CryptoTransaction, TICKET_LIST } from "../../api/endpoints";
 import DropDown from "../../components/dropDown/DropDown";
 import { useNavigate } from "react-router-dom";
 
@@ -45,8 +45,8 @@ export default function Financial() {
   ];
   const columns = [
     {
-      data: "title",
-      name: "title",
+      data: "id",
+      name: "id",
       orderable: true,
       width: "",
       autoWidth: "",
@@ -55,8 +55,8 @@ export default function Financial() {
       visible: true,
     },
     {
-      data: "ticketStatus",
-      name: "ticketStatus",
+      data: "title",
+      name: "title",
       orderable: true,
       width: "",
       autoWidth: "",
@@ -65,8 +65,8 @@ export default function Financial() {
       visible: true,
     },
     {
-      data: "sectionName",
-      name: "sectionName",
+      data: "requestAmount",
+      name: "requestAmount",
 
       orderable: true,
       width: "",
@@ -76,8 +76,8 @@ export default function Financial() {
       visible: true,
     },
     {
-      data: "createdAt",
-      name: "createdAt",
+      data: "paidAmount",
+      name: "paidAmount",
       orderable: false,
       width: "",
       autoWidth: "",
@@ -87,8 +87,8 @@ export default function Financial() {
       // renderModel:
     },
     {
-      data: "createdAt",
-      name: "createdAt",
+      data: "cryptoName",
+      name: "cryptoName",
       orderable: false,
       width: "",
       autoWidth: "",
@@ -98,8 +98,8 @@ export default function Financial() {
       // renderModel:
     },
     {
-      data: "createdAt",
-      name: "createdAt",
+      data: "createAt",
+      name: "createAt",
       orderable: false,
       width: "",
       autoWidth: "",
@@ -109,8 +109,8 @@ export default function Financial() {
       // renderModel:
     },
     {
-      data: "createdAt",
-      name: "createdAt",
+      data: "status",
+      name: "status",
       orderable: false,
       width: "",
       autoWidth: "",
@@ -210,7 +210,7 @@ export default function Financial() {
       {/* Financial Reports Table */}
       <div className="bg-white rounded-lg  p-6">
         <CustomeDataTable
-          urlRequest={`${BASE_URL + TICKET_LIST}`}
+          urlRequest={`${BASE_URL + CryptoTransaction}`}
           columns={columns}
         />
       </div>

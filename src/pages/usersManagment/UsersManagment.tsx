@@ -15,6 +15,8 @@ import { createRoot } from "react-dom/client";
 import Paragraph from "../../components/typography/Paragraph";
 import { QrCodeIcon } from "@heroicons/react/20/solid";
 import QRCodeGenerator from "../../components/QR/QRCodeGenerator";
+import IncreaseVolume from "./_components/IncreaseVolume";
+import RemoveClient from "./_components/RemoveClient";
 
 const UsersManagment = () => {
   const [addUserOpenModal, setAddUserModal] = useState<boolean>(false);
@@ -23,10 +25,14 @@ const UsersManagment = () => {
   const [increaseVolumeModal, setIncreaseVolumeModal] =
     useState<boolean>(false);
   const [removeClientModal, setRemoveClientModal] = useState<boolean>(false);
+  const [refreshKey, setRefreshKey] = useState<number>(0); // Add refresh key
+  const [getClientSelected, setGetClientSelected] = useState<[]>([]);
 
   const [getConnection, setConnection] = useState<string[]>(["sdsd", "sdsd"]);
   const [getSubConnection, setSubConnection] = useState<string>("");
-
+  const handleRefresh = () => {
+    setRefreshKey((prev) => prev + 1);
+  };
   const columns = [
     {
       data: "userName",
@@ -88,7 +94,7 @@ const UsersManagment = () => {
       orderable: true,
       width: "",
       autoWidth: "",
-      title: "حجم",
+      title: "حجم مصرفی / حجم کلی",
       searchable: true,
       visible: true,
       // @ts-ignore
@@ -102,11 +108,10 @@ const UsersManagment = () => {
 
         console.log(status);
         root.render(
-          <Paragraph
-            type={cellData?.color ?? ColorType.BLACK}
-            className="!font-normal"
+          <Paragraph 
+            className="!font-normal "
           >
-            {cellData}
+            {rowData.consumptionVolume}گیگ مصرف شده از {rowData.totalVolume} گیگ
           </Paragraph>
         );
       },
@@ -174,14 +179,20 @@ const UsersManagment = () => {
             </Button>
             <Button
               Icon={PlusCircleIcon}
-              onClick={() => setIncreaseVolumeModal(true)}
+              onClick={() => {
+                setIncreaseVolumeModal(true);
+                setGetClientSelected(rowData);
+              }}
             >
               حجم
             </Button>
             <Button
               themeType={ColorType.ERROR}
               Icon={TrashIcon}
-              onClick={() => setRemoveClientModal(true)}
+              onClick={() => {
+                setRemoveClientModal(true);
+                setGetClientSelected(rowData);
+              }}
             >
               حذف
             </Button>
@@ -202,6 +213,7 @@ const UsersManagment = () => {
       <CustomeDataTable
         urlRequest={`${BASE_URL + CLIENT_LIST}`}
         columns={columns}
+        key={refreshKey}
       />
       <Modal
         isOpen={connectionModal}
@@ -222,10 +234,14 @@ const UsersManagment = () => {
       <Modal
         isOpen={increaseVolumeModal}
         onClose={() => setIncreaseVolumeModal(false)}
-        title="حجم"
+        title="افزایش  حجم"
         className="md:min-w-[450px] min-w-[90%]"
       >
-        <Paragraph>حجم</Paragraph>
+        <IncreaseVolume
+          clientData={getClientSelected}
+          onAddClient={handleRefresh}
+          setClose={setIncreaseVolumeModal}
+        />
       </Modal>
       <Modal
         isOpen={removeClientModal}
@@ -233,7 +249,11 @@ const UsersManagment = () => {
         title="حذف"
         className="md:min-w-[450px] min-w-[90%]"
       >
-        <Paragraph>حذف</Paragraph>
+        <RemoveClient
+          clientData={getClientSelected}
+          onAddClient={handleRefresh}
+          setClose={setRemoveClientModal}
+        />
       </Modal>
       <Modal
         isOpen={addUserOpenModal}
@@ -241,7 +261,7 @@ const UsersManagment = () => {
         title="افزودن کاربر"
         className="md:min-w-[450px] min-w-[90%]"
       >
-        <AddUser />
+        <AddUser onAddClient={handleRefresh} setClose={setAddUserModal} />
       </Modal>
     </div>
   );
