@@ -39,8 +39,7 @@ const Login = () => {
           setError(res.message);
         }
       },
-      onError: () => {
-      },
+      onError: () => {},
     }
   );
 
@@ -94,7 +93,7 @@ const Login = () => {
             errorText={errors.password?.message}
           />
 
-{error && <Paragraph type={ColorType.ERROR}>{error}</Paragraph>}
+          {error && <Paragraph type={ColorType.ERROR}>{error}</Paragraph>}
           <Button
             className="mt-10"
             full
@@ -106,9 +105,8 @@ const Login = () => {
           </Button>
         </form>
 
-
         <div className="flex items-center gap-1 mt-3">
-          <Paragraph type={ColorType.PRIMARY}>ثبت نام نکردی عزیزم؟</Paragraph>
+          <Paragraph type={ColorType.PRIMARY}>ثبت نام نکردی؟ 😱</Paragraph>
           <Link to={"/signUp"} className="underline">
             ایجاد حساب کاربری
           </Link>

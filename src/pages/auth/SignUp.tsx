@@ -31,7 +31,6 @@ const SignUp = () => {
     {
       onSuccess: (res) => {
         if (res?.isSuccess) {
-       
           navigate("/login");
         } else {
           setError(res.message);
