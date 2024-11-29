@@ -1,4 +1,4 @@
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import SideBar from "./components/sideBar/SideBar";
 import Login from "./pages/auth/Login";
 import SignUp from "./pages/auth/SignUp";
@@ -11,9 +11,10 @@ import { Sizes } from "./utils/enums";
 
 function App() {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const [cookies] = useCookies(["access_token"]);
   useEffect(() => {
-    if (!cookies.access_token) {
+    if (!cookies.access_token && pathname !== "/signUp") {
       navigate("/login");
     }
   }, [cookies, navigate]);
