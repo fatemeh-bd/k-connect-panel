@@ -133,9 +133,7 @@
   --gray500: #4b5563;
   --gray800: #f3f4f6;
 }
-.dark .Toastify__toast-theme--light {
-  background-color: var(--bgColor);
-}
+
 * {
   font-family: "Anjoman" !important;
   box-sizing: border-box;
@@ -149,8 +147,11 @@ a {
 }
 .Toastify__toast-container {
   width: 100%;
-  max-width: 550px;
+  max-width: 70vw;
   text-align: right;
+}
+.Toastify__toast-theme--dark * {
+  color: #f5f5f5 !important;
 }
 @media (min-width: 700px) {
   .chat {

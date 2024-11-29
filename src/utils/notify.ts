@@ -10,8 +10,9 @@ export const notify = (text: string, type: "error" | "success") => {
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
+      theme: "dark",
       transition: Bounce,
-      className: "",
+      className:""
     });
   }
   if (type === "error") {
@@ -22,7 +23,10 @@ export const notify = (text: string, type: "error" | "success") => {
       closeOnClick: true,
       pauseOnHover: true,
       progress: undefined,
+      theme: "dark",
       transition: Bounce,
+      
     });
   }
+ 
 };
