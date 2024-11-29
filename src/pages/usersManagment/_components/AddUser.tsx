@@ -85,7 +85,9 @@ const AddUser = ({ setClose, onAddClient }: AddUserProps) => {
           "color: #007acc;",
           data
         );
-        notify(data.message, "success");
+        if(data.isSuccess){
+          notify(data.message, "success");
+        }
       },
       onError: (error) => {
         notify(error?.message, "error");
