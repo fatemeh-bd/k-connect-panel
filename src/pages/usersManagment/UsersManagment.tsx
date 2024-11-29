@@ -17,7 +17,11 @@ import { QrCodeIcon } from "@heroicons/react/20/solid";
 import QRCodeGenerator from "../../components/QR/QRCodeGenerator";
 import IncreaseVolume from "./_components/IncreaseVolume";
 import RemoveClient from "./_components/RemoveClient";
-
+export interface ClientDataType {
+  userName: string;
+  planName: string;
+  id: number;
+}
 const UsersManagment = () => {
   const [addUserOpenModal, setAddUserModal] = useState<boolean>(false);
   const [connectionModal, setConnectionModal] = useState<boolean>(false);
@@ -26,7 +30,11 @@ const UsersManagment = () => {
     useState<boolean>(false);
   const [removeClientModal, setRemoveClientModal] = useState<boolean>(false);
   const [refreshKey, setRefreshKey] = useState<number>(0); // Add refresh key
-  const [getClientSelected, setGetClientSelected] = useState<[]>([]);
+  const [getClientSelected, setGetClientSelected] = useState<ClientDataType>({
+    userName: "",
+    planName: "",
+    id: 0,
+  });
 
   const [getConnection, setConnection] = useState<string[]>(["sdsd", "sdsd"]);
   const [getSubConnection, setSubConnection] = useState<string>("");
@@ -108,9 +116,7 @@ const UsersManagment = () => {
 
         console.log(status);
         root.render(
-          <Paragraph 
-            className="!font-normal "
-          >
+          <Paragraph className="!font-normal ">
             {rowData.consumptionVolume}گیگ مصرف شده از {rowData.totalVolume} گیگ
           </Paragraph>
         );

@@ -1,7 +1,6 @@
 "use client";
 
 import Button from "../../../components/buttons/Button";
-import Input from "../../../components/inputs/Input";
 import { useForm } from "react-hook-form";
 import { Dispatch, SetStateAction } from "react";
 
@@ -11,8 +10,9 @@ import { useMutation } from "react-query";
 import { removeClient } from "./requests";
 import Paragraph from "../../../components/typography/Paragraph";
 import { ColorType } from "../../../utils/enums";
+import { ClientDataType } from "../UsersManagment";
 interface RemoveClientProps {
-  clientData: [];
+  clientData: ClientDataType;
   setClose: Dispatch<SetStateAction<boolean>>;
   onAddClient: () => void;
 }
@@ -38,7 +38,7 @@ const RemoveClient = ({
         onAddClient();
         return res;
       } else {
-        res?.message.split("|").map((i) => notify(i, "error"));
+        res?.message.split("|").map((i: string) => notify(i, "error"));
         return res;
       }
     },

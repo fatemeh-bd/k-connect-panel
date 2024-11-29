@@ -6,7 +6,7 @@ import { createRoot } from "react-dom/client";
 import { InformationCircleIcon } from "@heroicons/react/16/solid";
 import CustomeDataTable from "../../components/DataTable/DataTable";
 import { BASE_URL } from "../../api/callApi";
-import { CryptoTransaction, TICKET_LIST } from "../../api/endpoints";
+import { CryptoTransaction } from "../../api/endpoints";
 import DropDown from "../../components/dropDown/DropDown";
 import { useNavigate } from "react-router-dom";
 
