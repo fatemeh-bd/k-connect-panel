@@ -15,7 +15,6 @@ import Supports from "../pages/Supports/Support";
 import TicketDetail from "../pages/Supports/TiketDetail";
 import MyProfile from "../pages/profile/MyProfile";
 import Financial from "../pages/finance/Finance";
-import Transaction from "../pages/finance/_components/Transaction";
 import Finance from "../pages/finance/Finance";
 import FinanceReport from "../pages/finance/FinanceReport";
 

@@ -23,7 +23,6 @@ import {
 } from "./requests";
 import { notify } from "../../../utils/notify";
 import { numberWithCommas } from "../../../utils/helper";
-import { useSubmitClient } from "../Hooks/useSubmitClient";
 import { postMethod } from "../../../api/callApi";
 import { CREATE_CLIENT } from "../../../api/endpoints";
 import { ApiResponse } from "../../Supports/_components/AddTicket";
@@ -74,7 +73,7 @@ const AddUser = ({ setClose, onAddClient }: AddUserProps) => {
         onAddClient();
         return res;
       } else {
-        res?.message.split("|").map((i) => notify(i, "error"));
+        res?.message.split("|").map((i: string) => notify(i, "error"));
         return res;
       }
     },

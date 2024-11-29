@@ -1,18 +1,15 @@
-"use client";
-
 import Button from "../../../components/buttons/Button";
 import Input from "../../../components/inputs/Input";
 import { useForm } from "react-hook-form";
 import { Dispatch, SetStateAction } from "react";
-
 import { notify } from "../../../utils/notify";
-import { ApiResponse } from "../../Supports/_components/AddTicket";
 import { useMutation } from "react-query";
 import { increaseVolume } from "./requests";
 import Paragraph from "../../../components/typography/Paragraph";
 import { numberWithCommas } from "../../../utils/helper";
+import { ClientDataType } from "../UsersManagment";
 interface IncreaseVolumeProps {
-  clientData: [];
+  clientData: ClientDataType;
   setClose: Dispatch<SetStateAction<boolean>>;
   onAddClient: () => void;
 }
@@ -31,41 +28,56 @@ const IncreaseVolume = ({
     handleSubmit,
   } = useForm<IncreaseVolumeInputs>();
 
-  const { mutate, isLoading: addLoading } = useMutation<
-    ApiResponse<any>,
-    Error,
-    IncreaseVolumeInputs
-  >(
-    async function (input: IncreaseVolumeInputs) {
-      const res = await increaseVolume(clientData.id, input.unitGb);
-      console.log(res);
-      if (res?.isSuccess) {
-        setClose(false);
-        onAddClient();
-        return res;
-      } else {
-        res?.message.split("|").map((i) => notify(i, "error"));
-        return res;
-      }
-    },
+  // const { mutate, isLoading: addLoading } = useMutation(
+  //   async function (input: IncreaseVolumeInputs) {
+  //     const res = await increaseVolume(clientData.id, input.unitGb);
+  //     console.log(res);
+  //     if (res?.isSuccess) {
+  //       setClose(false);
+  //       onAddClient();
+  //       return res;
+  //     } else {
+  //       res?.message.split("|").map((i:string) => notify(i, "error"));
+  //       return res;
+  //     }
+  //   },
+  //   {
+  //     onSuccess: (data) => {
+  //       console.log(
+  //         "%csrcagesManagmentcomponentsddUser.tsx:81 data",
+  //         "color: #007acc;",
+  //         data
+  //       );
+  //       notify(data.message, "success");
+  //     },
+  //     onError: (error) => {
+  //       notify(error?.message, "error");
+  //     },
+  //   },
+  //   {
+  //     refetchOnWindowFocus: false,
+  //     refetchInterval: false,
+  //   }
+  // );
+
+  const { mutate, isLoading: addLoading } = useMutation(
+    (input: IncreaseVolumeInputs) =>
+      increaseVolume(clientData.id, input.unitGb),
     {
-      onSuccess: (data) => {
-        console.log(
-          "%csrcagesManagmentcomponentsddUser.tsx:81 data",
-          "color: #007acc;",
-          data
-        );
-        notify(data.message, "success");
+      onSuccess: (res) => {
+        if (res?.isSuccess) {
+          setClose(false);
+          onAddClient();
+          notify(res.message, "success");
+          return res;
+        } else {
+          res?.message.split("|").map((i: string) => notify(i, "error"));
+          return res;
+        }
       },
-      onError: (error) => {
-        notify(error?.message, "error");
-      },
-    },
-    {
-      refetchOnWindowFocus: false,
-      refetchInterval: false,
     }
   );
+
   const submitFrom = async (input: IncreaseVolumeInputs) => {
     mutate(input);
   };
