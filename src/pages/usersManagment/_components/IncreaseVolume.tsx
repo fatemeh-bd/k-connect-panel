@@ -75,6 +75,9 @@ const IncreaseVolume = ({
           return res;
         }
       },
+      onError: (error: any) => {
+        notify(error?.message, "error");
+      },
     }
   );
 
