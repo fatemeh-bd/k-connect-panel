@@ -117,7 +117,14 @@
   --gray600: #4b5563;
   --gray500: #9ca3af;
   --gray800: #1f2937;
+
+  .Toastify__toast-container {
+    width: 100%;
+    max-width: 550px;
+    text-align: right;
+  }
 }
+
 /* dark mode */
 .dark {
   --bgColor: #030712;
@@ -128,6 +135,7 @@
   --gray50: #1f2937;
   --gray200: #374151;
   --gray600: #d1d5db;
+  --gray400: #d1d5db;
   --gray500: #4b5563;
   --gray800: #f3f4f6;
 }

@@ -29,7 +29,7 @@ export const GET_NEWS = "/v1/Server/GetNews";
 export const INCREASE_VOLUME = "/v1/Client/IncreaseVolume";
 export const REMOVE_CLIENT = "/v1/Client/RemoveClient";
 
-export const DASHBOARD = "/v1/Client/IncreaseVolume";
+export const DASHBOARD = "/v1/Zone/GetDashboardZone";
 
 
 //Crypto
