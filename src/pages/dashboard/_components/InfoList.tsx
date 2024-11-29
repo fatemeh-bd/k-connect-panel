@@ -23,10 +23,18 @@ const InfoList = () => {
     }
   };
 
-  const { data: dashdata = {}, isLoading } = useQuery("dashboard", async () => {
-    return await fetchData();
-  });
+  const { data: dashdata = {}, isLoading } = useQuery(
+    "dashboard",
+    async () => {
+      return await fetchData();
+    },
+    {
+      refetchOnWindowFocus: false,
+      refetchInterval: false,
+    }
+  );
 
+ 
   return !isLoading ? (
     <div className="grid grid-cols-12 md:gap-4 gap-2">
       <div className="lg:col-span-3 col-span-6 ">

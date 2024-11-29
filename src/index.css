@@ -117,12 +117,6 @@
   --gray600: #4b5563;
   --gray500: #9ca3af;
   --gray800: #1f2937;
-
-  .Toastify__toast-container {
-    width: 100%;
-    max-width: 550px;
-    text-align: right;
-  }
 }
 
 /* dark mode */
@@ -139,6 +133,9 @@
   --gray500: #4b5563;
   --gray800: #f3f4f6;
 }
+.dark .Toastify__toast-theme--light {
+  background-color: var(--bgColor);
+}
 * {
   font-family: "Anjoman" !important;
   box-sizing: border-box;
@@ -150,7 +147,11 @@ div,
 a {
   color: var(--fontColor);
 }
-
+.Toastify__toast-container {
+  width: 100%;
+  max-width: 550px;
+  text-align: right;
+}
 @media (min-width: 700px) {
   .chat {
     height: calc(100vh - 210px);
