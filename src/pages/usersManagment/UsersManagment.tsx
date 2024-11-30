@@ -17,6 +17,7 @@ import { QrCodeIcon } from "@heroicons/react/20/solid";
 import QRCodeGenerator from "../../components/QR/QRCodeGenerator";
 import IncreaseVolume from "./_components/IncreaseVolume";
 import RemoveClient from "./_components/RemoveClient";
+import DataUsage from "../../components/dataUsage/DataUsage";
 export interface ClientDataType {
   userName: string;
   planName: string;
@@ -116,9 +117,12 @@ const UsersManagment = () => {
 
         console.log(status);
         root.render(
-          <Paragraph className="!font-normal ">
-            {rowData.consumptionVolume}گیگ مصرف شده از {rowData.totalVolume} گیگ
-          </Paragraph>
+          <div className="p-4">
+            <DataUsage
+              currentBytes={rowData.consumptionVolume}
+              totalBytes={rowData.totalVolume}
+            />
+          </div>
         );
       },
     },
