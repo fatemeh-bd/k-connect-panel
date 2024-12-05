@@ -3,9 +3,10 @@ import QRCodeGenerator from "../../../components/QR/QRCodeGenerator";
 import Input from "../../../components/inputs/Input";
 import { useQuery } from "react-query";
 import { getMethod } from "../../../api/callApi";
-import { GET_TRANSACTION} from "../../../api/endpoints";
 import { notify } from "../../../utils/notify";
+import { GET_TRANSACTION } from "../../../api/endpoints";
 import CustomSkeleton from "../../../components/skeleton/skeleton";
+
 
 const transaction = () => {
  
