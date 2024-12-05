@@ -76,7 +76,7 @@ export default function Financial() {
       return res;
     },
     {
-      refetchInterval: 90000, // هر 6 ثانیه یکبار (واحد: میلی‌ثانیه)
+      refetchInterval: 6000, // هر 6 ثانیه یکبار (واحد: میلی‌ثانیه)
     }
   );
 
@@ -291,7 +291,7 @@ export default function Financial() {
       ) : (
         <div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {cryptoResult.map((crypto: any) => (
+            {cryptoResult.map(() => (
               <CustomSkeleton height="h-[80px]" />
             ))}
           </div>
