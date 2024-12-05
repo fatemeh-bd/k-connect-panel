@@ -11,6 +11,7 @@ const Button: React.FC<ButtonProps> = ({
   full,
   Icon,
   loading,
+  onClick,
   ...props
 }) => {
   const buttonClass = `${
@@ -30,7 +31,7 @@ const Button: React.FC<ButtonProps> = ({
   } ${outline ? "!bg-transparent" : ""}`;
 
   return (
-    <button type="button" name="Button" className={buttonClass} {...props}>
+    <button onClick={onClick} type="button" name="Button" className={buttonClass} {...props}>
       {loading ? (
         <Loader />
       ) : (

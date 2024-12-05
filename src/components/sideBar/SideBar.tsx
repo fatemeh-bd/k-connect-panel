@@ -17,7 +17,9 @@ const SideBar = () => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const { pathname } = useLocation();
   const [pageTitle, setPageTitle] = useState<string>("داشبورد");
-  const [openSubMenus, setOpenSubMenus] = useState<{ [key: number]: boolean }>({});
+  const [openSubMenus, setOpenSubMenus] = useState<{ [key: number]: boolean }>(
+    {}
+  );
 
   useEffect(() => {
     const findCurrentPage = routesList.find((i) => i.path === pathname);
@@ -32,7 +34,7 @@ const SideBar = () => {
 
   const renderMenuItem = (item: RouteItemType) => (
     <li key={item.id} className="mb-2">
-      {item.subRoutes && item.subRoutes.some(subItem => subItem.active) ? (
+      {item.subRoutes && item.subRoutes.some((subItem) => subItem.active) ? (
         <div>
           <button
             onClick={() => toggleSubMenu(item.id)}
@@ -136,4 +138,3 @@ const SideBar = () => {
 };
 
 export default SideBar;
-

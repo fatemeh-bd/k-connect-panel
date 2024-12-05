@@ -2,8 +2,8 @@ import axios, { AxiosInstance } from "axios";
 import { getCookie } from "../utils/getCookie";
 import { delete_cookie } from "../utils/removeCookie";
 
-export const BASE_URL = "https://api.nexovpn.net";
-//export const BASE_URL = "https://localhost:7092";
+//export const BASE_URL = "https://api.nexovpn.net";
+export const BASE_URL = "https://localhost:7092";
 
 const getAccessToken = (): string => {
   const token = getCookie("access_token");
@@ -108,3 +108,14 @@ const handleError = (error: any) => {
     console.error("Unexpected error:", (error as Error).message);
   }
 };
+export interface ApiResponseWithData<T> {
+  isSuccess: boolean;
+  data: T;
+  message: string;
+}
+
+export interface ApiResponse {
+  isSuccess: boolean;
+  data: [];
+  message: string;
+}
