@@ -1,4 +1,5 @@
-import { Key, useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useState } from "react";
 import Input from "../../components/inputs/Input";
 import Button from "../../components/buttons/Button";
 import { numberWithCommas } from "../../utils/helper";
@@ -43,6 +44,7 @@ export default function Financial() {
 
   const [refreshKey, setRefreshKey] = useState<number>(0); // Add refresh key
   const [cancelModal, setCancelModal] = useState<boolean>(false); // Add refresh key
+  const [cryptoUpdate, setCryptoUpdatel] = useState<boolean>(false); // Add refresh key
   const [getrowData, setRowData] = useState<CancelTransactionData>({
     id: 0,
   }); // Add refresh key
@@ -51,34 +53,32 @@ export default function Financial() {
     setRefreshKey((prev) => prev + 1); // Increment refresh key to trigger re-fetch
   };
 
-  const { data: cryptoResult = [], isLoading: cryptoLoading } = useQuery(
+  const { data: cryptoResult = [] } = useQuery(
     "crypto",
     async () => {
-      return await fetchCryptoStat();
+      setCryptoUpdatel(true);
+      const res = await fetchCryptoStat();
+      setCryptoUpdatel(false);
+
+      return res;
     },
     {
       refetchInterval: 10000, // هر 6 ثانیه یکبار (واحد: میلی‌ثانیه)
     }
   );
-  const { data: iranCurrency = [], isLoading: iranCurrencyLoading } = useQuery(
+  const { data: iranCurrency } = useQuery(
     "USDStat",
     async () => {
-      return await fetchUSDStat();
+      setCryptoUpdatel(true);
+      const res = await fetchUSDStat();
+      setCryptoUpdatel(false);
+
+      return res;
     },
     {
-      refetchInterval: 10000, // هر 6 ثانیه یکبار (واحد: میلی‌ثانیه)
+      refetchInterval: 90000, // هر 6 ثانیه یکبار (واحد: میلی‌ثانیه)
     }
   );
-  // نرخ تبدیل دلار به تومان (مثال: 50,000 تومان)
-  const usdToIrrRate = iranCurrency.filter(
-    (t: { name: string }) => t.name === "دلار"
-  ).price;
-  console.log(
-    "%csrcages\financnance.tsx:67 usdToIrrRate",
-    "color: #007acc;",
-    usdToIrrRate
-  );
-  // Simulated crypto data
 
   const columns = [
     {
@@ -248,9 +248,9 @@ export default function Financial() {
 
   return (
     <div className="space-y-2 light:bg-gray-100 min-h-screen">
-      {!cryptoLoading ? (
+      {!cryptoUpdate ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {cryptoResult.map((crypto) => (
+          {cryptoResult.map((crypto: any) => (
             <div key={crypto.key} className="bg-white rounded-lg p-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-4 space-x-reverse">
@@ -278,9 +278,9 @@ export default function Financial() {
                   </p>
 
                   <p className="text-green-500">
-                    {Math.round(crypto.price * usdToIrrRate).toLocaleString(
-                      "fa-IR"
-                    )}{" "}
+                    {Math.round(
+                      crypto.price * iranCurrency?.data.currency[0].price
+                    ).toLocaleString("fa-IR")}{" "}
                     تومان
                   </p>
                 </div>
@@ -290,8 +290,11 @@ export default function Financial() {
         </div>
       ) : (
         <div>
-          <CustomSkeleton height="h-[90px]" />
-          <CustomSkeleton height="h-[400px]" className="mt-3" />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {cryptoResult.map((crypto: any) => (
+              <CustomSkeleton height="h-[80px]" />
+            ))}
+          </div>
         </div>
       )}
 

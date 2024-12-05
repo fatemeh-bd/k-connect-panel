@@ -41,4 +41,4 @@ export const CREATE_TRANSACTION_NETWORK = "/v1/Finance/CreateTransaction";
 export const CANCEL_TRANSACTION = "/v1/Finance/CancelTransaction";
 export const GET_TRANSACTION = "/v1/Finance/Transaction";
 export const WALLEXAPI = "https://api.wallex.ir/v1/currencies/stats";
-export const IRANCurrency = "https://brsapi.ir/FreeTsetmcBourseApi/Api_Free_Gold_Currency_v2.json";
+export const IRANCurrency = "/v1/Crypto/GetMarketData";
