@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Key, useState } from "react";
 import Input from "../../components/inputs/Input";
 import Button from "../../components/buttons/Button";
 import { numberWithCommas } from "../../utils/helper";
@@ -18,6 +18,8 @@ import { notify } from "../../utils/notify";
 import { useForm } from "react-hook-form";
 import Modal from "../../components/modal/Modal";
 import CancelTransaction from "./_components/CancelTransaction";
+import { fetchCryptoStat, fetchUSDStat } from "./requests";
+import CustomSkeleton from "../../components/skeleton/skeleton";
 interface AddTransacton {
   networkId: string;
   price: number;
@@ -48,37 +50,36 @@ export default function Financial() {
   const handleRefresh = () => {
     setRefreshKey((prev) => prev + 1); // Increment refresh key to trigger re-fetch
   };
+
+  const { data: cryptoResult = [], isLoading: cryptoLoading } = useQuery(
+    "crypto",
+    async () => {
+      return await fetchCryptoStat();
+    },
+    {
+      refetchInterval: 10000, // هر 6 ثانیه یکبار (واحد: میلی‌ثانیه)
+    }
+  );
+  const { data: iranCurrency = [], isLoading: iranCurrencyLoading } = useQuery(
+    "USDStat",
+    async () => {
+      return await fetchUSDStat();
+    },
+    {
+      refetchInterval: 10000, // هر 6 ثانیه یکبار (واحد: میلی‌ثانیه)
+    }
+  );
+  // نرخ تبدیل دلار به تومان (مثال: 50,000 تومان)
+  const usdToIrrRate = iranCurrency.filter(
+    (t: { name: string }) => t.name === "دلار"
+  ).price;
+  console.log(
+    "%csrcages\financnance.tsx:67 usdToIrrRate",
+    "color: #007acc;",
+    usdToIrrRate
+  );
   // Simulated crypto data
-  const cryptoData = [
-    {
-      name: "بیت کوین",
-      symbol: "BTC",
-      price: "41,235.67",
-      change: "+2.5%",
-      irPrice: 500000,
-    },
-    {
-      name: "اتریوم",
-      symbol: "ETH",
-      price: "2,234.12",
-      change: "-1.2%",
-      irPrice: 500000,
-    },
-    {
-      name: "تتر",
-      symbol: "USDT",
-      price: "1.00",
-      change: "0%",
-      irPrice: 500000,
-    },
-    {
-      name: "بایننس کوین",
-      symbol: "BNB",
-      price: "312.45",
-      change: "+0.8%",
-      irPrice: 500000,
-    },
-  ];
+
   const columns = [
     {
       data: "id",
@@ -247,41 +248,52 @@ export default function Financial() {
 
   return (
     <div className="space-y-2 light:bg-gray-100 min-h-screen">
-      {/* Crypto Prices Section */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {cryptoData.map((crypto) => (
-          <div key={crypto.symbol} className="bg-white rounded-lg p-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-4 space-x-reverse">
-                <svg
-                  className="h-8 w-8 text-yellow-500"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-                <div>
-                  <p className="font-semibold">{crypto.name}</p>
-                  <p className="text-sm text-gray-500">{crypto.symbol}</p>
+      {!cryptoLoading ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {cryptoResult.map((crypto) => (
+            <div key={crypto.key} className="bg-white rounded-lg p-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-4 space-x-reverse">
+                  <svg
+                    className="h-8 w-8 text-yellow-500"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                  <div>
+                    <p className="font-semibold">{crypto.key}</p>
+                    <p className="text-sm text-gray-500">{crypto.name}</p>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <p className="font-semibold">
+                    ${numberWithCommas(crypto.price)}
+                  </p>
+
+                  <p className="text-green-500">
+                    {Math.round(crypto.price * usdToIrrRate).toLocaleString(
+                      "fa-IR"
+                    )}{" "}
+                    تومان
+                  </p>
                 </div>
               </div>
-              <div className="text-right">
-                <p className="font-semibold">${crypto.price}</p>
-
-                <p className="text-green-500">
-                  {numberWithCommas(crypto.irPrice)} تومان
-                </p>
-              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <div>
+          <CustomSkeleton height="h-[90px]" />
+          <CustomSkeleton height="h-[400px]" className="mt-3" />
+        </div>
+      )}
 
       {/* Invoice Creation Section */}
       <div className="bg-white rounded-lg  p-6">
