@@ -36,3 +36,7 @@ export const DASHBOARD = "/v1/Zone/GetDashboardZone";
 
 export const CryptoTransaction = "/v1/Finance/GetCryptoTransaction";
 export const WalletTransaction = "/v1/Finance/GetWalletTransaction";
+export const GET_NETWORK = "/v1/Finance/GetNetWroks";
+export const CREATE_TRANSACTION_NETWORK = "/v1/Finance/CreateTransaction";
+export const CANCEL_TRANSACTION = "/v1/Finance/CancelTransaction";
+export const GET_TRANSACTION = "/v1/Finance/Transaction";

@@ -17,6 +17,7 @@ import MyProfile from "../pages/profile/MyProfile";
 import Financial from "../pages/finance/Finance";
 import Finance from "../pages/finance/Finance";
 import FinanceReport from "../pages/finance/FinanceReport";
+import Transaction from "../pages/finance/_components/Transaction";
 
 export interface RouteItemType {
   id: number;
@@ -81,6 +82,13 @@ export const routesList: RouteItemType[] = [
         title: "گردش مالی",
         active:true,
         element: <FinanceReport />,
+      },
+      {
+        id: 3,
+        path: "/financial/:id",
+        title: "تراکنش",
+        active:false,
+        element: <Transaction />,
       },
     ],
   },

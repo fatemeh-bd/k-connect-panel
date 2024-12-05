@@ -5,13 +5,49 @@ import { numberWithCommas } from "../../utils/helper";
 import { createRoot } from "react-dom/client";
 import { InformationCircleIcon } from "@heroicons/react/16/solid";
 import CustomeDataTable from "../../components/DataTable/DataTable";
-import { BASE_URL } from "../../api/callApi";
-import { CryptoTransaction } from "../../api/endpoints";
-import DropDown from "../../components/dropDown/DropDown";
+import { BASE_URL, getMethodGeneric, postMethod } from "../../api/callApi";
+import {
+  CREATE_TRANSACTION_NETWORK,
+  CryptoTransaction,
+  GET_NETWORK,
+} from "../../api/endpoints";
+import DropDown, { SelectType } from "../../components/dropDown/DropDown";
 import { useNavigate } from "react-router-dom";
+import { useMutation, useQuery } from "react-query";
+import { notify } from "../../utils/notify";
+import { useForm } from "react-hook-form";
+import Modal from "../../components/modal/Modal";
+import CancelTransaction from "./_components/CancelTransaction";
+interface AddTransacton {
+  networkId: string;
+  price: number;
+}
 
+export interface CancelTransactionData {
+  id: number;
+}
+export interface ApiResponseWithData<T> {
+  isSuccess: boolean;
+  data: T;
+  message: string;
+}
+export interface ApiResponse {
+  isSuccess: boolean;
+  data: [];
+  message: string;
+}
 export default function Financial() {
   const navigate = useNavigate();
+
+  const [refreshKey, setRefreshKey] = useState<number>(0); // Add refresh key
+  const [cancelModal, setCancelModal] = useState<boolean>(false); // Add refresh key
+  const [getrowData, setRowData] = useState<CancelTransactionData>({
+    id: 0,
+  }); // Add refresh key
+
+  const handleRefresh = () => {
+    setRefreshKey((prev) => prev + 1); // Increment refresh key to trigger re-fetch
+  };
   // Simulated crypto data
   const cryptoData = [
     {
@@ -109,21 +145,10 @@ export default function Financial() {
       // renderModel:
     },
     {
-      data: "status",
-      name: "status",
-      orderable: false,
-      width: "",
-      autoWidth: "",
-      title: "وضعیت",
-      searchable: true,
-      visible: true,
-      // renderModel:
-    },
-    {
       data: "id", // We will use this for the operations column
       name: "id",
       orderable: false,
-      width: "300px",
+      width: "320px",
       autoWidth: false,
       title: "عملیات",
       searchable: false,
@@ -137,19 +162,90 @@ export default function Financial() {
         const root = createRoot(container);
         root.render(
           <div className="flex gap-2">
-            <Button
-              Icon={InformationCircleIcon}
-              onClick={() => navigate(`/financial/${cellData}`)}
-            >
-              پرداخت
-            </Button>
-            <Button Icon={InformationCircleIcon}>باطل کن</Button>
+            {rowData.status === "منقضی شده" ? (
+              <span className="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10">
+                این سفارش منقضی شده است
+              </span>
+            ) : rowData.status === "پرداخت شده" ? (
+              <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+                این سفارش پرداخت شده است
+              </span>
+            ) : rowData.status === "در انتظار پرداخت" ? (
+              <>
+                <Button
+                  Icon={InformationCircleIcon}
+                  onClick={() => navigate(`/financial/${cellData}`)}
+                >
+                  پرداخت
+                </Button>
+                <Button
+                  Icon={InformationCircleIcon}
+                  onClick={() => {
+                    setCancelModal(true);
+                    setRowData(rowData);
+                  }}
+                >
+                  باطل کن
+                </Button>
+              </>
+            ) : (
+              ""
+            )}
           </div>
         );
       },
     },
   ];
-  const [amount, setAmount] = useState("");
+  const {
+    register,
+    setValue,
+    reset,
+    formState: { errors },
+    handleSubmit,
+  } = useForm<AddTransacton>();
+
+  const { data = [], isLoading } = useQuery("support-sections", () =>
+    getMethodGeneric<ApiResponseWithData<SelectType[]>>(GET_NETWORK).then(
+      (res) => {
+        if (res?.isSuccess) {
+          return res.data;
+        }
+        return [];
+      }
+    )
+  );
+  const { mutate, isLoading: addLoading } = useMutation<
+    ApiResponse,
+    Error,
+    AddTransacton
+  >(
+    async (data: AddTransacton) => {
+      const response = await postMethod(CREATE_TRANSACTION_NETWORK, data);
+
+      return response;
+    },
+    {
+      onSuccess: (res) => {
+        console.log(res);
+        if (res?.isSuccess) {
+          notify(res.message, "success");
+          handleRefresh();
+          reset();
+          return res;
+        } else {
+          res?.message.split("|").map((i) => notify(i, "error"));
+        }
+      },
+      onError: (error) => {
+        notify(error?.message, "error");
+      },
+    }
+  );
+
+  const reateTransactionHandler = (data: AddTransacton) => {
+    mutate(data);
+  };
+
   return (
     <div className="space-y-2 light:bg-gray-100 min-h-screen">
       {/* Crypto Prices Section */}
@@ -191,28 +287,59 @@ export default function Financial() {
       {/* Invoice Creation Section */}
       <div className="bg-white rounded-lg  p-6">
         <h2 className=" font-semibold mb-4">ایجاد فاکتور جدید</h2>
-        <div className="grid grid-cols-1 md:grid-cols-6 items-center  gap-2 ">
-          <Input
-            label="مبلغ"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-          ></Input>
-          <DropDown
-            className="w-[300px] "
-            onSelect={(e) => alert(e.value)}
-            options={[]}
-          ></DropDown>
+        <form onSubmit={handleSubmit(reateTransactionHandler)}>
+          <div className="grid grid-cols-1 md:grid-cols-6  items-center  gap-2 ">
+            <Input
+              label="مبلغ"
+              {...register("price", {
+                required: "مبلغ الزامی است",
+              })}
+              errorText={errors.price?.message}
+              placeholder="مبلغ  را وارد کنید"
+            ></Input>
+            <DropDown
+              className="w-[300px] "
+              options={data}
+              loading={isLoading}
+              onSelect={(e) => {
+                setValue("networkId", e.value);
+              }}
+              placeholder={
+                isLoading ? "در حال بارگذاری..." : " شبکه را انتخاب کنید"
+              }
+              {...register("networkId", {
+                required: "بخش شبکه را انتخاب کنید",
+              })}
+              errorText={errors.networkId?.message}
+            ></DropDown>
 
-          <Button type="button">ایجاد فاکتور</Button>
+            <Button type="submit" loading={addLoading}>
+              ایجاد آدرس واریز
+            </Button>
+          </div>
+        </form>
+
+        {/* Financial Reports Table */}
+        <div className="bg-white rounded-lg  p-6">
+          <CustomeDataTable
+            urlRequest={`${BASE_URL + CryptoTransaction}`}
+            columns={columns}
+            key={refreshKey}
+          />
         </div>
-      </div>
 
-      {/* Financial Reports Table */}
-      <div className="bg-white rounded-lg  p-6">
-        <CustomeDataTable
-          urlRequest={`${BASE_URL + CryptoTransaction}`}
-          columns={columns}
-        />
+        <Modal
+          isOpen={cancelModal}
+          onClose={() => setCancelModal(false)}
+          title="لغو فاکتور"
+          className="md:min-w-[450px] min-w-[90%]"
+        >
+          <CancelTransaction
+            modalData={getrowData}
+            onAddClient={handleRefresh}
+            setClose={setCancelModal}
+          ></CancelTransaction>
+        </Modal>
       </div>
     </div>
   );
