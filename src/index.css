@@ -141,6 +141,11 @@
   padding: 0;
   transition-duration: 0.2s;
 }
+html,
+body {
+  background-color: var(--bgColor);
+}
+
 div,
 a {
   color: var(--fontColor);
@@ -164,7 +169,6 @@ body {
   margin: 0;
   padding: 0;
   direction: rtl;
-  background-color: var(--bgColor);
 }
 input {
   color: var(--fontColor) !important;
