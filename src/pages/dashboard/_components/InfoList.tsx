@@ -81,16 +81,16 @@ const InfoList = () => {
   ) : (
     <div className="grid grid-cols-12 md:gap-4 gap-2">
       <div className="lg:col-span-3 col-span-6 ">
-        <CustomSkeleton width="w-full" height="h-[200px]" />
+        <CustomSkeleton width="w-full" height="h-[132px]" />
       </div>
       <div className="lg:col-span-3 col-span-6 ">
-        <CustomSkeleton width="w-full" height="h-[200px]" />
+        <CustomSkeleton width="w-full" height="h-[132px]" />
       </div>
       <div className="lg:col-span-3 col-span-6 ">
-        <CustomSkeleton width="w-full" height="h-[200px]" />
+        <CustomSkeleton width="w-full" height="h-[132px]" />
       </div>
       <div className="lg:col-span-3 col-span-6 ">
-        <CustomSkeleton width="w-full" height="h-[200px]" />
+        <CustomSkeleton width="w-full" height="h-[132px]" />
       </div>
     </div>
   );
