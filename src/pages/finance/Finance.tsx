@@ -20,7 +20,6 @@ import { useForm } from "react-hook-form";
 import Modal from "../../components/modal/Modal";
 import CancelTransaction from "./_components/CancelTransaction";
 import { fetchCryptoStat, fetchUSDStat } from "./requests";
-import CustomSkeleton from "../../components/skeleton/skeleton";
 interface AddTransacton {
   networkId: string;
   price: number;
@@ -44,7 +43,6 @@ export default function Financial() {
 
   const [refreshKey, setRefreshKey] = useState<number>(0); // Add refresh key
   const [cancelModal, setCancelModal] = useState<boolean>(false); // Add refresh key
-  const [cryptoUpdate, setCryptoUpdatel] = useState<boolean>(false); // Add refresh key
   const [getrowData, setRowData] = useState<CancelTransactionData>({
     id: 0,
   }); // Add refresh key
