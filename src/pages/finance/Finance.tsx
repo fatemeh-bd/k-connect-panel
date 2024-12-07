@@ -56,9 +56,9 @@ export default function Financial() {
   const { data: cryptoResult = [] } = useQuery(
     "crypto",
     async () => {
-      setCryptoUpdatel(true);
+      // setCryptoUpdatel(true);
       const res = await fetchCryptoStat();
-      setCryptoUpdatel(false);
+      // setCryptoUpdatel(false);
 
       return res;
     },
@@ -69,9 +69,9 @@ export default function Financial() {
   const { data: iranCurrency } = useQuery(
     "USDStat",
     async () => {
-      setCryptoUpdatel(true);
+      // setCryptoUpdatel(true);
       const res = await fetchUSDStat();
-      setCryptoUpdatel(false);
+      // setCryptoUpdatel(false);
 
       return res;
     },
@@ -271,13 +271,13 @@ export default function Financial() {
                   <p className="text-sm text-gray-500">{crypto.name}</p>
                 </div>
               </div>
-              {cryptoUpdate ? (
+              {/* {cryptoUpdate ? (
                 <div className="flex flex-col items-end justify-end gap-1">
                 <CustomSkeleton height="h-[22px] w-[80px]" />
                 <CustomSkeleton height="h-[22px] w-[90px]" />
 
                 </div>
-              ) : (
+              ) : ( */}
                 <div className="">
                   <p className="font-semibold text-end">
                     ${numberWithCommas(crypto.price)}
@@ -290,7 +290,7 @@ export default function Financial() {
                     تومان
                   </p>
                 </div>
-              )}
+              {/* )} */}
             </div>
           </div>
         ))}
