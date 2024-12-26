@@ -1,14 +1,14 @@
-import { getMethod, postMethod } from "../../api/callApi";
-import { IRANCurrency, WALLEXAPI } from "../../api/endpoints";
+import {postMethod } from "../../api/callApi";
+import { IRANCurrency, CryptoMarketData } from "../../api/endpoints";
 
 export const fetchCryptoStat = async () => {
-  const res = await getMethod(WALLEXAPI);
+  const res = await postMethod(CryptoMarketData,{});
 
   // لیست ارزهای مجاز
   const allowedCurrencies = ["BTC", "LTC", "XRP", "TRX", "USDT"];
 
   // فیلتر کردن داده‌ها
-  const filteredData = res.result.filter((currency: { key: string }) =>
+  const filteredData = res.data.result.filter((currency: { key: string }) =>
     allowedCurrencies.includes(currency.key)
   );
   return filteredData;

@@ -40,5 +40,5 @@ export const GET_NETWORK = "/v1/Finance/GetNetWroks";
 export const CREATE_TRANSACTION_NETWORK = "/v1/Finance/CreateTransaction";
 export const CANCEL_TRANSACTION = "/v1/Finance/CancelTransaction";
 export const GET_TRANSACTION = "/v1/Finance/Transaction";
-export const WALLEXAPI = "https://api.wallex.ir/v1/currencies/stats";
+export const CryptoMarketData = "/v1/Crypto/GetCryptoMarketData";
 export const IRANCurrency = "/v1/Crypto/GetMarketData";

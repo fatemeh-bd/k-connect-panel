@@ -67,7 +67,6 @@ export default function Financial() {
   const { data: iranCurrency } = useQuery(
     "USDStat",
     async () => {
-      // setCryptoUpdatel(true);
       const res = await fetchUSDStat();
       // setCryptoUpdatel(false);
 
