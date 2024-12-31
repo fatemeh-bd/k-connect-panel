@@ -44,7 +44,7 @@ const Accordion = ({
         }`}
       >
         <div className="px-6 py-4 text-secondary-500">
-          <div>{data.description}</div>
+          <div dangerouslySetInnerHTML={{ __html: data.description }} />
         </div>
       </div>
     </div>
