@@ -15,7 +15,7 @@ type Inputs = {
   email: string;
 };
 const editProfile = () => {
-  const [submitLoading, setSubmitLoading] = useState<Boolean>(false);
+  const [submitLoading, setSubmitLoading] = useState<boolean>(false);
   const { getTranslation } = useLang();
   const { info } = useProfile();
 

@@ -16,7 +16,7 @@ import { useLang } from "../../context/LangProvider";
 import { REGISTER } from "../../api/endpoints";
 
 const SignUp = () => {
-  const { lang, getTranslation: t } = useLang();
+  const {  getTranslation: t } = useLang();
 
   const {
     register,
@@ -26,19 +26,17 @@ const SignUp = () => {
   } = useForm<SignUpFormType>();
   const navigate = useNavigate();
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const [, setCookie] = useCookies(["access_token"]);
   const [error, setError] = useState<string>("");
   const { mutate, isLoading } = useMutation(
     (data: SignUpFormType) =>
       postMethod(REGISTER, {
-        userName: data.email,
+        email: data.email,
         password: data.password,
       }),
     {
       onSuccess: (res) => {
         if (res?.isSuccess) {
-          setCookie("access_token", res.data.accessToken, { path: "/" });
-          navigate("/");
+          navigate("/login");
         } else {
           setError(res.message);
         }
@@ -61,7 +59,7 @@ const SignUp = () => {
     <AuthLayout>
       <div className="lg:w-[85%] sm:w-[380px] w-full sm:px-2 px-4 mx-auto">
         <div className="space-y-3">
-          <Title>{t("signUpWelcome")}</Title>
+          <Title>{t("welcome")}</Title>
         </div>
         <form className="mt-6" onSubmit={handleSubmit(signUpHandler)}>
           <Input
