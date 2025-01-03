@@ -6,7 +6,7 @@ export const translations = {
     loginDescription: "Enter your username and password to log in",
     usernameLabel: "Username (Email)",
     passwordLabel: "Password",
-    loginButton: "Log in to the panel",
+    loginButton: "Log in",
     signUpPrompt: "Not registered? 😱",
     signUpLink: "Create an account",
     emailRequired: "Please enter your email",
@@ -32,6 +32,7 @@ export const translations = {
     AccountTitle: "Account",
     MyNotificationTitle: "My Notifications",
     logoutTitle: "Logout",
+    userBalance: "Balance",
   },
   Fa: {
     welcome: "به وبسایت ما خوش آمدید",
@@ -64,6 +65,7 @@ export const translations = {
     AccountTitle: "حساب کاربری",
     MyNotificationTitle: "اعلان های من",
     logoutTitle: "اعلان های من",
+    userBalance: "موجودی",
   },
   Ru: {
     welcome: "Добро пожаловать на наш сайт",
@@ -97,6 +99,7 @@ export const translations = {
     AccountTitle: "Аккаунт",
     MyNotificationTitle: "Мои уведомления",
     logoutTitle: "Выйти",
+    userBalance: "Баланс",
   },
 };
 

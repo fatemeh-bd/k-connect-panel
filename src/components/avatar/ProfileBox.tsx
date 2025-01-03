@@ -7,8 +7,11 @@ import { GET_BALANCE, GET_PROFILE } from "../../api/endpoints";
 import { notify } from "../../utils/notify";
 import { numberWithCommas } from "../../utils/helper";
 import { ProfileInfoType, useProfile } from "../../store/profileSlice";
+import { useLang } from "../../context/LangProvider";
 
 const fetchBalance = async () => {
+
+  
   const response = await postMethod(GET_BALANCE, {});
   if (response?.isSuccess) {
     return response.data;
@@ -33,7 +36,7 @@ const fetchProfile = async (
 
 const ProfileBox = () => {
   const { info, setProfileInfo } = useProfile();
-
+  const { t } = useLang();
   const results = useQueries([
     {
       queryKey: "profile",
@@ -59,7 +62,7 @@ const ProfileBox = () => {
         </Paragraph>
         <div>
           <Paragraph size={Sizes.xs} type={ColorType.PRIMARY}>
-            موجودی شما :
+           {t("userBalance")} :
             {balance && <span>{numberWithCommas(balance)} تومان</span>}
           </Paragraph>
         </div>
