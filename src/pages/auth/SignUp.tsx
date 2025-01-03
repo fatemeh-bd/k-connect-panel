@@ -9,7 +9,6 @@ import { ColorType } from "../../utils/enums";
 import { Link, useNavigate } from "react-router-dom";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
 import { SignUpFormType } from "./types";
-import { useCookies } from "react-cookie";
 import { useMutation } from "react-query";
 import { postMethod } from "../../api/callApi";
 import { useLang } from "../../context/LangProvider";
