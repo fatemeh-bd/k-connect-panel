@@ -57,8 +57,6 @@ export const translations = {
     phoneNumberLength: "Phone number must be exactly 11 digits",
     profileUpdatedSuccess: "Profile updated successfully",
     profileUpdatedError: "Error updating profile",
-    
-    
 
     currentPasswordLabel: "Current Password",
     newPasswordLabel: "New Password",
@@ -68,6 +66,71 @@ export const translations = {
     passwordUpdateSuccess: "Password updated successfully",
     passwordUpdateError: "Error updating password",
     genericError: "An error occurred. Please try again",
+
+    //table
+    tableTitle: "Title",
+    tableStatus: "Status",
+    tableDepartment: "Department",
+    tableOperations: "Operations",
+    phoneNumber: "Phone Number",
+
+    sProcessing: "Please wait ...",
+    sZeroRecords: "No data available to display",
+    infoEmpty: "No data to display",
+    emptyTable: "No data available in table",
+    tableInfo: "Showing _START_ to _END_ of _TOTAL_ records",
+    lengthMenu: "Show _MENU_ records",
+    infoFiltered: " - Filtered from _MAX_ records",
+    paginateLast: "Last",
+    paginateFirst: "First",
+    paginateNext: "❯",
+    paginatePrevious: "❮",
+    search: "Search",
+    searchPlaceholder: "Search",
+
+    selectedPlan: "Selected Plan",
+
+    usedVolume: "Used Volume",
+
+    createDate: "Creation Date",
+
+    userName: "UserName",
+
+    delete: "Delete",
+
+    volume: "Volume",
+
+    subscription: "Subscription",
+
+    connectionCode: "Connection Code",
+    addUser: "Add User",
+
+    total: "Total",
+
+    remaining: "Remaining",
+
+    gigabyte: "GB",
+    byte: "B",
+
+    kilobyte: "K",
+    from: "From",
+    details: "Details",
+
+    megabyte: "M",
+    terabyte: "T",
+
+    createUser: "Register User",
+    selectPlanLocation: "Select Plan Location",
+
+    selectServer: "Select Server",
+
+    selectPlan: "Select plan",
+    selectLocationPlan: "Select location plan",
+    usernameAlreadyExists: "Username already exists",
+
+    enterUsername: "Enter username",
+    price: "Price",
+    toman: "Toman",
   },
   Fa: {
     welcome: "به وبسایت ما خوش آمدید",
@@ -126,7 +189,6 @@ export const translations = {
     profileUpdatedSuccess: "اطلاعات با موفقیت به‌روزرسانی شد",
     profileUpdatedError: "خطا در به‌روزرسانی اطلاعات",
 
-
     currentPasswordLabel: "کلمه عبور کنونی",
     newPasswordLabel: "کلمه عبور جدید",
     currentPasswordRequired: " کلمه عبور کنونی را وارد کنید",
@@ -135,7 +197,62 @@ export const translations = {
     passwordUpdateSuccess: "اطلاعات با موفقیت به‌روزرسانی شد",
     passwordUpdateError: "خطا در به‌روزرسانی اطلاعات",
     genericError: "خطایی رخ داد. لطفاً دوباره تلاش کنید",
+
+    //table
+    tableTitle: "عنوان",
+    tableStatus: "وضعیت",
+    tableDepartment: "دپارتمان",
+    tableOperations: "عملیات",
+
+    sProcessing: "لطفا منتظر بمانید ...",
+    sZeroRecords: "دیتایی برای نمایش وجود ندارد",
+    infoEmpty: "دیتایی برای نمایش وجود ندارد",
+    emptyTable: "دیتایی برای نمایش وجود ندارد",
+    tableInfo: "نمایش _START_ از _END_ از _TOTAL_ رکورد",
+    lengthMenu: "نمایش _MENU_ رکورد",
+    infoFiltered: " - فیلتر از بین  _MAX_ رکورد",
+    paginateLast: "آخرین",
+    paginateFirst: "اولین",
+    paginateNext: "❯",
+    paginatePrevious: "❮",
+    search: "جستجو ",
+    searchPlaceholder: "جستجو",
+
+    phoneNumber: "شماره موبایل",
+
+    selectedPlan: "پلن انتخابی",
+
+    usedVolume: "حجم مصرفی",
+
+    createDate: "تاریخ ایجاد",
+
+    delete: "حذف",
+    volume: "حجم",
+    subscription: "سابسکرپشن",
+    connectionCode: "کد اتصال",
+    addUser: "افزودن کاربر",
+    total: "کل",
+    remaining: "باقی‌مانده",
+    gigabyte: "گیگ",
+    byte: "بایت",
+    kilobyte: "کیلوبایت",
+    megabyte: "مگ",
+    terabyte: "ترا",
+    from: "از",
+    details: "جزئیات",
+    userName: "نام کاربری",
+    createUser: "ثبت کاربر",
+    selectPlanLocation: "انتخاب لوکیشن پلن",
+    selectServer: "انتخاب سرور",
+    usernameAlreadyExists: "نام کاربری از قبل وجود دارد",
+    selectPlan: "پلن را انتخاب کنید",
+    selectLocationPlan: "لوکیشن پلن را انتخاب کنید",
+    enterUsername: "نام کاربری را وارد کنید",
+
+    price: "قیمت",
+    toman: "تومان",
   },
+
   Ru: {
     welcome: "Добро пожаловать на наш сайт",
     description: "Это многоязычное приложение",
@@ -194,9 +311,6 @@ export const translations = {
     profileUpdatedSuccess: "Профиль успешно обновлен",
     profileUpdatedError: "Ошибка обновления профиля",
 
-
-
-
     currentPasswordLabel: "Текущий пароль",
     newPasswordLabel: "Новый пароль",
     currentPasswordRequired: "Пожалуйста, введите ваш текущий пароль",
@@ -205,6 +319,57 @@ export const translations = {
     passwordUpdateSuccess: "Пароль успешно обновлен",
     passwordUpdateError: "Ошибка обновления пароля",
     genericError: "Произошла ошибка. Пожалуйста, попробуйте еще раз",
+
+    tableTitle: "Заголовок",
+    tableStatus: "Статус",
+    tableDepartment: "Департамент",
+    tableOperations: "Операции",
+
+    sProcessing: "Пожалуйста, подождите ...",
+    sZeroRecords: "Нет данных для отображения",
+    infoEmpty: "Нет данных для отображения",
+    emptyTable: "В таблице нет данных",
+    tableInfo: "Показано с _START_ по _END_ из _TOTAL_ записей",
+    lengthMenu: "Показать _MENU_ записей",
+    infoFiltered: " - Отфильтровано из _MAX_ записей",
+    paginateLast: "Последняя",
+    paginateFirst: "Первая",
+    paginateNext: "❯",
+    paginatePrevious: "❮",
+    search: "Поиск : ",
+    searchPlaceholder: "Поиск",
+
+    userName: "Имя пользователя",
+    createDate: "Дата создания",
+    usedVolume: "Использованный объем",
+    selectedPlan: "Выбранный план",
+    phoneNumber: "Номер телефона",
+    operations: "Операции",
+    delete: "Удалить",
+    volume: "Объем",
+    subscription: "Подписка",
+    connectionCode: "Код подключения",
+    total: "Всего",
+    remaining: "Осталось",
+    gigabyte: "ГБ",
+    byte: "Байт",
+    kilobyte: "Килобайт",
+    megabyte: "Мегабайт",
+    terabyte: "Terabyte",
+    from: "Из",
+    details: "Детали",
+    addUser: "Добавить пользователя",
+    createUser: "Зарегистрировать пользователя",
+    selectPlanLocation: "Выберите местоположение плана",
+    selectServer: "Выберите сервер",
+    usernameAlreadyExists: "Имя пользователя уже существует",
+
+    selectPlan: "Выберите план",
+    selectLocationPlan: "Выберите местоположение плана",
+
+    enterUsername: "Введите имя пользователя",
+    price: "Цена",
+    toman: "Томан",
   },
 };
 

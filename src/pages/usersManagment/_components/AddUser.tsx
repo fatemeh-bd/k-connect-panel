@@ -26,6 +26,8 @@ import { numberWithCommas } from "../../../utils/helper";
 import { postMethod } from "../../../api/callApi";
 import { CREATE_CLIENT } from "../../../api/endpoints";
 import { ApiResponse } from "../../Supports/_components/AddTicket";
+import { useLang } from "../../../context/LangProvider";
+import { translations } from "../../../context/translations";
 interface AddUserProps {
   setClose: Dispatch<SetStateAction<boolean>>;
   onAddClient: () => void;
@@ -40,6 +42,7 @@ type Inputs = {
 };
 
 const AddUser = ({ setClose, onAddClient }: AddUserProps) => {
+  const { lang } = useLang();
   const [userNameExist, setUserNameExist] = useState<boolean>(false);
   const [planPrice, setPlanPrice] = useState<number>(0);
 
@@ -84,7 +87,7 @@ const AddUser = ({ setClose, onAddClient }: AddUserProps) => {
           "color: #007acc;",
           data
         );
-        if(data.isSuccess){
+        if (data.isSuccess) {
           notify(data.message, "success");
         }
       },
@@ -152,16 +155,18 @@ const AddUser = ({ setClose, onAddClient }: AddUserProps) => {
     <form className="space-y-3" onSubmit={handleSubmit(submitFrom)}>
       <div className="grid grid-cols-12 items-start gap-x-4">
         <Input
-          label="نام کاربری"
+          label={translations[lang].userName}
           onInput={(e: ChangeEvent<HTMLInputElement>) =>
             checkUserNameExist(e.target.value)
           }
-          {...register("userName", { required: "نام کاربری را وارد کنید" })}
+          {...register("userName", {
+            required: translations[lang].enterUsername,
+          })}
           errorText={errors.userName?.message}
           className="md:col-span-6 col-span-12"
         />
         <Input
-          label="شماره موبایل "
+          label={translations[lang].phoneNumber}
           {...register("phoneNumber")}
           className="md:col-span-6 col-span-12"
         />
@@ -173,17 +178,17 @@ const AddUser = ({ setClose, onAddClient }: AddUserProps) => {
             trigger("planId");
           }}
           loading={plansLoading}
-          placeholder="انتخاب پلن"
-          {...register("planId", { required: " پلن  را  انتخاب کنید" })}
+          placeholder={translations[lang].selectedPlan}
+          {...register("planId", { required: translations[lang].selectPlan })}
           errorText={errors.planId?.message}
         />
         <DropDown
           className="col-span-12 mb-3"
           options={serverLocation}
           loading={serverLocationLoading}
-          placeholder=" انتخاب لوکیشن پلن"
+          placeholder={translations[lang].selectPlanLocation}
           {...register("serverLocationId", {
-            required: " لوکیشن پلن  را انتخاب کنید",
+            required: translations[lang].selectLocationPlan,
           })}
           onSelect={(e) => {
             setValue("serverLocationId", e.value);
@@ -195,9 +200,11 @@ const AddUser = ({ setClose, onAddClient }: AddUserProps) => {
           className="col-span-12 mb-3"
           options={serverList}
           loading={serverLoading}
-          placeholder=" انتخاب سرور"
+          placeholder={translations[lang].selectServer}
           disabled={!watch("serverLocationId")}
-          {...register("serverId", { required: "سرور  را انتخاب کنید" })}
+          {...register("serverId", {
+            required: translations[lang].selectServer,
+          })}
           onSelect={(e) => {
             setValue("serverId", e.value);
             trigger("serverId");
@@ -215,7 +222,7 @@ const AddUser = ({ setClose, onAddClient }: AddUserProps) => {
 
       {userNameExist ? (
         <Paragraph type={ColorType.ERROR}>
-          نام کاربری از قبل وجود دارد
+          {translations[lang].usernameAlreadyExists}
         </Paragraph>
       ) : (
         ""
@@ -227,7 +234,7 @@ const AddUser = ({ setClose, onAddClient }: AddUserProps) => {
         className="w-full"
         type="submit"
       >
-        ثبت کاربر
+        {translations[lang].createUser}
       </Button>
     </form>
   );

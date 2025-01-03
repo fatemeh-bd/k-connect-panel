@@ -10,6 +10,8 @@ import { TICKET_LIST } from "../../api/endpoints";
 import Paragraph from "../../components/typography/Paragraph";
 import { useNavigate } from "react-router-dom";
 import { createRoot } from "react-dom/client";
+import { useLang } from "../../context/LangProvider";
+import { translations } from "../../context/translations";
 
 const Supports = () => {
   const navigate = useNavigate();
@@ -20,7 +22,7 @@ const Supports = () => {
   const handleRefresh = () => {
     setRefreshKey((prev) => prev + 1); // Increment refresh key to trigger re-fetch
   };
-
+  const { lang } = useLang();
   const columns = [
     {
       data: "title",
@@ -28,7 +30,7 @@ const Supports = () => {
       orderable: true,
       width: "",
       autoWidth: "",
-      title: "عنوان",
+      title: translations[lang].tableTitle,
       searchable: true,
       visible: true,
       // @ts-ignore: Ignore TypeScript error for ReactDOM.render
@@ -42,7 +44,7 @@ const Supports = () => {
       orderable: true,
       width: "",
       autoWidth: "",
-      title: "وضعیت",
+      title: translations[lang].tableStatus,
       searchable: true,
       visible: true,
       // @ts-ignore
@@ -76,7 +78,7 @@ const Supports = () => {
       orderable: true,
       width: "",
       autoWidth: "",
-      title: "دپارتمان",
+      title: translations[lang].tableDepartment,
       searchable: true,
       visible: true,
     },
@@ -86,7 +88,7 @@ const Supports = () => {
       orderable: false,
       width: "",
       autoWidth: "",
-      title: "تاریخ ایجاد",
+      title: translations[lang].createDate,
       searchable: true,
       visible: true,
       // renderModel:
@@ -98,7 +100,7 @@ const Supports = () => {
       orderable: false,
       width: "150px",
       autoWidth: false,
-      title: "عملیات",
+      title: translations[lang].tableOperations,
       searchable: false,
       visible: true,
       // @ts-ignore
@@ -114,7 +116,7 @@ const Supports = () => {
             Icon={InformationCircleIcon}
             onClick={() => navigate(`/support/${cellData}`)}
           >
-            جزئیات
+            {translations[lang].details}
           </Button>
         );
       },

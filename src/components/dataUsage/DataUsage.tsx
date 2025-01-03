@@ -1,14 +1,16 @@
+import { useLang } from "../../context/LangProvider";
+import { translations } from "../../context/translations";
+
 interface DataUsageProps {
   currentBytes: number;
   totalBytes: number;
   className?: string;
 }
 
-function formatBytes(bytes: number): string {
+function formatBytes(bytes: number, sizes: string[]): string {
   if (bytes === 0) return "0 ";
 
   const k = 1024;
-  const sizes = ["بایت", "کیلوبایت", "مگ", "گیگ", "ترا"];
 
   const i = Math.floor(Math.log(bytes) / Math.log(k));
   const value = bytes / Math.pow(k, i);
@@ -21,9 +23,18 @@ export default function DataUsage({
   totalBytes,
   className,
 }: DataUsageProps) {
+  const { lang } = useLang();
+  const sizes = [
+    translations[lang].byte,
+    translations[lang].kilobyte,
+    translations[lang].megabyte,
+    translations[lang].gigabyte,
+    translations[lang].terabyte,
+  ];
+
   const percentage = (currentBytes / totalBytes) * 100;
-  const formattedCurrent = formatBytes(currentBytes);
-  const formattedTotal = formatBytes(totalBytes);
+  const formattedCurrent = formatBytes(currentBytes, sizes);
+  const formattedTotal = formatBytes(totalBytes, sizes);
 
   return (
     <div className={` rounded-lg  text-slate-200 ${className}`}>
@@ -36,8 +47,10 @@ export default function DataUsage({
         </div>
 
         <div className="flex justify-between items-center text-sm ">
-          <span className="">کل: {formattedCurrent}</span>
-          {formattedCurrent} از {formattedTotal}
+          <span className="">
+            {translations[lang].total}: {formattedCurrent}
+          </span>
+          {formattedCurrent} {translations[lang].from} {formattedTotal}
         </div>
       </div>
     </div>

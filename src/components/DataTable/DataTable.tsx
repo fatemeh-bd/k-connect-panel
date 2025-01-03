@@ -4,6 +4,8 @@ import DT from "datatables.net-dt";
 import "datatables.net-dt/js/dataTables.dataTables";
 import "datatables.net-dt/css/dataTables.dataTables.css";
 import { useCookies } from "react-cookie";
+import { useLang } from "../../context/LangProvider";
+import { translations } from "../../context/translations";
 DataTable.use(DT);
 
 // Define types for props
@@ -31,7 +33,7 @@ const CustomeDataTable: React.FC<CustomeDataTableProps> = ({
 }) => {
   const inputRefs = useRef<{ [key: string]: HTMLInputElement | null }>({});
   const [cookies] = useCookies(["access_token"]);
-
+  const { lang } = useLang();
   // DataTable options
   const tableOptions = {
     processing: true,
@@ -41,24 +43,24 @@ const CustomeDataTable: React.FC<CustomeDataTableProps> = ({
     responsive: true,
     pagingType: "full_numbers",
     language: {
-      sProcessing: "لطفا منتطر بمانید ...",
-      sZeroRecords: "دیتایی برای نمایش وجود ندارد",
-      infoEmpty: "دیتایی برای نمایش وجود ندارد",
-      emptyTable: "دیتایی برای نمایش وجود ندارد",
-      info: "نمایش _START_ از _END_ از _TOTAL_ رکورد",
-      lengthMenu: "نمایش _MENU_ رکورد",
-      infoFiltered: " - فیلتر از بین  _MAX_ رکورد",
+      sProcessing: translations[lang].sProcessing,
+      sZeroRecords: translations[lang].sZeroRecords,
+      infoEmpty: translations[lang].infoEmpty,
+      emptyTable: translations[lang].emptyTable,
+      info: translations[lang].tableInfo,
+      lengthMenu: translations[lang].lengthMenu,
+      infoFiltered: translations[lang].infoFiltered,
       paginate: {
-        last: "آخرین",
-        first: "اولین",
+        last: translations[lang].paginateLast,
+        first: translations[lang].paginateFirst,
         next: "❯",
         previous: "❮",
       },
-      search: "جستجو :  ",
-      searchPlaceholder: "جستجو",
+      search: translations[lang].search,
+      searchPlaceholder: translations[lang].search,
     },
-    lengthMenu: [10, 20, 50, 100, 150, 200, 300, 500, 700, 1000], // Pagination options
-    pageLength: 10, 
+    lengthMenu: [5, 10, 20, 50, 100, 200, 300, 500, 700, 1000], // Pagination options
+    pageLength: 5,
   };
   const ajaxConfig = {
     url: `${urlRequest}`,

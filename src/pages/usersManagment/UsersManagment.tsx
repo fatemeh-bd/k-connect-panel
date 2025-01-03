@@ -18,6 +18,8 @@ import QRCodeGenerator from "../../components/QR/QRCodeGenerator";
 import IncreaseVolume from "./_components/IncreaseVolume";
 import RemoveClient from "./_components/RemoveClient";
 import DataUsage from "../../components/dataUsage/DataUsage";
+import { LangProvider, useLang } from "../../context/LangProvider";
+import { translations } from "../../context/translations";
 export interface ClientDataType {
   userName: string;
   planName: string;
@@ -36,6 +38,7 @@ const UsersManagment = () => {
     planName: "",
     id: 0,
   });
+  const { lang } = useLang();
 
   const [getConnection, setConnection] = useState<string[]>(["sdsd", "sdsd"]);
   const [getSubConnection, setSubConnection] = useState<string>("");
@@ -49,7 +52,7 @@ const UsersManagment = () => {
       orderable: true,
       width: "",
       autoWidth: "",
-      title: "نام کاربری",
+      title: translations[lang].userName,
       searchable: true,
       visible: true,
       // @ts-ignore: Ignore TypeScript error for ReactDOM.render
@@ -63,7 +66,7 @@ const UsersManagment = () => {
       orderable: true,
       width: "",
       autoWidth: "",
-      title: "شماره موبایل",
+      title: translations[lang].phoneNumber,
       searchable: true,
       visible: true,
       // @ts-ignore
@@ -89,7 +92,7 @@ const UsersManagment = () => {
       orderable: true,
       width: "",
       autoWidth: "",
-      title: "پلن انتخابی",
+      title: translations[lang].selectedPlan,
       searchable: true,
       visible: true,
       // @ts-ignore: Ignore TypeScript error for ReactDOM.render
@@ -103,7 +106,7 @@ const UsersManagment = () => {
       orderable: true,
       width: "",
       autoWidth: "",
-      title: "حجم مصرفی / حجم کلی",
+      title: translations[lang].usedVolume,
       searchable: true,
       visible: true,
       // @ts-ignore
@@ -118,10 +121,12 @@ const UsersManagment = () => {
         console.log(status);
         root.render(
           <div className="p-4">
-            <DataUsage
-              currentBytes={rowData.consumptionVolume}
-              totalBytes={rowData.totalVolume}
-            />
+            <LangProvider>
+              <DataUsage
+                currentBytes={rowData.consumptionVolume}
+                totalBytes={rowData.totalVolume}
+              />
+            </LangProvider>
           </div>
         );
       },
@@ -132,7 +137,7 @@ const UsersManagment = () => {
       orderable: true,
       width: "",
       autoWidth: "",
-      title: "تاریخ ایجاد",
+      title: translations[lang].createDate,
       searchable: true,
       visible: true,
     },
@@ -142,7 +147,7 @@ const UsersManagment = () => {
       orderable: false,
       width: "470px",
       autoWidth: false,
-      title: "عملیات",
+      title: translations[lang].tableOperations,
       searchable: false,
       visible: true,
       // @ts-ignore
@@ -171,7 +176,7 @@ const UsersManagment = () => {
                 );
               }}
             >
-              کد اتصال
+              {translations[lang].connectionCode}
             </Button>
             <Button
               Icon={QrCodeIcon}
@@ -185,7 +190,7 @@ const UsersManagment = () => {
                 setSubConnection(rowData.subLink);
               }}
             >
-              سابسکریپشن
+              {translations[lang].subscription}
             </Button>
             <Button
               Icon={PlusCircleIcon}
@@ -194,7 +199,7 @@ const UsersManagment = () => {
                 setGetClientSelected(rowData);
               }}
             >
-              حجم
+              {translations[lang].volume}
             </Button>
             <Button
               themeType={ColorType.ERROR}
@@ -204,7 +209,7 @@ const UsersManagment = () => {
                 setGetClientSelected(rowData);
               }}
             >
-              حذف
+              {translations[lang].delete}
             </Button>
           </div>
         );
@@ -218,7 +223,7 @@ const UsersManagment = () => {
         className=" mb-3"
         onClick={() => setAddUserModal(true)}
       >
-        افزودن کاربر
+      {translations[lang].addUser}
       </Button>
       <CustomeDataTable
         urlRequest={`${BASE_URL + CLIENT_LIST}`}
@@ -268,7 +273,7 @@ const UsersManagment = () => {
       <Modal
         isOpen={addUserOpenModal}
         onClose={() => setAddUserModal(false)}
-        title="افزودن کاربر"
+        title={translations[lang].addUser}
         className="md:min-w-[450px] min-w-[90%] h-[3]"
       >
         <AddUser onAddClient={handleRefresh} setClose={setAddUserModal} />
