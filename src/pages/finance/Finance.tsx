@@ -22,7 +22,6 @@ import CancelTransaction from "./_components/CancelTransaction";
 import { fetchCryptoStat, fetchUSDStat } from "./requests";
 import { useLang } from "../../context/LangProvider";
 import { translations } from "../../context/translations";
-import transaction from "./_components/Transaction";
 interface AddTransacton {
   networkId: string;
   price: number;
