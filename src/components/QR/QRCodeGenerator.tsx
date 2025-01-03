@@ -1,8 +1,11 @@
 import { QRCodeSVG } from "qrcode.react";
 import { useState } from "react";
 import Button from "../buttons/Button";
+import { useLang } from "../../context/LangProvider";
+import { translations } from "../../context/translations";
 
 const QRCodeGenerator = ({ texts }: { texts: string[] }) => {
+  const { lang } = useLang();
   const [copySuccess, setCopySuccess] = useState<string | null>(null);
 
   const handleCopy = (text: string) => {
@@ -23,17 +26,17 @@ const QRCodeGenerator = ({ texts }: { texts: string[] }) => {
             >
               <QRCodeSVG value={text} size={250} />
               <Button className="mt-3" onClick={() => handleCopy(text)}>
-                کپی لینک
+                {translations[lang].copyLink}
               </Button>
               {copySuccess === text && (
                 <p className="mt-2 text-green-500 text-sm">
-                  لینک {index + 1} با موفقیت کپی شد
+                  {translations[lang].linkCopiedSuccessfully}
                 </p>
               )}
             </div>
           ))
         ) : (
-          <p className="text-gray-500">لیست خالی است.</p>
+          <p className="text-gray-500">{translations[lang].emptyList}</p>
         )}
       </div>
     </div>

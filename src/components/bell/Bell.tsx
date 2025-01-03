@@ -13,8 +13,11 @@ import { getMethod } from "../../api/callApi";
 import { GET_NOTIF } from "../../api/endpoints";
 import { notify } from "../../utils/notify";
 import { useQuery } from "react-query";
+import { useLang } from "../../context/LangProvider";
+import { translations } from "../../context/translations";
 
 const Bell = () => {
+  const { lang } = useLang();
   const [isOpen, setIsOpen] = useState(false);
   const notifs = useRef<HTMLDivElement>(null);
   const fetchNotif = async () => {
@@ -101,7 +104,7 @@ const Bell = () => {
                 type={ColorType.SECONDARY}
                 className="flex gap-2 items-center justify-center text-center mx-auto"
               >
-                مشاهده همه
+                {translations[lang].viewAll}
                 <ChevronDoubleLeftIcon className="size-4" />
               </Paragraph>
             </Link>

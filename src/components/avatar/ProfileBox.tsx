@@ -63,7 +63,7 @@ const ProfileBox = () => {
         <div>
           <Paragraph size={Sizes.xs} type={ColorType.PRIMARY}>
            {t("userBalance")} :
-            {balance && <span>{numberWithCommas(balance)} تومان</span>}
+            {balance && <span>{numberWithCommas(balance)} {t("toman")}</span>}
           </Paragraph>
         </div>
       </div>

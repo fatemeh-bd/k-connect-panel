@@ -15,8 +15,7 @@ import { translations } from "../../../context/translations";
 import { useLang } from "../../../context/LangProvider";
 
 const InfoList = () => {
-
-  const { lang} = useLang();
+  const { lang } = useLang();
 
   const fetchData = async () => {
     const response = await postMethod(DASHBOARD, {});
@@ -39,7 +38,6 @@ const InfoList = () => {
     }
   );
 
- 
   return !isLoading ? (
     <div className="grid grid-cols-12 md:gap-4 gap-2">
       <div className="lg:col-span-3 col-span-6 ">
@@ -67,7 +65,9 @@ const InfoList = () => {
           data={{
             title: translations[lang].wallet,
             icon: WalletIcon,
-            value: `${numberWithCommas(Number(dashdata.balance))} تومان`,
+            value: `${numberWithCommas(Number(dashdata.balance))} ${
+              translations[lang].toman
+            }`,
             color: "#666cff",
           }}
         />
@@ -75,7 +75,7 @@ const InfoList = () => {
       <div className="lg:col-span-3 col-span-6 ">
         <InfoBox
           data={{
-            title:translations[lang].serverCount,
+            title: translations[lang].serverCount,
             icon: ServerIcon,
             value: dashdata?.serverCount,
             color: "#666cff",

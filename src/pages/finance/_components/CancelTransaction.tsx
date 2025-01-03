@@ -7,11 +7,12 @@ import { Dispatch, SetStateAction } from "react";
 import { notify } from "../../../utils/notify";
 import { ApiResponse } from "../../Supports/_components/AddTicket";
 import { useMutation } from "react-query";
-import Paragraph from "../../../components/typography/Paragraph";
 import { ColorType } from "../../../utils/enums";
 import { postMethod } from "../../../api/callApi";
 import { CANCEL_TRANSACTION } from "../../../api/endpoints";
 import { CancelTransactionData } from "../Finance";
+import { useLang } from "../../../context/LangProvider";
+import { translations } from "../../../context/translations";
 interface CancelTransactionProps {
   modalData: CancelTransactionData;
   setClose: Dispatch<SetStateAction<boolean>>;
@@ -58,6 +59,7 @@ const CancelTransaction = ({
       },
     }
   );
+
   const cancelTrnsaction = async (id: number) => {
     const res = await postMethod(CANCEL_TRANSACTION + `?id=${id}`, {});
     if (res?.isSuccess) {
@@ -69,24 +71,18 @@ const CancelTransaction = ({
   };
 
   const { handleSubmit } = useForm<CancelTransactionInputs>();
+  const { lang } = useLang();
 
-  const submitFrom = async (input:  CancelTransactionInputs) => {
+  const submitFrom = async (input: CancelTransactionInputs) => {
     mutate(input);
   };
 
   return (
     <form className="space-y-3" onSubmit={handleSubmit(submitFrom)}>
-      <div className="grid grid-cols-12 items-start gap-x-4">
-        <Paragraph
-          type={ColorType.ERROR}
-          className="col-span-12 py-4  text-center rounded-md"
-        >
-          لغو تراکنش
-        </Paragraph>
-      </div>
+      <div className="grid grid-cols-12 items-start gap-x-4"></div>
 
       <Button loading={addLoading} className="w-full" type="submit">
-        لغو تراکنش
+        {translations[lang].cancelInvoice}
       </Button>
 
       <Button
@@ -95,7 +91,7 @@ const CancelTransaction = ({
         className="w-full"
         type={"button"}
       >
-        بخیال
+        {translations[lang].nevermind}
       </Button>
     </form>
   );

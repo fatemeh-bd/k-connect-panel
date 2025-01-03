@@ -131,6 +131,42 @@ export const translations = {
     enterUsername: "Enter username",
     price: "Price",
     toman: "Toman",
+
+    createNewInvoice: "Create new invoice",
+    enterAmount: "Enter amount",
+    selectNetwork: "Select network",
+    createDepositAddress: "Create deposit address",
+    amountIsRequired: "Amount is required",
+    trackingId: "Tracking ID",
+    requestedAmount: "Requested amount",
+    depositedAmount: "Deposited amount",
+    selectedCurrency: "Selected currency",
+    amount: "Amount",
+    receivedNotifications: "Received notifications.",  
+
+  
+    loading: "Loading...",
+    cancelInvoice: "Cancel invoice",
+    expired: "Expired",
+    orderExpired: "This order has expired",
+    orderPaid: "This order has been paid",
+    awaitingPayment: "Awaiting payment",
+    payment: "Payment",
+    cancel: "Cancel",
+    nevermind: "Nevermind",
+    youArePayingWithCurrency:
+      "You are paying with the currency {data.netWorkName}",
+    pleaseTransferTheAmountToAddress:
+      "Please transfer the specified amount to the address below.",
+    walletAddress: "Wallet address:",
+    emptyList: "The list is empty.",
+    linkCopiedSuccessfully: "The link was successfully copied.",
+    copyLink: "Copy link.",
+    pleaseEnterAddressInWithdraw:
+      "Please enter the text address in the withdrawal section of the Tether wallet or open the barcode scanner in the same section and scan the provided QR code.",
+      viewAll: "View all.",  
+
+  
   },
   Fa: {
     welcome: "به وبسایت ما خوش آمدید",
@@ -251,6 +287,44 @@ export const translations = {
 
     price: "قیمت",
     toman: "تومان",
+
+    createNewInvoice: "ایجاد فاکتور جدید",
+    enterAmount: "مبلغ را وارد کنید",
+    selectNetwork: "شبکه را انتخاب کنید",
+    createDepositAddress: "ایجاد آدرس واریز",
+    amountIsRequired: "مبلغ الزامی است",
+    trackingId: "شناسه رهگیری",
+    requestedAmount: "مبلغ درخواستی",
+    depositedAmount: "مبلغ واریزی",
+    selectedCurrency: "ارز انتخابی",
+    amount: "مبلغ",
+
+    loading: "در حال بارگذاری...",
+    cancelInvoice: "لغو فاکتور",
+    expired: "منقضی شده",
+    orderExpired: "این سفارش منقضی شده است",
+    orderPaid: "این سفارش پرداخت شده است",
+    awaitingPayment: "در انتظار پرداخت",
+    payment: "پرداخت",
+    cancel: "باطل کن",
+    nevermind: "بخیال",
+
+    youArePayingWithCurrency:
+      "شما در حال پرداخت با ارز {data.netWorkName} هستید",
+    pleaseTransferTheAmountToAddress:
+      "لطفاً مقدار مشخص شده را به آدرس زیر واریز نمایید.",
+    walletAddress: "آدرس کیف پول:",
+    pleaseEnterAddressInWithdraw:
+      "لطفاً آدرس متنی را در بخش برداشت یا کیف پول تتر وارد کرده یا از همان قسمت بارکد اسکنر را باز کرده و QR کد درج شده را اسکن نمایید.",
+
+    emptyList: "لیست خالی است.",
+    linkCopiedSuccessfully: "لینک با موفقیت کپی شد.",
+    copyLink: "کپی لینک",
+    receivedNotifications: "اعلانی‌های دریافتی.",  
+    viewAll: "مشاهده همه.",  
+      
+    
+    
   },
 
   Ru: {
@@ -370,6 +444,43 @@ export const translations = {
     enterUsername: "Введите имя пользователя",
     price: "Цена",
     toman: "Томан",
+
+    createNewInvoice: "Создать новый счет",
+    enterAmount: "Введите сумму",
+    selectNetwork: "Выберите сеть",
+    createDepositAddress: "Создать адрес для депозита",
+    amountIsRequired: "Сумма обязательна",
+    trackingId: "Идентификатор отслеживания",
+    requestedAmount: "Запрашиваемая сумма",
+    depositedAmount: "Депонированная сумма",
+    selectedCurrency: "Выбранная валюта",
+
+    amount: "Сумма",
+
+    loading: "Загрузка...",
+    cancelInvoice: "Отменить счет",
+    expired: "Истекший",
+    orderExpired: "Этот заказ истек",
+    orderPaid: "Этот заказ оплачен",
+    awaitingPayment: "Ожидание оплаты",
+    payment: "Оплата",
+    cancel: "Аннулировать",
+
+    nevermind: "Неважно",
+
+    emptyList: "Список пуст.",
+    linkCopiedSuccessfully: "Ссылка успешно скопирована.",
+    copyLink: "Копировать ссылку",
+    receivedNotifications: "Полученные уведомления.",  
+
+    youArePayingWithCurrency: "Вы платите валютой {data.netWorkName}",
+    pleaseTransferTheAmountToAddress:
+      "Пожалуйста, переведите указанную сумму на адрес ниже.",
+    walletAddress: "Адрес кошелька:",
+    pleaseEnterAddressInWithdraw:
+      "Пожалуйста, введите текстовый адрес в разделе вывода кошелька Tether или откройте сканер штрих-кодов в том же разделе и отсканируйте предоставленный QR-код.",
+    viewAll: "Посмотреть все.",  
+
   },
 };
 

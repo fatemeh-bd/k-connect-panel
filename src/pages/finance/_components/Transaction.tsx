@@ -6,17 +6,18 @@ import { getMethod } from "../../../api/callApi";
 import { notify } from "../../../utils/notify";
 import { GET_TRANSACTION } from "../../../api/endpoints";
 import CustomSkeleton from "../../../components/skeleton/skeleton";
-
+import { useLang } from "../../../context/LangProvider";
+import { translations } from "../../../context/translations";
 
 const transaction = () => {
- 
+  const { lang } = useLang();
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const { id } = useParams();
 
   const {
     data = {},
     isLoading,
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+    // eslint-disable-next-line react-hooks/rules-of-hooks
   } = useQuery(
     `ticket-${id}`,
     async () => {
@@ -45,30 +46,43 @@ const transaction = () => {
           <div className="text-center">
             <h1 className="text-xl font-bold text-blue-600 mb-4">NEXO VPN</h1>
             <p className="light:text-gray-700 mb-2">
-             شما در حال پرداخت با ارز {data.netWorkName}     هستید
+              {translations[lang].youArePayingWithCurrency.replace(
+                "{data.netWorkName}",
+                data.netWorkName
+              )}
             </p>
             <p className="light:text-gray-700 mb-4">
-              لطفاً مقدار مشخص شده را به آدرس زیر واریز نمایید.
+              {translations[lang].pleaseTransferTheAmountToAddress}
             </p>
           </div>
           <div className="flex justify-between items-center light:text-gray-700 mb-4">
-            <span>مقدار:</span>
-            <span className="font-bold">{data.cryptoPrice} USDT</span>
+            <span>{translations[lang].amount}:</span>
+            {/* <span className="font-bold">{data.cryptoPrice} </span> */}
           </div>
           <div className="text-center mb-4">
-            <p className="light:text-gray-700 mb-2">آدرس کیف پول:</p>
-            <Input type="text" value={data.walletAddress?"":data.walletAddress} readOnly label=""></Input>
+            <p className="light:text-gray-700 mb-2">
+              {translations[lang].walletAddress}
+            </p>
+            <Input
+              type="text"
+              value={data.walletAddress ? "" : data.walletAddress}
+              readOnly
+              label=""
+            ></Input>
           </div>
           <p className="light:text-gray-500 text-sm text-right ">
-            لطفاً آدرس متنی را در بخش برداشت یا{" "}
-            <span className="font-bold">withdraw</span> کیف پول تتر وارد کرده یا
-            از همان قسمت بارکد اسکنر را باز کرده و QR کد درج شده را اسکن نمایید.
+            <span className="font-bold">
+              {translations[lang].pleaseEnterAddressInWithdraw}
+            </span>
           </p>
         </div>
 
         <div>
           <div className="flex justify-center ">
-            <QRCodeGenerator texts={[data.walletAddress]} key={data.walletAddress} />
+            <QRCodeGenerator
+              texts={[data.walletAddress]}
+              key={data.walletAddress}
+            />
           </div>
         </div>
       </div>

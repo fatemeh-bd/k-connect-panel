@@ -14,7 +14,6 @@ const MyNotification = ({
   onClick?: () => void;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-
   const toggleAccordion = () => {
     const newIsOpen = !isOpen;
     setIsOpen(newIsOpen);

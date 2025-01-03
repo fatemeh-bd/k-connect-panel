@@ -20,6 +20,9 @@ import { useForm } from "react-hook-form";
 import Modal from "../../components/modal/Modal";
 import CancelTransaction from "./_components/CancelTransaction";
 import { fetchCryptoStat, fetchUSDStat } from "./requests";
+import { useLang } from "../../context/LangProvider";
+import { translations } from "../../context/translations";
+import transaction from "./_components/Transaction";
 interface AddTransacton {
   networkId: string;
   price: number;
@@ -40,12 +43,12 @@ export interface ApiResponse {
 }
 export default function Financial() {
   const navigate = useNavigate();
-
   const [refreshKey, setRefreshKey] = useState<number>(0); // Add refresh key
   const [cancelModal, setCancelModal] = useState<boolean>(false); // Add refresh key
   const [getrowData, setRowData] = useState<CancelTransactionData>({
     id: 0,
   }); // Add refresh key
+  const { lang } = useLang();
 
   const handleRefresh = () => {
     setRefreshKey((prev) => prev + 1); // Increment refresh key to trigger re-fetch
@@ -84,7 +87,7 @@ export default function Financial() {
       orderable: true,
       width: "",
       autoWidth: "",
-      title: "شناسه رهگیری",
+      title: translations[lang].trackingId,
       searchable: true,
       visible: true,
     },
@@ -94,7 +97,7 @@ export default function Financial() {
       orderable: true,
       width: "",
       autoWidth: "",
-      title: "عنوان",
+      title: translations[lang].tableTitle,
       searchable: true,
       visible: true,
     },
@@ -105,7 +108,7 @@ export default function Financial() {
       orderable: true,
       width: "",
       autoWidth: "",
-      title: "مبلغ درخواستی",
+      title: translations[lang].requestedAmount,
       searchable: true,
       visible: true,
     },
@@ -115,7 +118,7 @@ export default function Financial() {
       orderable: false,
       width: "",
       autoWidth: "",
-      title: "مبلغ واریزی",
+      title: translations[lang].depositedAmount,
       searchable: true,
       visible: true,
       // renderModel:
@@ -126,7 +129,7 @@ export default function Financial() {
       orderable: false,
       width: "",
       autoWidth: "",
-      title: "ارز انتخابی",
+      title: translations[lang].selectedCurrency,
       searchable: true,
       visible: true,
       // renderModel:
@@ -137,7 +140,7 @@ export default function Financial() {
       orderable: false,
       width: "",
       autoWidth: "",
-      title: "تاریخ ایجاد",
+      title: translations[lang].createDate,
       searchable: true,
       visible: true,
       // renderModel:
@@ -148,7 +151,7 @@ export default function Financial() {
       orderable: false,
       width: "320px",
       autoWidth: false,
-      title: "عملیات",
+      title: translations[lang].tableOperations,
       searchable: false,
       visible: true,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -162,11 +165,11 @@ export default function Financial() {
           <div className="flex gap-2">
             {rowData.status === "منقضی شده" ? (
               <span className="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10">
-                این سفارش منقضی شده است
+                {translations[lang].orderExpired}
               </span>
             ) : rowData.status === "پرداخت شده" ? (
               <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-                این سفارش پرداخت شده است
+                {translations[lang].orderPaid}
               </span>
             ) : rowData.status === "در انتظار پرداخت" ? (
               <>
@@ -174,7 +177,7 @@ export default function Financial() {
                   Icon={InformationCircleIcon}
                   onClick={() => navigate(`/financial/${cellData}`)}
                 >
-                  پرداخت
+                  {translations[lang].payment}
                 </Button>
                 <Button
                   Icon={InformationCircleIcon}
@@ -183,7 +186,7 @@ export default function Financial() {
                     setRowData(rowData);
                   }}
                 >
-                  باطل کن
+                  {translations[lang].cancel}
                 </Button>
               </>
             ) : (
@@ -275,18 +278,18 @@ export default function Financial() {
 
                 </div>
               ) : ( */}
-                <div className="">
-                  <p className="font-semibold text-end">
-                    ${numberWithCommas(crypto.price)}
-                  </p>
+              <div className="">
+                <p className="font-semibold text-end">
+                  ${numberWithCommas(crypto.price)}
+                </p>
 
-                  <p className="text-green-500">
-                    {Math.round(
-                      crypto.price * iranCurrency?.data.currency[0].price
-                    ).toLocaleString("fa-IR")}{" "}
-                    تومان
-                  </p>
-                </div>
+                <p className="text-green-500">
+                  {Math.round(
+                    crypto.price * iranCurrency?.data.currency[0].price
+                  ).toLocaleString("fa-IR")}{" "}
+                  {translations[lang].toman}
+                </p>
+              </div>
               {/* )} */}
             </div>
           </div>
@@ -295,16 +298,18 @@ export default function Financial() {
 
       {/* Invoice Creation Section */}
       <div className="bg-white rounded-lg  p-6">
-        <h2 className=" font-semibold mb-4">ایجاد فاکتور جدید</h2>
+        <h2 className=" font-semibold mb-4">
+          {translations[lang].createNewInvoice}{" "}
+        </h2>
         <form onSubmit={handleSubmit(reateTransactionHandler)}>
           <div className="grid grid-cols-1 md:grid-cols-6  items-center  gap-2 ">
             <Input
-              label="مبلغ"
+              label={translations[lang].amount}
               {...register("price", {
-                required: "مبلغ الزامی است",
+                required: translations[lang].enterAmount,
               })}
               errorText={errors.price?.message}
-              placeholder="مبلغ  را وارد کنید"
+              placeholder={translations[lang].enterAmount}
             ></Input>
             <DropDown
               className="w-[300px] "
@@ -314,16 +319,18 @@ export default function Financial() {
                 setValue("networkId", e.value);
               }}
               placeholder={
-                isLoading ? "در حال بارگذاری..." : " شبکه را انتخاب کنید"
+                isLoading
+                  ? "در حال بارگذاری..."
+                  : translations[lang].selectNetwork
               }
               {...register("networkId", {
-                required: "بخش شبکه را انتخاب کنید",
+                required: translations[lang].selectNetwork,
               })}
               errorText={errors.networkId?.message}
             ></DropDown>
 
             <Button type="submit" loading={addLoading}>
-              ایجاد آدرس واریز
+              {translations[lang].createDepositAddress}
             </Button>
           </div>
         </form>
@@ -340,7 +347,7 @@ export default function Financial() {
         <Modal
           isOpen={cancelModal}
           onClose={() => setCancelModal(false)}
-          title="لغو فاکتور"
+          title={translations[lang].cancelInvoice}
           className="md:min-w-[450px] min-w-[90%]"
         >
           <CancelTransaction

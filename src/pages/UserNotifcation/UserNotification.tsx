@@ -4,7 +4,11 @@ import { notify } from "../../utils/notify";
 import { GET_NOTIF, READ_NOTIF } from "../../api/endpoints";
 import CustomSkeleton from "../../components/skeleton/skeleton";
 import MyNotification from "./_commponets/MyNotifications";
+import { useLang } from "../../context/LangProvider";
+import { translations } from "../../context/translations";
 const UserNotification = () => {
+  const { lang } = useLang();
+
   const fetchNotif = async () => {
     const response: any = await getMethod(GET_NOTIF);
     if (response?.isSuccess) {
@@ -24,23 +28,27 @@ const UserNotification = () => {
     }
   };
 
-  const { data = {}, isLoading } = useQuery("َAccountNotif", async () => {
-    return await fetchNotif();
-  },{
-    refetchOnWindowFocus:false,
-    refetchInterval:false,
-  });
+  const { data = {}, isLoading } = useQuery(
+    "َAccountNotif",
+    async () => {
+      return await fetchNotif();
+    },
+    {
+      refetchOnWindowFocus: false,
+      refetchInterval: false,
+    }
+  );
 
   return (
     <div>
-      <h2 className="mb-4"> اعلانی های دریافتی</h2>
+      <h2 className="mb-4">{translations[lang].receivedNotifications}</h2>
       {!isLoading ? (
         <div className="space-y-2">
           {data.map((item: any, index: any) => (
             <MyNotification
               key={index}
               data={item}
-              onClick={()=>readNotif(item.id)}
+              onClick={() => readNotif(item.id)}
             />
           ))}
         </div>
