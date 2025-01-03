@@ -16,7 +16,7 @@ import { useLang } from "../../context/LangProvider";
 import { REGISTER } from "../../api/endpoints";
 
 const SignUp = () => {
-  const { lang, t } = useLang();
+  const { lang, getTranslation: t } = useLang();
 
   const {
     register,

@@ -8,12 +8,16 @@ import { TabType } from "../../components/tabs/TabsTypes";
 import UserProfile from "./_components/UserProfile/UserProfile";
 import EditProfile from "./_components/EditProfile/EditProfile";
 import ChangePassword from "./_components/ChangePassword/ChangePassword";
+import { useLang } from "../../context/LangProvider";
+import { translations } from "../../context/translations";
 
 const MyProfile = () => {
+
+  const {lang}=useLang();
   const tabs: TabType[] = [
-    { icon: UserIcon, label: "پروفایل من", id: 1 },
-    { icon: PencilSquareIcon, label: "جزئیات حساب", id: 2 },
-    { icon: LockClosedIcon, label: "تغییر کلمه عبور", id: 3 },
+    { icon: UserIcon, label: translations[lang].AccountTitle, id: 1 },
+    { icon: PencilSquareIcon, label:translations[lang].accountDetails, id: 2 },
+    { icon: LockClosedIcon, label:translations[lang].changePassword, id: 3 },
   ];
   const content = [<UserProfile />, <EditProfile />, <ChangePassword />];
   return (

@@ -8,7 +8,7 @@ i18n
   .use(LanguageDetector) // برای شناسایی زبان مرورگر
   .use(initReactI18next) // برای اتصال به ری‌اکت
   .init({
-    fallbackLng: 'en', // زبان پیش‌فرض
+    fallbackLng: 'Fa', // زبان پیش‌فرض
     debug: true, // نمایش اطلاعات دیباگ در کنسول
     interpolation: {
       escapeValue: false, // برای امنیت، اما در ری‌اکت نیاز نیست

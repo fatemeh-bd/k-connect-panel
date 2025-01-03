@@ -15,7 +15,7 @@ import { useLang } from "../../context/LangProvider";
 
 const SideBar = () => {
   const [, removeCookie] = useCookies(["access_token"]);
-  const { t,lang } = useLang();
+  const { getTranslation: t,lang } = useLang();
   const routes = routesList(lang);
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const { pathname } = useLocation();

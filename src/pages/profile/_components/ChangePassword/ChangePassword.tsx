@@ -9,8 +9,10 @@ import { notify } from "../../../../utils/notify";
 import { CHANGE_PASSOWRD } from "../../../../api/endpoints";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import { useTranslation } from "react-i18next";
 
 const changePassword = () => {
+  const { t } = useTranslation();
   const [submitLoading, setSubmitLoading] = useState<Boolean>(false);
   const navigate = useNavigate();
   type Inputs = {
@@ -38,7 +40,7 @@ const changePassword = () => {
 
       if (response?.isSuccess) {
         notify(
-          response?.message || "اطلاعات با موفقیت به‌روزرسانی شد",
+          t("passwordUpdateSuccess"),
           "success"
         );
 
@@ -47,11 +49,11 @@ const changePassword = () => {
           removeCookie("access_token", "");
         }, 300);
       } else {
-        notify(response.message || "خطا در به‌روزرسانی اطلاعات", "error");
+        notify(t("passwordUpdateError"), "error");
       }
     } catch (error) {
       console.error("Error updating profile:", error);
-      notify("خطایی رخ داد. لطفاً دوباره تلاش کنید.", "error");
+      notify(t("genericError"), "error");
       setSubmitLoading(false);
     }
   };
@@ -83,9 +85,9 @@ const changePassword = () => {
               </div>
             }
             defaultValue={""}
-            label="کلمه عبور کنونی"
+            label={t("currentPasswordLabel")}
             {...register("currentPassword", {
-              required: " کلمه عبور کنونی را وارد کنید",
+              required: t("currentPasswordRequired"),
             })}
             errorText={errors.currentPassword?.message}
             className="self-center"
@@ -107,9 +109,9 @@ const changePassword = () => {
                   )}
                 </div>
               }
-              label="کلمه عبور جدید "
+              label={t("newPasswordLabel")}
               {...register("newPassword", {
-                required: " کلمه عبور جدید را وارد کنید",
+                required: t("newPasswordRequired"),
               })}
               errorText={errors.newPassword?.message}
             />
@@ -129,12 +131,12 @@ const changePassword = () => {
                   )}
                 </div>
               }
-              label="تکرار کلمه عبور جدید "
+              label={t("repeatPasswordLabel")}
               {...register("confirmPassowrd", {
-                required: "تکرار کلمه عبور جدید را وارد کنید",
+                required: t("repeatPasswordRequired"),
                 validate: (value) =>
                   value === getValues("newPassword") ||
-                  "کلمه عبور با تکرار آن مطابقت ندارد",
+                  t("passwordsMismatch"),
               })}
               errorText={errors.confirmPassowrd?.message}
             />
@@ -143,7 +145,7 @@ const changePassword = () => {
             className="sm:col-span-4 col-span-12 mt-4 w-fit px-8"
             type={"submit"}
           >
-            تغییر کلمه عبور
+            {t("changePasswordButton")}
           </Button>
         </div>
       </div>

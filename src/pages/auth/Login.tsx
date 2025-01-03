@@ -16,7 +16,7 @@ import { LOGIN } from "../../api/endpoints";
 import { useLang } from "../../context/LangProvider";
 
 const Login = () => {
-  const { t } = useLang();
+  const { getTranslation: t } = useLang();
 
   const {
     register,

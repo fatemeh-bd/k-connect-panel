@@ -36,7 +36,7 @@ const fetchProfile = async (
 
 const ProfileBox = () => {
   const { info, setProfileInfo } = useProfile();
-  const { t } = useLang();
+  const { getTranslation: t } = useLang();
   const results = useQueries([
     {
       queryKey: "profile",

@@ -4,7 +4,7 @@ import { Lang, translations } from "./translations";
 interface LangContextType {
   lang: Lang;
   setLang: (lang: Lang) => void;
-  t: (key: keyof typeof translations[Lang]) => string;
+  getTranslation: (key: keyof typeof translations[Lang]) => string;
 }
 
 const LangContext = createContext<LangContextType | undefined>(undefined);
@@ -22,7 +22,7 @@ export const LangProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const t = (key: keyof typeof translations[Lang]) => translations[lang][key] || key;
 
   return (
-    <LangContext.Provider value={{ lang, setLang, t }}>
+    <LangContext.Provider value={{ lang, setLang, getTranslation: t }}>
       {children}
     </LangContext.Provider>
   );

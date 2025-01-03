@@ -7,8 +7,12 @@ import { useQuery } from "react-query";
 import { postMethod } from "../../../api/callApi";
 import { GET_NEWS } from "../../../api/endpoints";
 import Loader from "../../../components/loaders/Loader";
+import { useLang } from "../../../context/LangProvider";
 
 const LastNotifications = () => {
+
+    const { getTranslation} = useLang();
+  
   const { data = [], isLoading } = useQuery(
     "news",
     async () => {
@@ -27,7 +31,7 @@ const LastNotifications = () => {
   );
   return (
     <div className={boxStyle}>
-      <Paragraph className="mb-4">آخرین اخبار</Paragraph>
+      <Paragraph className="mb-4">{getTranslation("latestNews")}</Paragraph>
       <div className="space-y-2">
         {isLoading ? (
           <Loader />

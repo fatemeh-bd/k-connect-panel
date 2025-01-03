@@ -4,6 +4,7 @@ import { boxStyle } from "../../utils/enums";
 import Paragraph from "../../components/typography/Paragraph";
 import InfoList from "./_components/InfoList";
 import LastNotifications from "./_components/LastNotifications";
+import { useLang } from "../../context/LangProvider";
 
 export const exampleData = {
   labels: ["واریزی", "برداشت"],
@@ -45,19 +46,26 @@ export const exampleData2 = {
 };
 
 const Dashboard = () => {
+  const { getTranslation } = useLang();
+
   return (
     <div className="space-y-4">
       <InfoList />
       <div className="grid grid-cols-12 gap-4">
         <div className="lg:col-span-7 col-span-12">
           <div className={boxStyle}>
-            <Paragraph className="mb-4">آمار فروش شما</Paragraph>
+            <Paragraph className="mb-4">
+            {getTranslation("salesStats")}
+
+                </Paragraph>
             <VerticalChart data={exampleData2} />
           </div>
         </div>
         <div className="lg:col-span-5 col-span-12">
           <div className={boxStyle}>
-            <Paragraph className="mb-4">گزارش مالی شما</Paragraph>
+            <Paragraph className="mb-4">
+              {getTranslation("financialReport")}
+            </Paragraph>
             <PieChart data={exampleData} />
           </div>
         </div>

@@ -11,8 +11,13 @@ import {
 } from "@heroicons/react/24/outline";
 import { numberWithCommas } from "../../../utils/helper";
 import CustomSkeleton from "../../../components/skeleton/skeleton";
+import { translations } from "../../../context/translations";
+import { useLang } from "../../../context/LangProvider";
 
 const InfoList = () => {
+
+  const { lang} = useLang();
+
   const fetchData = async () => {
     const response = await postMethod(DASHBOARD, {});
     if (response?.isSuccess) {
@@ -40,7 +45,7 @@ const InfoList = () => {
       <div className="lg:col-span-3 col-span-6 ">
         <InfoBox
           data={{
-            title: "تعداد کاربران فعال شما",
+            title: translations[lang].activeUsers,
             icon: CheckBadgeIcon,
             value: dashdata?.activeClientCount,
             color: "#666cff",
@@ -50,7 +55,7 @@ const InfoList = () => {
       <div className="lg:col-span-3 col-span-6 ">
         <InfoBox
           data={{
-            title: "تعداد کاربران غیرفعال شما",
+            title: translations[lang].inactiveUsers,
             icon: UserMinusIcon,
             value: dashdata?.deActiveClientCount,
             color: "#666cff",
@@ -60,7 +65,7 @@ const InfoList = () => {
       <div className="lg:col-span-3 col-span-6 ">
         <InfoBox
           data={{
-            title: "کیف پول",
+            title: translations[lang].wallet,
             icon: WalletIcon,
             value: `${numberWithCommas(Number(dashdata.balance))} تومان`,
             color: "#666cff",
@@ -70,7 +75,7 @@ const InfoList = () => {
       <div className="lg:col-span-3 col-span-6 ">
         <InfoBox
           data={{
-            title: "تعداد سرور ها",
+            title:translations[lang].serverCount,
             icon: ServerIcon,
             value: dashdata?.serverCount,
             color: "#666cff",

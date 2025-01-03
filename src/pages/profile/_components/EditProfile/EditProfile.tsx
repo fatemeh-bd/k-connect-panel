@@ -1,12 +1,13 @@
-import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { postMethod } from "../../../../api/callApi";
 import Button from "../../../../components/buttons/Button";
 import Input from "../../../../components/inputs/Input";
-import { boxStyle } from "../../../../utils/enums";
-import { postMethod } from "../../../../api/callApi";
-import { notify } from "../../../../utils/notify";
-import { EDIT_PROFILE } from "../../../../api/endpoints";
-import { useState } from "react";
+import { useLang } from "../../../../context/LangProvider";
 import { useProfile } from "../../../../store/profileSlice";
+import { notify } from "../../../../utils/notify";
+import { useForm } from "react-hook-form";
+import { EDIT_PROFILE } from "../../../../api/endpoints";
+import { boxStyle } from "../../../../utils/enums";
 type Inputs = {
   firstName: string;
   lastName: string;
@@ -14,10 +15,8 @@ type Inputs = {
   email: string;
 };
 const editProfile = () => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [submitLoading, setSubmitLoading] = useState<Boolean>(false);
-
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { getTranslation } = useLang();
   const { info } = useProfile();
 
   const {
@@ -25,79 +24,89 @@ const editProfile = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
+
   const onSubmit = async (input: Inputs) => {
     try {
       setSubmitLoading(true);
       const response = await postMethod(EDIT_PROFILE, input);
       setSubmitLoading(false);
 
-      // Handle API response
       if (response?.isSuccess) {
-        notify("اطلاعات با موفقیت به‌روزرسانی شد", "success");
+        notify(getTranslation("profileUpdatedSuccess"), "success");
       } else {
-        notify(response.message || "خطا در به‌روزرسانی اطلاعات", "error");
+        notify(
+          response.message || getTranslation("profileUpdatedError"),
+          "error"
+        );
       }
     } catch (error) {
       console.error("Error updating profile:", error);
-      notify("خطایی رخ داد. لطفاً دوباره تلاش کنید.", "error");
+      notify(getTranslation("genericError"), "error");
       setSubmitLoading(false);
     }
   };
 
   return (
     <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
-      <div className={`${boxStyle}  grid grid-cols-12 gap-2 items-start`}>
-        <div className="md:col-span-4 col-span-12  flex gap-4 md:mb-0 mb-3 items-center">
+      <div className={`${boxStyle} grid grid-cols-12 gap-2 items-start`}>
+        <div className="md:col-span-4 col-span-12 flex gap-4 md:mb-0 mb-3 items-center">
           <Input
-            label="نام "
+            label={getTranslation("name")}
             defaultValue={info.firstName}
             {...register("firstName", {
-              required: "نام را وارد کنید",
+              required: getTranslation("firstNameRequired"),
             })}
+            errorText={errors.firstName?.message}
           />
         </div>
-        <div className="md:col-span-4 col-span-12  flex gap-4 md:mb-0 mb-3 items-center">
+        <div className="md:col-span-4 col-span-12 flex gap-4 md:mb-0 mb-3 items-center">
           <Input
-            label="نام خانوادگی"
+            label={getTranslation("lastName")}
             defaultValue={info.lastName}
-            {...register("lastName", { required: "نام خانوادگی را وارد کنید" })}
+            {...register("lastName", {
+              required: getTranslation("lastNameRequired"),
+            })}
             errorText={errors.lastName?.message}
           />
         </div>
-        <div className="md:col-span-4 col-span-12  flex gap-4 md:mb-0 mb-3 items-center">
+        <div className="md:col-span-4 col-span-12 flex gap-4 md:mb-0 mb-3 items-center">
           <Input
-            disabled={info.phoneNumber ? true : false}
-            label="شماره موبایل"
+            disabled={!!info.phoneNumber}
+            label={getTranslation("mobileNumber")}
             defaultValue={info.phoneNumber}
             type="number"
             {...register("phoneNumber", {
-              required: "شماره موبایل را وارد کنید",
+              required: getTranslation("phoneNumberRequired"),
               pattern: {
-                value: /^[0-9]+$/, // Regex for numeric values only
-                message: "شماره موبایل باید فقط شامل اعداد باشد", // Validation message for non-numeric input
+                value: /^[0-9]+$/,
+                message: getTranslation("phoneNumberPattern"),
               },
               minLength: {
                 value: 11,
-                message: "شماره موبایل باید 11 رقم باشد", // Validation message for short length
+                message: getTranslation("phoneNumberLength"),
               },
               maxLength: {
                 value: 11,
-                message: "شماره موبایل نباید بیش از 11 رقم باشد", // Validation message for long length
+                message: getTranslation("phoneNumberLength"),
               },
             })}
             errorText={errors.phoneNumber?.message}
           />
         </div>
-
-        <div className="md:col-span-4 col-span-12  flex gap-4 md:mb-0 mb-3 items-center">
-          <Input label="ایمیل" readOnly value={info.sellerInfo.email} />
+        <div className="md:col-span-4 col-span-12 flex gap-4 md:mb-0 mb-3 items-center">
+          <Input
+            label={getTranslation("email")}
+            readOnly
+            value={info.sellerInfo.email}
+          />
         </div>
         <Button
-          loading={submitLoading ? true : false}
-          className=" col-span-2 h-fit self-center"
-          type={"submit"}
+        loading={submitLoading}
+          className="col-span-2 h-fit self-center"
+          type="submit"
+          
         >
-          ثبت
+          {getTranslation("submitButton")}
         </Button>
       </div>
     </form>
