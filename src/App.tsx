@@ -8,16 +8,21 @@ import TopBar from "./components/TopBar/TopBar";
 import { routesList } from "./utils/routesList";
 import Paragraph from "./components/typography/Paragraph";
 import { Sizes } from "./utils/enums";
+import { LangProvider, useLang } from "./context/LangProvider";
 
-function App() {
+function AppContent() {
   const navigate = useNavigate();
+  const { lang } = useLang();
+  const routes = routesList(lang);
+
   const { pathname } = useLocation();
   const [cookies] = useCookies(["access_token"]);
   useEffect(() => {
     if (!cookies.access_token && pathname !== "/signUp") {
       navigate("/login");
     }
-  }, [cookies, navigate]);
+  }, [cookies, navigate, pathname]);
+
   return (
     <>
       <Routes>
@@ -33,32 +38,40 @@ function App() {
 
             <div className="py-4">
               <Routes>
-                {routesList.map((item) => (
-                  <React.Fragment key={item.id}>
-                    <Route path={item.path} element={item.element} />
-                    {item.subRoutes?.map((sub) => (
-                      <Route
-                        key={sub.id}
-                        path={sub.path}
-                        element={sub.element}
-                      />
-                    ))}
-                  </React.Fragment>
-                ))}
-                <Route
-                  path="*"
-                  element={
-                    <Paragraph size={Sizes.lg} className="text-center mt-4">
-                      صفحه مورد نظر یافت نشد
-                    </Paragraph>
-                  }
-                />
+                  {routes.map((item) => (
+                    <React.Fragment key={item.id}>
+                      <Route path={item.path} element={item.element} />
+                      {item.subRoutes?.map((sub) => (
+                        <Route
+                          key={sub.id}
+                          path={sub.path}
+                          element={sub.element}
+                        />
+                      ))}
+                    </React.Fragment>
+                  ))}
+                  <Route
+                    path="*"
+                    element={
+                      <Paragraph size={Sizes.lg} className="text-center mt-4">
+                        صفحه مورد نظر یافت نشد
+                      </Paragraph>
+                    }
+                  />
               </Routes>
             </div>
           </div>
         </div>
       )}
     </>
+  );
+}
+
+function App() {
+  return (
+    <LangProvider>
+      <AppContent />
+    </LangProvider>
   );
 }
 

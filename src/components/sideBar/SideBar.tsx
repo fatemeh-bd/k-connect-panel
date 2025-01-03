@@ -11,9 +11,12 @@ import {
 import { useCookies } from "react-cookie";
 import { useEffect, useState } from "react";
 import ThemeToggle from "../TopBar/ThemeToggle";
+import { useLang } from "../../context/LangProvider";
 
 const SideBar = () => {
   const [, removeCookie] = useCookies(["access_token"]);
+  const { t,lang } = useLang();
+  const routes = routesList(lang);
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const { pathname } = useLocation();
   const [pageTitle, setPageTitle] = useState<string>("داشبورد");
@@ -22,7 +25,7 @@ const SideBar = () => {
   );
 
   useEffect(() => {
-    const findCurrentPage = routesList.find((i) => i.path === pathname);
+    const findCurrentPage = routes.find((i) => i.path === pathname);
     if (findCurrentPage) {
       setPageTitle(findCurrentPage.title);
     }
@@ -116,11 +119,11 @@ const SideBar = () => {
           type={ColorType.PRIMARY}
           className="font-bold !text-2xl mb-6 text-center"
         >
-          پنل فروشندگان
+          {t("sidbarTitle")}
         </Paragraph>
 
         <ul>
-          {routesList.map(renderMenuItem)}
+          {routes.map(renderMenuItem)}
           <li
             className="flex items-center gap-2 px-4 py-3 cursor-pointer"
             onClick={() => {
@@ -129,7 +132,7 @@ const SideBar = () => {
             }}
           >
             <ArrowLeftStartOnRectangleIcon className="size-5 text-rose-500" />
-            <Paragraph type={ColorType.ERROR}>خروج</Paragraph>
+            <Paragraph type={ColorType.ERROR}>{t('logoutTitle')}</Paragraph>
           </li>
         </ul>
       </div>

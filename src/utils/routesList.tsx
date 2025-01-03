@@ -18,6 +18,7 @@ import Financial from "../pages/finance/Finance";
 import Finance from "../pages/finance/Finance";
 import FinanceReport from "../pages/finance/FinanceReport";
 import Transaction from "../pages/finance/_components/Transaction";
+import { Lang, translations } from "../context/translations";
 
 export interface RouteItemType {
   id: number;
@@ -35,86 +36,85 @@ export interface RouteItemType {
   }[];
 }
 
-export const routesList: RouteItemType[] = [
+export const routesList = (lang: Lang): RouteItemType[] => [
   {
     id: 1,
-    title: "داشبورد",
+    title: translations[lang].dashboardTitle,
     path: "/",
     icon: HomeIcon,
-    active:false,
+    active: false,
     element: <Dashboard />,
   },
   {
     id: 2,
-    title: "پشتیبانی",
+    title: translations[lang].supportTitle,
     path: "/support",
-    active:false,
+    active: false,
     icon: ChatBubbleBottomCenterTextIcon,
     element: <Supports />,
     subRoutes: [
       {
         id: 1,
         path: "/support/:id",
-        title: "پشتیبانی",
-        active:false,
+        title: translations[lang].supportTitle,
+        active: false,
         element: <TicketDetail />,
       },
     ],
   },
   {
     id: 3,
-    title: "امور مالی",
+    title: translations[lang].financeTitle,
     path: "/financial",
     icon: BanknotesIcon,
-    active:false,
+    active: false,
     element: <Financial />,
     subRoutes: [
       {
         id: 1,
         path: "/financialCrypto",
-        title: "رمز ارز",
-        active:true,
+        title: translations[lang].subFinanceCryptoTitle,
+        active: true,
         element: <Finance />,
       },
       {
         id: 2,
         path: "/financeReport",
-        title: "گردش مالی",
-        active:true,
+        title: translations[lang].subFinanceReportTitle,
+        active: true,
         element: <FinanceReport />,
       },
       {
         id: 3,
         path: "/financial/:id",
-        title: "تراکنش",
-        active:false,
+        title: translations[lang].financeTitle,
+        active: false,
         element: <Transaction />,
       },
     ],
   },
   {
     id: 4,
-    title: "مدیریت کاربران",
+    title: translations[lang].userManagmentTitle,
     path: "/usermanagment",
-    active:false,
+    active: false,
     icon: UserGroupIcon,
     element: <UsersManagment />,
   },
   {
     id: 5,
-    title: "حساب کاربری",
+    title: translations[lang].AccountTitle,
     path: "/profile",
-    active:false,
+    active: false,
     icon: UserIcon,
     element: <MyProfile />,
   },
   {
     id: 6,
-    title: "اعلان های من",
+    title: translations[lang].MyNotificationTitle,
     path: "/MyNotification",
-     active:false,
+    active: false,
     icon: BellAlertIcon,
     element: <UserNotification />,
   },
 ];
-

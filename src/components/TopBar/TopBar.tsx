@@ -1,5 +1,6 @@
 import ProfileBox from "../avatar/ProfileBox";
 import Bell from "../bell/Bell";
+import LangToggle from "./LangToggle";
 import ThemeToggle from "./ThemeToggle";
 
 const TopBar = () => {
@@ -8,6 +9,10 @@ const TopBar = () => {
       <div className="lg:block hidden"></div>
       <div className="lg:w-fit w-full flex items-center lg:justify-end justify-between gap-4 flex-wrap">
         <Bell />
+        <div>
+          <LangToggle />
+          {/* Other components */}
+        </div>
         <div className="lg:block hidden">
           <ThemeToggle />
         </div>

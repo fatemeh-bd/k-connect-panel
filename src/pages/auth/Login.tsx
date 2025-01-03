@@ -13,8 +13,11 @@ import { useCookies } from "react-cookie";
 import { useMutation } from "react-query";
 import { postMethod } from "../../api/callApi";
 import { LOGIN } from "../../api/endpoints";
+import { useLang } from "../../context/LangProvider";
 
 const Login = () => {
+  const { t } = useLang();
+
   const {
     register,
     formState: { errors },
@@ -55,18 +58,18 @@ const Login = () => {
     <AuthLayout>
       <div className="lg:w-[85%] sm:w-[380px] w-full sm:px-2 px-4 mx-auto">
         <div className="space-y-3">
-          <Title>به پنل خوش آمدید</Title>
-          <Paragraph>نام کاربری و گذرواژه خود را برای ورود وارد کنید</Paragraph>
+          <Title>{t("loginWelcome")}</Title>
+          <Paragraph>{t("loginDescription")}</Paragraph>
         </div>
         <form className="mt-6" onSubmit={handleSubmit(loginHandler)}>
           <Input
             type="email"
-            label="نام کاربری (ایمیل)"
+            label={t("usernameLabel")}
             {...register("email", {
-              required: "ایمیل خود را وارد کنید",
+              required: t("emailRequired"),
               pattern: {
                 value: /^\S+@\S+$/i,
-                message: "فرمت ایمیل معتبر نیست",
+                message: t("emailInvalid"),
               },
             })}
             errorText={errors.email?.message}
@@ -86,9 +89,9 @@ const Login = () => {
                 )}
               </div>
             }
-            label="کلمه عبور"
+            label={t("passwordLabel")}
             {...register("password", {
-              required: "کلمه عبور خود را وارد کنید",
+              required: t("passwordRequired"),
             })}
             errorText={errors.password?.message}
           />
@@ -101,14 +104,14 @@ const Login = () => {
             disabled={isLoading}
             loading={isLoading}
           >
-            ورود به پنل
+            {t("loginButton")}
           </Button>
         </form>
 
         <div className="flex items-center gap-1 mt-3">
-          <Paragraph type={ColorType.PRIMARY}>ثبت نام نکردی؟ 😱</Paragraph>
+          <Paragraph type={ColorType.PRIMARY}>{t("signUpPrompt")}</Paragraph>
           <Link to={"/signUp"} className="underline">
-            ایجاد حساب کاربری
+            {t("signUpLink")}
           </Link>
         </div>
       </div>

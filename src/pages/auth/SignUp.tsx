@@ -3,17 +3,21 @@ import { useForm } from "react-hook-form";
 import Input from "../../components/inputs/Input";
 import Paragraph from "../../components/typography/Paragraph";
 import Title from "../../components/typography/Title";
-import LoginLayout from "./AuthLayout";
+import AuthLayout from "./AuthLayout";
 import Button from "../../components/buttons/Button";
 import { ColorType } from "../../utils/enums";
 import { Link, useNavigate } from "react-router-dom";
-import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid"; // Correct import for icons
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
 import { SignUpFormType } from "./types";
+import { useCookies } from "react-cookie";
 import { useMutation } from "react-query";
 import { postMethod } from "../../api/callApi";
+import { useLang } from "../../context/LangProvider";
 import { REGISTER } from "../../api/endpoints";
 
 const SignUp = () => {
+  const { lang, t } = useLang();
+
   const {
     register,
     formState: { errors },
@@ -21,17 +25,20 @@ const SignUp = () => {
     watch,
   } = useForm<SignUpFormType>();
   const navigate = useNavigate();
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [, setCookie] = useCookies(["access_token"]);
   const [error, setError] = useState<string>("");
   const { mutate, isLoading } = useMutation(
     (data: SignUpFormType) =>
       postMethod(REGISTER, {
-        email: data.email,
+        userName: data.email,
         password: data.password,
       }),
     {
       onSuccess: (res) => {
         if (res?.isSuccess) {
-          navigate("/login");
+          setCookie("access_token", res.data.accessToken, { path: "/" });
+          navigate("/");
         } else {
           setError(res.message);
         }
@@ -40,35 +47,34 @@ const SignUp = () => {
     }
   );
 
-  const [passwordVisible, setPasswordVisible] = useState(false);
-
   const togglePasswordVisibility = () => {
     setPasswordVisible((prevState) => !prevState);
   };
 
-  const password = watch("password");
-
-  const signupHandler = (data: SignUpFormType) => {
+  const signUpHandler = (data: SignUpFormType) => {
     mutate(data);
   };
 
+  const password = watch("password");
+
   return (
-    <LoginLayout>
-      <div className="lg:w-[85%] w-full min-w-[300px] mx-auto">
+    <AuthLayout>
+      <div className="lg:w-[85%] sm:w-[380px] w-full sm:px-2 px-4 mx-auto">
         <div className="space-y-3">
-          <Title>به پنل خوش آمدید</Title>
-          <Paragraph>
-            نام کاربری و گذرواژه خود را برای ثبت نام وارد کنید
-          </Paragraph>
+          <Title>{t("signUpWelcome")}</Title>
         </div>
-        <form className="mt-6" onSubmit={handleSubmit(signupHandler)}>
+        <form className="mt-6" onSubmit={handleSubmit(signUpHandler)}>
           <Input
             type="email"
-            label="نام کاربری (ایمیل)"
+            label={t("usernameLabel")}
             {...register("email", {
-              required: "ایمیل خود را وارد کنید",
+              required: t("emailRequired"),
+              pattern: {
+                value: /^\S+@\S+$/i,
+                message: t("emailInvalid"),
+              },
             })}
-            errorText={errors.email?.message?.toString()}
+            errorText={errors.email?.message}
           />
 
           <Input
@@ -85,16 +91,17 @@ const SignUp = () => {
                 )}
               </div>
             }
-            label="کلمه عبور"
+            label={t("passwordLabel")}
             {...register("password", {
-              required: "کلمه عبور خود را وارد کنید",
+              required: t("passwordRequired"),
               minLength: {
                 value: 6,
-                message: "کلمه عبور باید حداقل 6 کاراکتر باشد",
+                message: t("passwordMinLength"),
               },
             })}
-            errorText={errors.password?.message?.toString()}
+            errorText={errors.password?.message}
           />
+
           <Input
             type={passwordVisible ? "text" : "password"}
             icon={
@@ -109,29 +116,30 @@ const SignUp = () => {
                 )}
               </div>
             }
-            label="تکرار کلمه عبور"
+            label={t("repeatPasswordLabel")}
             {...register("repeatPassword", {
-              required: "تکرار کلمه عبور خود را وارد کنید",
+              required: t("repeatPasswordRequired"),
               validate: (value) =>
-                value === password || "کلمه عبور و تکرار آن مطابقت ندارند",
+                value === password || t("passwordsMismatch"),
             })}
-            errorText={errors.repeatPassword?.message?.toString()}
+            errorText={errors.repeatPassword?.message}
           />
+
           {error && <Paragraph type={ColorType.ERROR}>{error}</Paragraph>}
 
           <Button className="mt-10" full type="submit" loading={isLoading}>
-            ثبت و ورود به پنل
+            {t("signUpButton")}
           </Button>
         </form>
 
         <div className="flex items-center gap-1 mt-3">
-          <Paragraph type={ColorType.PRIMARY}>حساب کاربری داری؟</Paragraph>
+          <Paragraph type={ColorType.PRIMARY}>{t("alreadyHaveAccount")}</Paragraph>
           <Link to={"/login"} className="underline">
-            ورود به حساب کاربریم
+            {t("loginLink")}
           </Link>
         </div>
       </div>
-    </LoginLayout>
+    </AuthLayout>
   );
 };
 
